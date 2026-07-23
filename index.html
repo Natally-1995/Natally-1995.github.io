@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natalia Tarita · DevOps &amp; Cloud Engineer</title>
+<meta name="description" content="Natalia Tarita — DevOps and Cloud Engineer across AWS, Kubernetes and Terraform, with an AI-native approach to infrastructure. CKAD certified.">
+<style>
+  :root{
+    --bg:#0e1a24;--bg-2:#132530;--panel:#17303c;--line:#24414f;--line-soft:#1c3541;
+    --ink:#eef4f4;--ink-dim:#93aab3;--accent:#5ec8b7;--accent-deep:#2e9284;--warm:#e7a15a;--ok:#6cc39a;
+    --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,26,36,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{font-family:var(--mono);font-size:14px;letter-spacing:.02em;font-weight:600}
+  .brand span{color:var(--accent)}
+  .navlinks{display:flex;gap:28px;font-size:14px;color:var(--ink-dim);align-items:center}
+  .navlinks a:not(.status):hover{color:var(--ink)}
+  .navlinks .status{font-family:var(--mono);font-size:12px;color:var(--ok);display:inline-flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,195,154,.5)}70%{box-shadow:0 0 0 7px rgba(108,195,154,0)}100%{box-shadow:0 0 0 0 rgba(108,195,154,0)}}
+  @media(max-width:760px){.navlinks a:not(.status){display:none}}
+
+  header.hero{position:relative;padding:110px 0 84px;border-bottom:1px solid var(--line-soft);overflow:hidden}
+  header.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(700px 340px at 78% 8%,rgba(94,200,183,.09),transparent 70%);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+  h1{font-size:clamp(40px,6.2vw,72px);line-height:1.0;letter-spacing:-.025em;font-weight:700;margin:24px 0 22px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{font-size:19px;color:var(--ink-dim);max-width:48ch;margin-bottom:32px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.02em;padding:13px 22px;border-radius:9px;transition:transform .15s,background .2s,border-color .2s,color .2s;display:inline-flex;align-items:center;gap:9px}
+  .btn.primary{background:var(--accent);color:#06231f;font-weight:600}
+  .btn.primary:hover{transform:translateY(-2px);background:#74d6c6}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  .oploop{background:linear-gradient(180deg,var(--bg-2),var(--bg));border:1px solid var(--line);border-radius:16px;padding:24px}
+  .oploop .top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:20px}
+  .oploop .top .nom{color:var(--ok)}
+  .loopwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .op{border:1px solid var(--line);border-radius:11px;padding:15px 14px;transition:border-color .35s,background .35s}
+  .op .oi{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em}
+  .op .ot{font-size:15px;font-weight:600;margin:5px 0 2px}
+  .op .od{font-size:12px;color:var(--ink-dim)}
+  .op.active{border-color:var(--accent);background:rgba(94,200,183,.06)}
+  .loopfoot{font-family:var(--mono);font-size:11px;color:var(--ink-dim);text-align:center;margin-top:16px;letter-spacing:.08em}
+  .loopfoot b{color:var(--ok);font-weight:400}
+
+  .creds{display:flex;gap:13px;flex-wrap:wrap;margin-top:36px}
+  .cred{display:flex;align-items:center;gap:12px;background:var(--bg-2);border:1px solid var(--line);border-radius:11px;padding:12px 16px;transition:border-color .2s}
+  a.cred:hover{border-color:var(--accent)}
+  .cred .k{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--accent)}
+  .cred.pending .k{color:var(--ink-dim)}
+  .cred .v{font-size:12px;color:var(--ink-dim);line-height:1.3}
+  .cred .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;background:rgba(108,195,154,.14);color:var(--ok)}
+  .cred.pending .tag{background:rgba(231,161,90,.14);color:var(--warm)}
+
+  section{padding:88px 0;border-bottom:1px solid var(--line-soft)}
+  .sec-head{margin-bottom:46px;max-width:62ch}
+  .sec-head h2{font-size:clamp(27px,3.6vw,40px);letter-spacing:-.015em;margin:16px 0 12px;font-weight:700}
+  .sec-head p{color:var(--ink-dim);font-size:16.5px}
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  @media(max-width:780px){.about-grid{grid-template-columns:1fr;gap:26px}}
+  .about-grid p{color:var(--ink-dim);margin-bottom:16px;font-size:16px}
+  .about-grid p strong{color:var(--ink);font-weight:600}
+
+  .case{background:var(--bg-2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .case-top{padding:32px 34px;border-bottom:1px solid var(--line)}
+  .case-top .role{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.05em}
+  .case-top h3{font-size:25px;letter-spacing:-.01em;margin:8px 0 6px}
+  .case-top .sub{color:var(--ink-dim);font-size:15px;max-width:64ch}
+  .case-top .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .tag-pill{font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:5px 11px;border:1px solid var(--line);border-radius:20px;color:var(--ink-dim)}
+
+  .arch{display:flex;align-items:stretch;gap:0;padding:26px 34px;border-bottom:1px solid var(--line);overflow-x:auto}
+  .arch .stage{flex:1;min-width:96px;text-align:center}
+  .arch .box{border:1px solid var(--line);border-radius:10px;padding:12px 8px;font-family:var(--mono);background:var(--bg);height:100%;display:flex;flex-direction:column;justify-content:center;gap:3px}
+  .arch .box b{color:var(--ink);font-weight:600;font-size:12.5px}
+  .arch .box span{color:var(--ink-dim);font-size:10.5px}
+  .arch .arrow{display:flex;align-items:center;color:var(--accent);padding:0 8px;font-size:16px}
+
+  .case-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+  @media(max-width:780px){.case-body{grid-template-columns:1fr}}
+  .case-col{background:var(--bg-2);padding:30px 34px}
+  .case-col h4{font-size:13px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  .case-col ul{list-style:none}
+  .case-col li{position:relative;padding-left:20px;margin-bottom:14px;font-size:14.5px;color:var(--ink-dim)}
+  .case-col li::before{content:"▹";position:absolute;left:0;color:var(--accent)}
+  .case-col li strong{color:var(--ink);font-weight:600}
+  .case-col li em{color:var(--accent);font-style:normal}
+  .warstory{background:linear-gradient(180deg,rgba(94,200,183,.05),transparent);border-top:1px solid var(--line);padding:28px 34px}
+  .warstory .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);display:block;margin-bottom:10px}
+  .warstory p{color:var(--ink);line-height:1.65;font-size:15px}
+  .warstory em{color:var(--accent);font-style:normal}
+
+  .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .stack-card{background:var(--bg-2);border:1px solid var(--line);border-radius:13px;padding:22px;transition:transform .2s,border-color .2s}
+  .stack-card:hover{transform:translateY(-3px);border-color:var(--accent-deep)}
+  .stack-card .cat{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:6px}
+  .stack-card .lead{font-size:19px;font-weight:600;margin-bottom:14px}
+  .stack-card .lead .d{font-family:var(--mono);font-size:11px;color:var(--ok);letter-spacing:.04em;display:block;margin-top:3px;font-weight:400}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:11px;color:var(--ink-dim);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 9px}
+
+  .course{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .course-card{border:1px solid var(--line);border-radius:13px;padding:24px;background:var(--bg-2)}
+  .course-card .ct{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.04em;margin-bottom:8px}
+  .course-card h4{font-size:17px;margin-bottom:9px}
+  .course-card p{font-size:14px;color:var(--ink-dim)}
+  .course-card code{font-family:var(--mono);font-size:12.5px;color:var(--accent);background:var(--bg);padding:1px 5px;border-radius:4px}
+  .course-note{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:20px;letter-spacing:.03em;opacity:.85}
+
+  .ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .ai-card{border:1px solid var(--line);border-radius:13px;padding:26px;background:linear-gradient(162deg,var(--bg-2),var(--bg))}
+  .ai-card .n{font-family:var(--mono);color:var(--accent);font-size:13px;margin-bottom:12px}
+  .ai-card h4{font-size:17px;margin-bottom:9px}
+  .ai-card p{font-size:14.5px;color:var(--ink-dim)}
+
+  .contact{text-align:center;padding:100px 0}
+  .contact h2{font-size:clamp(30px,5vw,52px);letter-spacing:-.02em;margin-bottom:18px;font-weight:700}
+  .contact h2 em{font-style:normal;color:var(--accent)}
+  .contact p{color:var(--ink-dim);max-width:46ch;margin:0 auto 32px;font-size:17px}
+  .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  footer{padding:30px 0;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-dim);border-top:1px solid var(--line-soft)}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.dot{animation:none}}
+</style>
+</head>
+<body>
+<a id="top"></a>
+<nav>
+  <div class="wrap">
+    <div class="brand">natalia<span>.</span>tarita</div>
+    <div class="navlinks">
+      <a href="#work">Work</a><a href="#capstone">Capstone</a><a href="#about">About</a><a href="#stack">Stack</a>
+      <a href="#learning">Learning</a><a href="#ai">AI workflow</a><a href="#contact">Contact</a>
+      <span class="status"><span class="dot"></span>open to work</span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">DevOps &amp; Cloud Engineer · Chicago</span>
+        <h1>I keep infrastructure<br><em>legible</em> under pressure.</h1>
+        <p class="lede">I build and operate cloud platforms on AWS, Kubernetes and Terraform — and I work AI-native, using agent skills to move faster without losing the thread. My strongest muscle is tracing a failure to its exact root.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">See the case study →</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+        <div class="creds">
+          <a class="cred" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b/linked_in?t=tfjsuw" target="_blank" rel="noopener">
+            <span class="k">CKAD</span><span class="v">Certified Kubernetes<br>Application Developer</span><span class="tag">Verify →</span>
+          </a>
+          <div class="cred pending">
+            <span class="k">AWS SAA</span><span class="v">Solutions Architect<br>Associate</span><span class="tag">In progress</span>
+          </div>
+        </div>
+      </div>
+      <div class="oploop reveal">
+        <div class="top"><span>Platform operations</span><span class="nom">● nominal</span></div>
+        <div class="loopwrap" id="loop">
+          <div class="op" data-i="0"><div class="oi">01</div><div class="ot">Observe</div><div class="od">metrics &amp; signals</div></div>
+          <div class="op" data-i="1"><div class="oi">02</div><div class="ot">Decide</div><div class="od">policy &amp; intent</div></div>
+          <div class="op" data-i="3"><div class="oi">04</div><div class="ot">Verify</div><div class="od">health &amp; drift</div></div>
+          <div class="op" data-i="2"><div class="oi">03</div><div class="ot">Automate</div><div class="od">delivery &amp; IaC</div></div>
+        </div>
+        <div class="loopfoot">reconciled · <b>systems steady</b></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">About</span><h2>Systems people can operate and trust.</h2></div>
+    <div class="about-grid reveal">
+      <div>
+        <p>I'm a DevOps and cloud engineer based in Chicago. I work across the full delivery path — <strong>provisioning with Terraform, packaging with Docker and Packer, running on Kubernetes (EKS), and shipping through CI/CD</strong> — with an emphasis on making infrastructure clear rather than clever.</p>
+        <p>I'm <strong>CKAD certified</strong> and currently preparing for the <strong>AWS Solutions Architect – Associate</strong> exam.</p>
+      </div>
+      <div>
+        <p>What I care about most is <strong>diagnosis</strong>: when something breaks, tracing it past "it doesn't work" to the exact boundary where the failure lives. The case study below is built around one such trace — a networking bug that looked like broken application code but turned out to be cluster-level infrastructure.</p>
+        <p>I also work <strong>AI-native</strong>, building agent skills that automate the repetitive parts of infrastructure work so my attention goes where it matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected work</span>
+      <h2>Two deployment paths, one honest trade-off.</h2>
+      <p>A platform web app that normally runs on Kubernetes — rebuilt on plain EC2 to answer a real question: when is each path actually worth it? Paired with a full alerting system spanning AWS and Kubernetes.</p>
+    </div>
+    <div class="case reveal">
+      <div class="case-top">
+        <span class="role">Platform engineering · individual contributor</span>
+        <h3>EC2/AMI deployment path &amp; end-to-end alerting</h3>
+        <p class="sub">A Django REST app on a shared MySQL RDS database, normally on Kubernetes — rebuilt the "old way" on VMs, with everything Kubernetes gives for free wired by hand.</p>
+        <div class="tags">
+          <span class="tag-pill">AWS</span><span class="tag-pill">Terraform</span><span class="tag-pill">Packer</span>
+          <span class="tag-pill">EKS</span><span class="tag-pill">Prometheus</span><span class="tag-pill">Alertmanager</span>
+          <span class="tag-pill">GitLab CI</span><span class="tag-pill">Bash</span>
+        </div>
+      </div>
+      <div class="arch">
+        <div class="stage"><div class="box"><b>Packer</b><span>backend + frontend AMIs</span></div></div>
+        <div class="arrow">→</div>
+        <div class="stage"><div class="box"><b>Terraform</b><span>ASG · ALB · Route53 · ACM</span></div></div>
+        <div class="arrow">→</div>
+        <div class="stage"><div class="box"><b>Boot</b><span>Secrets Mgr via IAM role</span></div></div>
+        <div class="arrow">→</div>
+        <div class="stage"><div class="box"><b>Serving</b><span>self-healing via ASG</span></div></div>
+      </div>
+      <div class="case-body">
+        <div class="case-col">
+          <h4>Part 1 · VM deployment path</h4>
+          <ul>
+            <li>Built immutable <strong>backend and frontend AMIs with Packer</strong> so instances boot ready-to-serve, not self-configuring at launch.</li>
+            <li>Provisioned <strong>ASG, ALB, Route53 and ACM TLS in Terraform</strong> — the DNS, HTTPS and routing Kubernetes wires automatically.</li>
+            <li>Injected DB credentials at boot from <strong>Secrets Manager via an IAM instance role</strong>.</li>
+            <li>Parallelized AMI builds on a <strong>self-hosted GitLab runner</strong>, cutting build time roughly in half.</li>
+          </ul>
+        </div>
+        <div class="case-col">
+          <h4>Part 2 · End-to-end alerting</h4>
+          <ul>
+            <li><strong>AWS path:</strong> CloudWatch → SNS → Lambda posting to Slack in under 5 seconds.</li>
+            <li><strong>Kubernetes path:</strong> Prometheus rules + Alertmanager routing, enriched with pod, namespace and reason.</li>
+            <li>Wrote <strong>three runbooks</strong> and an alert-vs-noise policy to prevent alert fatigue.</li>
+            <li>Fixed a <strong>secret-schema mismatch</strong> (<em>dbname/username</em> vs actual <em>database/user</em>) that silently broke every DB query.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warstory">
+        <span class="lbl">◆ The diagnosis I'm most proud of</span>
+        <p>AWS alerts reached Slack; Kubernetes alerts fired but never arrived. I traced it past the config: Alertmanager showed <em>context-deadline-exceeded</em> timeouts; pods reached AWS services via VPC endpoints but timed out to every public IPv4 destination. The cluster was IPv6-only and Slack's API is IPv4-only, so delivery depended on a NAT64 gateway that wasn't functioning. The alerting was correct — the block was cluster-level egress infrastructure. That's the exact line between "my code" and "the platform," and naming it is what saves an on-call engineer hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Core stack</span><h2>What I build with.</h2>
+      <p>Grouped by where each tool sits in the delivery path. Depth labels reflect real hands-on use.</p>
+    </div>
+    <div class="stack-grid reveal">
+      <div class="stack-card"><div class="cat">Cloud foundation</div><div class="lead">AWS<span class="d">hands-on</span></div><div class="chips"><span class="chip">EC2</span><span class="chip">VPC</span><span class="chip">IAM</span><span class="chip">RDS</span><span class="chip">Lambda</span><span class="chip">Secrets Mgr</span></div></div>
+      <div class="stack-card"><div class="cat">Provisioning</div><div class="lead">Terraform<span class="d">hands-on</span></div><div class="chips"><span class="chip">Modules</span><span class="chip">State</span><span class="chip">Packer</span></div></div>
+      <div class="stack-card"><div class="cat">Platform runtime</div><div class="lead">Kubernetes<span class="d">CKAD certified</span></div><div class="chips"><span class="chip">EKS</span><span class="chip">Docker</span><span class="chip">Helm</span></div></div>
+      <div class="stack-card"><div class="cat">Delivery</div><div class="lead">CI/CD<span class="d">hands-on</span></div><div class="chips"><span class="chip">GitLab CI</span><span class="chip">GitHub Actions</span></div></div>
+      <div class="stack-card"><div class="cat">Observability</div><div class="lead">Monitoring<span class="d">hands-on</span></div><div class="chips"><span class="chip">Prometheus</span><span class="chip">Alertmanager</span><span class="chip">CloudWatch</span></div></div>
+      <div class="stack-card"><div class="cat">Scripting</div><div class="lead">Automation<span class="d">hands-on</span></div><div class="chips"><span class="chip">Bash</span><span class="chip">Python</span><span class="chip">Git</span><span class="chip">Linux</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="capstone">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Capstone projects</span>
+      <h2>Three simulated client environments.</h2>
+      <p>Team projects from an advanced DevOps program — Agile, two-week sprints, pull requests and code reviews. My role on each: DevOps/Cloud Engineer owning infrastructure and deployment automation, with application code built by teammates.</p>
+    </div>
+    <div class="course reveal">
+      <div class="course-card">
+        <div class="ct">Retail · Jan–Apr 2024</div>
+        <h4>RetailHub — e-commerce platform</h4>
+        <p>Replaced a manual eight-step deploy — SSH to EC2, hand-built image, hand-edited manifests — with GitHub Actions triggered on merge to <code>main</code>, cutting releases from ~45 minutes to ~8–10. Terraform modules for VPC, subnets, security groups, IAM and RDS with remote state in S3 + DynamoDB; EKS deploys via Helm with rolling updates; Prometheus and Grafana monitoring.</p>
+      </div>
+      <div class="course-card">
+        <div class="ct">Healthcare · May–Aug 2025</div>
+        <h4>MedCare — clinic appointment portal</h4>
+        <p>Containerized Spring Boot microservices and managed Kubernetes Deployments, Services, ConfigMaps and Secrets. Ingress via the AWS Load Balancer Controller, application secrets from AWS Secrets Manager, zero-downtime rolling deployments, and CloudWatch alarms and dashboards.</p>
+      </div>
+      <div class="course-card">
+        <div class="ct">Fintech · Sep–Dec 2023</div>
+        <h4>FinPay — payment gateway</h4>
+        <p>Provisioned multi-environment AWS infrastructure (dev / stage / prod) with Terraform, automated Docker image publishing to Amazon ECR, and deployed workloads to Kubernetes with Helm. Implemented RDS backup and disaster recovery, plus Prometheus alerts and Grafana dashboards.</p>
+      </div>
+    </div>
+    <p class="course-note">Training-program capstone work simulating real client environments — not engagements for paying clients.</p>
+  </div>
+</section>
+
+<section id="learning">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Coursework &amp; practice</span>
+      <h2>Hands-on reps beyond the case study.</h2>
+      <p>Structured exercises from an intensive DevOps program — building fluency with the patterns real teams use.</p>
+    </div>
+    <div class="course reveal">
+      <div class="course-card"><div class="ct">Terraform · HCL</div><h4>Multi-environment infrastructure</h4><p>Worked through a dev / staging / prod Terraform structure with per-environment tfvars, backends and shared network modules — practising how promotion and state separation work across environments.</p></div>
+      <div class="course-card"><div class="ct">Kubernetes · CKAD</div><h4>Application-developer fundamentals</h4><p>The hands-on skills behind the CKAD: pods, deployments, config and secrets, probes, and troubleshooting workloads under time pressure — verified by the certification.</p></div>
+      <div class="course-card"><div class="ct">Platform tooling</div><h4>Day-two operations practice</h4><p>Team exercises on the operational side of a platform — CI pipelines, tooling, and the glue work that keeps environments reproducible.</p></div>
+    </div>
+    <p class="course-note">Guided coursework and structured practice, listed separately from the projects above.</p>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">AI-native workflow</span><h2>Agent skills as infrastructure.</h2>
+      <p>I treat AI as a force multiplier for real infra work — not a keyword. Do a task carefully once, then capture it as a reusable agent skill.</p>
+    </div>
+    <div class="ai-grid reveal">
+      <div class="ai-card"><div class="n">01</div><h4>Capture, don't repeat</h4><p>When a task is worth repeating — a deploy check, a review pass — I turn it into an agent skill so it runs consistently instead of from memory each time.</p></div>
+      <div class="ai-card"><div class="n">02</div><h4>Plan-reviewed execution</h4><p>I keep the model on a leash: plan first, review the plan against real state, then let it act. Judgment stays with me; the typing gets delegated.</p></div>
+      <div class="ai-card"><div class="n">03</div><h4>Context as a file</h4><p>Markdown context files keep an agent grounded in how a project actually works — the hard part isn't writing them, it's deciding what belongs in them.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Contact</span>
+    <h2>Let's build something <em>steady.</em></h2>
+    <p>Open to DevOps, cloud and platform engineering roles. The fastest way to reach me:</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:nataliatarita95@gmail.com">nataliatarita95@gmail.com</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/natalia-tarita-8b23403a8/" target="_blank" rel="noopener">LinkedIn →</a>
+      <a class="btn ghost" href="https://github.com/Natally-1995" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Natalia Tarita · DevOps &amp; Cloud Engineering · Chicago, IL</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const ops=[...document.querySelectorAll('#loop .op')].sort((a,b)=>a.dataset.i-b.dataset.i);
+  let k=0;
+  function tick(){ops.forEach(o=>o.classList.remove('active'));ops[k].classList.add('active');k=(k+1)%ops.length;}
+  if(!window.matchMedia('(prefers-reduced-motion:reduce)').matches){tick();setInterval(tick,1200);}
+</script>
+</body>
+</html>
