@@ -382,11 +382,11 @@ a{color:inherit;text-decoration:none}
           <h3>Platform Engineer</h3>
           <p class="xmeta">Chowly · Chicago, IL · Nov 2023 — present</p>
           <ul class="xl">
+            <li>Built <b>AI agents</b> (Claude Code) for Terraform plan review, IAM-risk PR review, runbooks, and incident summaries — some wired into CI on pull requests, others run on demand, all scoped read-only with no apply or merge rights. Used by ~5 engineers; Terraform review <span class="m">~50 → ~20 min</span>.</li>
             <li>Replaced SSH-based EC2 deploys with <b>immutable Packer AMIs</b> rolled via ASG instance refresh across 8 services and 3 environments — deploy <span class="m">~30 → 8–10 min</span>, rollback <span class="m">20–30 → 5–10 min</span>, zero downtime behind ALB health checks.</li>
             <li>Automated the path end to end: a merge triggers a Packer build, publishes the AMI ID to SSM, and Terraform applies it. Monthly rebuilds replaced manual patching and <b>ended recurring drift incidents</b>.</li>
             <li>Moved ~20 services to <b>Argo CD GitOps on EKS</b> — CI commits image tags to a Helm values repo, nothing runs kubectl against production. Weekly releases became <span class="m">multiple daily</span>; merge-to-prod <span class="m">2–4 hrs → 20–30 min</span>.</li>
             <li>Gated changes at pull-request time across <b>35 repos</b> — tests, Trivy scan, Helm validation, Terraform plan, applies blocked from CI — with dev → staging → prod promotion. Failed production deploys <span class="m">~10% → under 3%</span>.</li>
-            <li>Built <b>Claude Code agents</b> for Terraform plan review, IAM-risk PR review, runbooks, and incident summaries — scoped read-only with no apply or merge rights. Used by ~5 engineers; Terraform review <span class="m">~50 → ~20 min</span>.</li>
           </ul>
         </div>
         <div class="xpanel" role="tabpanel" id="p-gh" aria-labelledby="t-gh" hidden style="--c:var(--cy)">
