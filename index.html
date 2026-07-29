@@ -141,6 +141,59 @@ a{color:inherit;text-decoration:none}
 .bar i{display:block;height:100%;border-radius:4px;background:var(--c);width:100%;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
 .mg.on .bar i{width:var(--w)}
 
+
+/* ---------- AI section ---------- */
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px}
+@media(max-width:1000px){.ag{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.ag{grid-template-columns:1fr}}
+.ac{border:1px solid var(--edge);border-radius:16px;padding:22px;background:linear-gradient(165deg,rgba(26,15,61,.9),rgba(18,10,46,.4));
+  transition:.32s;position:relative;overflow:hidden}
+.ac::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.ac:hover{transform:translateY(-6px);border-color:var(--c);box-shadow:0 18px 50px -22px var(--c)}
+.ac:hover::after{transform:scaleX(1)}
+.ac .ix{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--c)}
+.ac h4{font-family:var(--disp);font-weight:700;font-size:16.5px;letter-spacing:-.02em;margin:12px 0 9px;line-height:1.24}
+.ac p{font-size:14px;color:var(--text-2);line-height:1.55}
+
+.gate{border:1px solid var(--edge-2);border-radius:20px;overflow:hidden;
+  background:linear-gradient(150deg,rgba(26,15,61,.9),rgba(18,10,46,.5))}
+.gate-h{padding:18px 24px;border-bottom:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.gate-h .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+.gate-h .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--am)}
+.gate-b{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch}
+@media(max-width:860px){.gate-b{grid-template-columns:1fr}}
+.gcol{padding:24px}
+.gcol .hd{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.gcol.ok .hd{color:var(--li)}
+.gcol.no .hd{color:var(--mg)}
+.gcol ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.gcol li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--text-2)}
+.gcol li span{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;margin-top:2px}
+.gcol.ok li span{background:rgba(163,230,53,.14);color:var(--li);border:1px solid rgba(163,230,53,.4)}
+.gcol.no li span{background:rgba(255,61,138,.12);color:var(--mg);border:1px solid rgba(255,61,138,.4)}
+.gcol.no li{color:var(--text-3)}
+.gbar{width:1px;background:linear-gradient(180deg,transparent,var(--edge-2) 18%,var(--edge-2) 82%,transparent);position:relative;margin:0 6px}
+.gbar em{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-style:normal;white-space:nowrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--am);
+  background:var(--void);border:1px solid rgba(255,176,32,.45);border-radius:100px;padding:9px 13px;
+  box-shadow:0 0 26px -6px var(--am);animation:hold 2.8s ease-in-out infinite}
+@keyframes hold{0%,100%{box-shadow:0 0 26px -6px var(--am)}50%{box-shadow:0 0 40px -2px var(--am)}}
+@media(max-width:860px){.gbar{width:auto;height:1px;background:var(--edge-2);margin:6px 24px}
+  .gbar em{position:relative;top:0;left:0;transform:translateY(-50%);display:inline-block}}
+.gate-f{padding:18px 24px;border-top:1px solid var(--edge);font-size:15px;color:var(--text-2)}
+.gate-f b{color:var(--text);font-weight:500}
+
+.meth{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+@media(max-width:860px){.meth{grid-template-columns:1fr}}
+.mt{border-left:2px solid var(--c);padding:4px 0 4px 20px}
+.mt .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--c)}
+.mt h4{font-family:var(--disp);font-weight:600;font-size:17px;margin:9px 0 8px;letter-spacing:-.02em}
+.mt p{font-size:14.5px;color:var(--text-2)}
+.tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:36px}
+.tool{font-family:var(--mono);font-size:12px;padding:10px 16px;border-radius:100px;border:1px solid var(--edge-2);
+  color:var(--text-2);background:rgba(36,21,81,.4);transition:.25s}
+.tool:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-2px)}
+
 /* ---------- experience ---------- */
 .xp{display:grid;grid-template-columns:280px 1fr;gap:42px}
 @media(max-width:900px){.xp{grid-template-columns:1fr;gap:24px}}
@@ -259,7 +312,7 @@ a{color:inherit;text-decoration:none}
     <div class="mark">NATALIA TARITA<i>.</i></div>
     <div class="nlinks">
       <a href="#impact">Impact</a><a href="#experience">Experience</a>
-      <a href="#trace">The trace</a><a href="#program">Program</a><a href="#stack">Stack</a>
+      <a href="#ai">AI work</a><a href="#trace">The trace</a><a href="#program">Program</a><a href="#stack">Stack</a>
     </div>
     <button class="nbtn" id="printBtn">Save as PDF</button>
   </div>
@@ -288,7 +341,7 @@ a{color:inherit;text-decoration:none}
         <button class="stg" style="--c:var(--mg)"  data-go="#impact"><span class="node">03</span><span class="lb">Scan</span><span class="sb">Trivy gate</span></button>
         <button class="stg" style="--c:var(--am)"  data-go="#experience"><span class="node">04</span><span class="lb">Plan</span><span class="sb">Terraform</span></button>
         <button class="stg" style="--c:var(--li)"  data-go="#experience"><span class="node">05</span><span class="lb">Promote</span><span class="sb">dev → prod</span></button>
-        <button class="stg" style="--c:var(--cy)"  data-go="#trace"><span class="node">06</span><span class="lb">Observe</span><span class="sb">alert &amp; trace</span></button>
+        <button class="stg" style="--c:var(--cy)"  data-go="#ai"><span class="node">06</span><span class="lb">Observe</span><span class="sb">alert &amp; trace</span></button>
       </div>
     </div>
   </div>
@@ -351,9 +404,65 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+
+<section class="sec" id="ai" style="--c:var(--am)">
+  <div class="wrap">
+    <div class="sec-h rv"><span class="sec-n">03 — AI-native platform work</span>
+      <h2>Agents with a leash.</h2>
+      <p>I use AI as a force multiplier on real infrastructure, not as a keyword. The interesting part isn't that an agent can write Terraform — it's deciding exactly what it's allowed to touch.</p>
+    </div>
+
+    <div class="ag rv">
+      <div class="ac" style="--c:var(--cy)"><div class="ix">AGENT 01</div><h4>Terraform plan review</h4><p>Reads a plan, flags destructive changes, replacements and blast radius before a human reads a line. Cut review from ~50 to ~20 minutes.</p></div>
+      <div class="ac" style="--c:var(--mg)"><div class="ix">AGENT 02</div><h4>IAM-risk PR review</h4><p>Scans pull requests for permission changes — wildcards, privilege escalation paths, over-broad trust policies — and comments before merge.</p></div>
+      <div class="ac" style="--c:var(--vi)"><div class="ix">AGENT 03</div><h4>Runbook drafting</h4><p>Turns a procedure done carefully once into a runbook that reads the same way every time, instead of living in one engineer's memory.</p></div>
+      <div class="ac" style="--c:var(--li)"><div class="ix">AGENT 04</div><h4>Incident summaries</h4><p>Assembles timeline, signals and impact from logs and alerts so the write-up starts from evidence rather than a blank page.</p></div>
+    </div>
+
+    <div class="gate rv">
+      <div class="gate-h"><span class="t">Permission boundary · how these agents are scoped</span><span class="s">◆ apply requires a human</span></div>
+      <div class="gate-b">
+        <div class="gcol ok">
+          <div class="hd">Agent may</div>
+          <ul>
+            <li><span>✓</span>Read cluster and cloud state</li>
+            <li><span>✓</span>Run <code style="font-family:var(--mono);font-size:13px;color:var(--cy)">terraform plan</code> and analyse output</li>
+            <li><span>✓</span>Comment on pull requests</li>
+            <li><span>✓</span>Draft runbooks and incident notes</li>
+            <li><span>✓</span>Propose a diff for review</li>
+          </ul>
+        </div>
+        <div class="gbar"><em>Human approves</em></div>
+        <div class="gcol no">
+          <div class="hd">Agent may not</div>
+          <ul>
+            <li><span>✗</span>Run <code style="font-family:var(--mono);font-size:13px">terraform apply</code></li>
+            <li><span>✗</span>Merge a pull request</li>
+            <li><span>✗</span>Write to production</li>
+            <li><span>✗</span>Read or rotate secrets</li>
+            <li><span>✗</span>Change IAM policy directly</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gate-f">Built at Chowly and used by <b>~5 engineers</b>. Scoped read-only with no apply or merge rights — judgment stays with the engineer, the typing gets delegated.</div>
+    </div>
+
+    <div class="meth rv">
+      <div class="mt" style="--c:var(--cy)"><div class="n">METHOD 01</div><h4>Capture, don't repeat</h4><p>When a task is worth doing twice — a deploy check, a review pass — it becomes a reusable agent skill so it runs consistently instead of from memory.</p></div>
+      <div class="mt" style="--c:var(--vi)"><div class="n">METHOD 02</div><h4>Plan-reviewed execution</h4><p>Plan first, review the plan against real state, then act. The gate is the whole design, not an afterthought bolted on later.</p></div>
+      <div class="mt" style="--c:var(--mg)"><div class="n">METHOD 03</div><h4>Context as a file</h4><p>Markdown context files keep an agent grounded in how a project actually works. The hard part isn't writing them — it's deciding what belongs in them.</p></div>
+    </div>
+
+    <div class="tools rv">
+      <span class="tool">Claude Code</span><span class="tool">Agent skills</span><span class="tool">MCP servers</span>
+      <span class="tool">CLAUDE.md / AGENTS.md</span><span class="tool">Context engineering</span><span class="tool">Plan-gated automation</span>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="trace" style="--c:var(--mg)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">03 — The trace</span>
+    <div class="sec-h rv"><span class="sec-n">04 — The trace</span>
       <h2>Alerts that fired into a void.</h2>
       <p>Lab environment, individual work. The bug was four layers below where it looked. Scroll to follow the trace.</p>
     </div>
@@ -370,7 +479,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="sec" id="program" style="--c:var(--am)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">04 — Program work</span>
+    <div class="sec-h rv"><span class="sec-n">05 — Program work</span>
       <h2>Training projects, kept separate on purpose.</h2>
       <p>Team projects from an advanced DevOps program — Agile sprints, pull requests, code review. My role on each: infrastructure and deployment automation, with application code built by teammates.</p>
     </div>
@@ -385,7 +494,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="sec" id="stack" style="--c:var(--li)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">05 — Stack</span>
+    <div class="sec-h rv"><span class="sec-n">06 — Stack</span>
       <h2>What I build with.</h2>
       <p>Grouped by where each tool sits in the delivery path. Filter to see a slice.</p>
     </div>
@@ -421,7 +530,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="sec-n" style="--c:var(--mg)">06 — Contact</span>
+    <span class="sec-n" style="--c:var(--mg)">07 — Contact</span>
     <h2>Let's talk about<br><span class="g">your delivery path.</span></h2>
     <p>Open to platform, DevOps and cloud engineering roles in Chicago or remote.</p>
     <div class="hcta">
