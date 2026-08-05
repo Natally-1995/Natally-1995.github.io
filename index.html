@@ -382,21 +382,21 @@ a{color:inherit;text-decoration:none}
           <h3>Platform Engineer</h3>
           <p class="xmeta">Chowly · Chicago, IL · Nov 2023 — present</p>
           <ul class="xl">
-            <li>Built <b>AI agents</b> (Claude Code) for Terraform plan review, IAM-risk PR review, runbooks, and incident summaries — some wired into CI on pull requests, others run on demand, all scoped read-only with no apply or merge rights. Used by ~5 engineers; Terraform review <span class="m">~50 → ~20 min</span>.</li>
-            <li>Replaced SSH-based EC2 deploys with <b>immutable Packer AMIs</b> rolled via ASG instance refresh across 8 services and 3 environments — deploy <span class="m">~30 → 8–10 min</span>, rollback <span class="m">20–30 → 5–10 min</span>, zero downtime behind ALB health checks.</li>
-            <li>Automated the path end to end: a merge triggers a Packer build, publishes the AMI ID to SSM, and Terraform applies it. Monthly rebuilds replaced manual patching and <b>ended recurring drift incidents</b>.</li>
-            <li>Moved ~20 services to <b>Argo CD GitOps on EKS</b> — CI commits image tags to a Helm values repo, nothing runs kubectl against production. Weekly releases became <span class="m">multiple daily</span>; merge-to-prod <span class="m">2–4 hrs → 20–30 min</span>.</li>
-            <li>Gated changes at pull-request time across <b>35 repos</b> — tests, Trivy scan, Helm validation, Terraform plan, applies blocked from CI — with dev → staging → prod promotion. Failed production deploys <span class="m">~10% → under 3%</span>.</li>
+            <li>Built <b>AI agents</b> that review Terraform plans and flag risky IAM changes on pull requests. They can read and comment, but never apply or merge — the engineer still decides. Five engineers use them daily, and Terraform review dropped from <span class="m">~50 to ~20 min</span>.</li>
+            <li>Replaced hand-run SSH deploys with <b>immutable machine images</b> across 8 services and 3 environments. Deploys went from <span class="m">~30 to 8–10 min</span>, rollbacks from <span class="m">20–30 to 5–10 min</span>, with no downtime.</li>
+            <li>Automated the whole path so that merging a pull request builds the image and Terraform ships it. Monthly rebuilds replaced manual patching and <b>ended the configuration drift</b> we kept running into.</li>
+            <li>Moved ~20 services to <b>GitOps on Kubernetes</b>, so nothing reaches production by hand. Releases went from weekly to <span class="m">several a day</span>, and merge-to-production from <span class="m">2–4 hrs to under 30 min</span>.</li>
+            <li>Added automated checks to <b>35 repositories</b> — tests, security scans, config validation, Terraform plans — so problems surface in review instead of production. Failed production deploys fell <span class="m">~10% → under 3%</span>.</li>
           </ul>
         </div>
         <div class="xpanel" role="tabpanel" id="p-gh" aria-labelledby="t-gh" hidden style="--c:var(--cy)">
           <h3>DevOps Engineer</h3>
           <p class="xmeta">Grubhub, Inc. · Chicago, IL · Jul 2021 — Nov 2023</p>
           <ul class="xl">
-            <li>Built reusable <b>Terraform modules</b> for AWS provisioning, replacing a mix of console clicking and copy-pasted configs — new environment standup dropped from <span class="m">days to hours</span>.</li>
-            <li>Automated build, test, and deploy with <b>GitHub Actions and Jenkins</b> across the team's 10+ services, removing the manual steps from a weekly release train and making deploys repeatable across environments.</li>
-            <li>Built <b>Prometheus and Grafana</b> dashboards and alert rules covering both application health and host-level infrastructure, giving on-call a single place to triage from.</li>
-            <li>Carried the <b>on-call pager</b> on a regular rotation, triaging production incidents across the application and AWS layers.</li>
+            <li>Built reusable <b>Terraform modules</b> for AWS, replacing a mix of console clicking and copy-pasted configs. Standing up a new environment went from <span class="m">days to hours</span>.</li>
+            <li>Automated build, test and deploy across the team's 10+ services with <b>GitHub Actions and Jenkins</b>, taking the manual steps out of a weekly release.</li>
+            <li>Built the <b>Prometheus and Grafana</b> dashboards and alert rules the team relied on, covering both application health and the infrastructure underneath — one place for on-call to start.</li>
+            <li>Carried the <b>on-call pager</b> on a regular rotation, handling production incidents across the application and AWS.</li>
           </ul>
         </div>
       </div>
