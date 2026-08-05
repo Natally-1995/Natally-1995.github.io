@@ -12,11 +12,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --void:#0A0518; --deep:#120A2E; --panel:#1A0F3D; --panel-2:#241551;
-  --edge:#2E1C66; --edge-2:#432A8F;
-  --text:#F4EEFF; --text-2:#B3A3DC; --text-3:#7A6BA8;
+  --paper:#F5F3EE; --paper-2:#EAE6DD; --card:#FFFFFF;
+  --line:#DED8CC; --line-2:#C6BEAE;
+  --ink:#241F19; --ink-2:#57503F; --ink-3:#8A8271;
 
-  --cy:#22D3EE; --mg:#FF3D8A; --am:#FFB020; --li:#A3E635; --vi:#A855F7;
+  --forest:#3C5A43; --sage:#7B9070; --slate:#4B6B78; --ochre:#A8813C; --clay:#A2593D;
+
+  --void:var(--paper); --deep:var(--paper-2); --panel:var(--card); --panel-2:var(--paper-2);
+  --edge:var(--line); --edge-2:var(--line-2);
+  --text:var(--ink); --text-2:var(--ink-2); --text-3:var(--ink-3);
+  --cy:var(--slate); --mg:var(--clay); --am:var(--ochre); --li:var(--sage); --vi:var(--forest);
 
   --disp:"Unbounded",system-ui,sans-serif;
   --body:"Outfit",system-ui,-apple-system,sans-serif;
@@ -31,88 +36,75 @@ a{color:inherit;text-decoration:none}
 @media(max-width:640px){.wrap{padding:0 20px}}
 
 /* ambient colour field */
-.aura{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-   radial-gradient(760px 520px at 12% -6%, rgba(168,85,247,.22), transparent 62%),
-   radial-gradient(680px 480px at 92% 12%, rgba(34,211,238,.15), transparent 60%),
-   radial-gradient(700px 560px at 60% 104%, rgba(255,61,138,.14), transparent 62%);}
+.aura{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(820px 560px at 10% -8%, rgba(60,90,67,.10), transparent 62%),radial-gradient(700px 500px at 94% 10%, rgba(75,107,120,.09), transparent 60%),radial-gradient(720px 580px at 58% 106%, rgba(168,129,60,.08), transparent 62%)}
 .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-  background-image:linear-gradient(rgba(255,255,255,.017) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.017) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(36,31,25,.030) 1px,transparent 1px),linear-gradient(90deg,rgba(36,31,25,.030) 1px,transparent 1px);
   background-size:52px 52px;
-  mask-image:radial-gradient(1100px 720px at 50% 22%,#000 30%,transparent 78%)}
+  mask-image:radial-gradient(1100px 720px at 50% 20%,#000 25%,transparent 75%)}
 .page{position:relative;z-index:1}
 
 .kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--text-3)}
 
 /* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:80;backdrop-filter:blur(16px);
-  background:linear-gradient(180deg,rgba(10,5,24,.94),rgba(10,5,24,.62));border-bottom:1px solid var(--edge)}
+.nav{position:sticky;top:0;z-index:80;backdrop-filter:blur(16px);background:rgba(245,243,238,.90);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
 .mark{font-family:var(--disp);font-weight:800;font-size:15px;letter-spacing:-.02em}
-.mark i{font-style:normal;background:linear-gradient(92deg,var(--cy),var(--mg));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mark i{font-style:normal;color:var(--forest)}
 .nlinks{display:flex;gap:24px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
 .nlinks a{position:relative;padding:4px 0;transition:color .2s}
 .nlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--cy);transition:right .28s cubic-bezier(.2,.8,.2,1)}
 .nlinks a:hover{color:var(--text)}
 .nlinks a:hover::after{right:0}
-.nbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:100px;
-  border:1px solid var(--edge-2);background:rgba(66,42,143,.24);color:var(--text);cursor:pointer;transition:.2s}
-.nbtn:hover{border-color:var(--cy);color:var(--cy);box-shadow:0 0 22px rgba(34,211,238,.28)}
+.nbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:100px;border:1px solid var(--line-2);background:var(--card);color:var(--ink);cursor:pointer;transition:.2s}
+.nbtn:hover{border-color:var(--forest);color:var(--forest)}
 @media(max-width:900px){.nlinks{display:none}}
 
 /* ---------- hero ---------- */
 .hero{padding:96px 0 60px;position:relative}
-.live{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--li);border:1px solid rgba(163,230,53,.32);background:rgba(163,230,53,.07);padding:6px 13px;border-radius:100px}
-.live i{width:6px;height:6px;border-radius:50%;background:var(--li);box-shadow:0 0 10px var(--li);animation:blip 2.2s infinite}
+.live{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);border:1px solid rgba(60,90,67,.34);background:rgba(123,144,112,.12);padding:6px 13px;border-radius:100px}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--sage);display:block;animation:blip 2.2s infinite}
 @keyframes blip{0%,100%{opacity:1}50%{opacity:.28}}
 
 .name{font-family:var(--disp);font-weight:800;font-size:clamp(52px,11.5vw,140px);line-height:.86;letter-spacing:-.05em;margin:24px 0 0}
 .name span{display:block;overflow:hidden}
 .name b{display:block;font-weight:800;transform:translateY(105%);animation:rise .95s cubic-bezier(.16,1,.3,1) forwards}
 .name span:nth-child(2) b{animation-delay:.1s}
-.name .g{background:linear-gradient(96deg,var(--cy) 8%,var(--vi) 48%,var(--mg) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.name .g{color:var(--forest)}
 @keyframes rise{to{transform:translateY(0)}}
 
 .htag{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;opacity:0;animation:fade .7s .55s forwards}
 .tg{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;padding:7px 13px;border-radius:100px;border:1px solid var(--edge-2);color:var(--text-2)}
-.tg:nth-child(1){border-color:rgba(34,211,238,.45);color:var(--cy)}
-.tg:nth-child(2){border-color:rgba(168,85,247,.45);color:var(--vi)}
-.tg:nth-child(3){border-color:rgba(255,61,138,.45);color:var(--mg)}
-.tg:nth-child(4){border-color:rgba(255,176,32,.45);color:var(--am)}
-.tg:nth-child(5){border-color:rgba(163,230,53,.45);color:var(--li)}
+.tg:nth-child(1){border-color:rgba(75,107,120,.5);color:var(--slate)}
+.tg:nth-child(2){border-color:rgba(60,90,67,.5);color:var(--forest)}
+.tg:nth-child(3){border-color:rgba(162,89,61,.5);color:var(--clay)}
+.tg:nth-child(4){border-color:rgba(168,129,60,.5);color:var(--ochre)}
+.tg:nth-child(5){border-color:rgba(123,144,112,.5);color:var(--sage)}
 @keyframes fade{to{opacity:1}}
 
 .lede{font-size:clamp(18px,2.3vw,23px);font-weight:300;color:var(--text-2);max-width:52ch;margin-top:26px;opacity:0;animation:fade .7s .68s forwards}
 .lede b{color:var(--text);font-weight:500}
 .hcta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;opacity:0;animation:fade .7s .8s forwards}
-.btn{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;padding:14px 24px;border-radius:100px;
-  border:1px solid var(--edge-2);background:rgba(36,21,81,.5);cursor:pointer;transition:.22s}
-.btn:hover{transform:translateY(-2px);border-color:var(--vi);box-shadow:0 10px 34px rgba(168,85,247,.3)}
-.btn-hot{border:0;color:#12061F;font-weight:700;background:linear-gradient(96deg,var(--cy),var(--vi) 55%,var(--mg))}
-.btn-hot:hover{box-shadow:0 12px 40px rgba(255,61,138,.42)}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;padding:14px 24px;border-radius:100px;border:1px solid var(--line-2);background:var(--card);cursor:pointer;transition:.22s}
+.btn:hover{transform:translateY(-2px);border-color:var(--forest);color:var(--forest);box-shadow:0 8px 22px rgba(60,90,67,.14)}
+.btn-hot{border:1px solid var(--forest);color:#FFFFFF;font-weight:600;background:var(--forest)}
+.btn-hot:hover{background:#31492F;border-color:#31492F;color:#FFFFFF;box-shadow:0 10px 26px rgba(60,90,67,.26)}
 
 /* ---------- signature: the pipeline ---------- */
-.pipe{margin-top:60px;border:1px solid var(--edge);border-radius:18px;background:linear-gradient(180deg,rgba(26,15,61,.86),rgba(18,10,46,.5));
-  padding:22px 24px 20px;opacity:0;animation:fade .8s .95s forwards;position:relative;overflow:hidden}
+.pipe{margin-top:60px;border:1px solid var(--line);border-radius:18px;background:var(--card);padding:22px 24px 20px;opacity:0;animation:fade .8s .95s forwards;position:relative;overflow:hidden}
 .pipe-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:14px;flex-wrap:wrap}
 .pipe-h .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
 .pipe-h .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--li)}
 .rail{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
 .rail::before{content:"";position:absolute;left:5%;right:5%;top:19px;height:2px;border-radius:2px;
   background:linear-gradient(90deg,var(--cy),var(--vi) 40%,var(--mg) 72%,var(--am))}
-.rail::after{content:"";position:absolute;top:15px;left:0;width:10px;height:10px;border-radius:50%;background:#fff;
-  box-shadow:0 0 16px 5px rgba(255,255,255,.75);animation:flow 5.2s linear infinite}
+.rail::after{content:"";position:absolute;top:15px;left:0;width:10px;height:10px;border-radius:50%;background:var(--forest);box-shadow:0 0 12px 3px rgba(60,90,67,.35);animation:flow 5.2s linear infinite}
 @keyframes flow{0%{left:4%;opacity:0}8%{opacity:1}92%{opacity:1}100%{left:95%;opacity:0}}
 .stg{position:relative;background:none;border:0;cursor:pointer;text-align:center;padding:0;font-family:inherit}
-.node{width:40px;height:40px;margin:0 auto 11px;border-radius:50%;border:2px solid var(--edge-2);background:var(--deep);
-  display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--text-3);
-  transition:.3s;position:relative;z-index:2}
+.node{width:40px;height:40px;margin:0 auto 11px;border-radius:50%;border:2px solid var(--line-2);background:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink-3);transition:.3s;position:relative;z-index:2}
 .stg .lb{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);transition:.3s}
 .stg .sb{display:block;font-size:11px;color:var(--text-3);opacity:0;transform:translateY(-4px);transition:.3s;margin-top:3px}
 .stg:hover .sb,.stg.lit .sb{opacity:.85;transform:none}
-.stg.lit .node,.stg:hover .node{border-color:var(--c);color:var(--c);box-shadow:0 0 26px -2px var(--c);background:var(--panel)}
+.stg.lit .node,.stg:hover .node{border-color:var(--c);color:var(--c);background:var(--card);box-shadow:0 0 0 4px color-mix(in srgb, var(--c) 13%, transparent)}
 .stg.lit .lb,.stg:hover .lb{color:var(--text)}
 @media(max-width:780px){.rail{grid-template-columns:repeat(3,1fr);row-gap:22px}.rail::before,.rail::after{display:none}}
 
@@ -146,17 +138,15 @@ a{color:inherit;text-decoration:none}
 .ag{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px}
 @media(max-width:1000px){.ag{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.ag{grid-template-columns:1fr}}
-.ac{border:1px solid var(--edge);border-radius:16px;padding:22px;background:linear-gradient(165deg,rgba(26,15,61,.9),rgba(18,10,46,.4));
-  transition:.32s;position:relative;overflow:hidden}
+.ac{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--card);transition:.32s;position:relative;overflow:hidden}
 .ac::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .4s}
-.ac:hover{transform:translateY(-6px);border-color:var(--c);box-shadow:0 18px 50px -22px var(--c)}
+.ac:hover{transform:translateY(-6px);border-color:var(--c);box-shadow:0 16px 34px -20px rgba(36,31,25,.35)}
 .ac:hover::after{transform:scaleX(1)}
 .ac .ix{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--c)}
 .ac h4{font-family:var(--disp);font-weight:700;font-size:16.5px;letter-spacing:-.02em;margin:12px 0 9px;line-height:1.24}
 .ac p{font-size:14px;color:var(--text-2);line-height:1.55}
 
-.gate{border:1px solid var(--edge-2);border-radius:20px;overflow:hidden;
-  background:linear-gradient(150deg,rgba(26,15,61,.9),rgba(18,10,46,.5))}
+.gate{border:1px solid var(--line-2);border-radius:20px;overflow:hidden;background:var(--card)}
 .gate-h{padding:18px 24px;border-bottom:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .gate-h .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
 .gate-h .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--am)}
@@ -169,14 +159,11 @@ a{color:inherit;text-decoration:none}
 .gcol ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .gcol li{display:flex;gap:11px;align-items:flex-start;font-size:15px;color:var(--text-2)}
 .gcol li span{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;margin-top:2px}
-.gcol.ok li span{background:rgba(163,230,53,.14);color:var(--li);border:1px solid rgba(163,230,53,.4)}
-.gcol.no li span{background:rgba(255,61,138,.12);color:var(--mg);border:1px solid rgba(255,61,138,.4)}
+.gcol.ok li span{background:rgba(123,144,112,.16);color:#4C6242;border:1px solid rgba(123,144,112,.5)}
+.gcol.no li span{background:rgba(162,89,61,.12);color:var(--clay);border:1px solid rgba(162,89,61,.45)}
 .gcol.no li{color:var(--text-3)}
 .gbar{width:1px;background:linear-gradient(180deg,transparent,var(--edge-2) 18%,var(--edge-2) 82%,transparent);position:relative;margin:0 6px}
-.gbar em{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-style:normal;white-space:nowrap;
-  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--am);
-  background:var(--void);border:1px solid rgba(255,176,32,.45);border-radius:100px;padding:9px 13px;
-  box-shadow:0 0 26px -6px var(--am);animation:hold 2.8s ease-in-out infinite}
+.gbar em{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-style:normal;white-space:nowrap;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);background:var(--card);border:1px solid rgba(168,129,60,.5);border-radius:100px;padding:9px 13px}
 @keyframes hold{0%,100%{box-shadow:0 0 26px -6px var(--am)}50%{box-shadow:0 0 40px -2px var(--am)}}
 @media(max-width:860px){.gbar{width:auto;height:1px;background:var(--edge-2);margin:6px 24px}
   .gbar em{position:relative;top:0;left:0;transform:translateY(-50%);display:inline-block}}
@@ -190,21 +177,19 @@ a{color:inherit;text-decoration:none}
 .mt h4{font-family:var(--disp);font-weight:600;font-size:17px;margin:9px 0 8px;letter-spacing:-.02em}
 .mt p{font-size:14.5px;color:var(--text-2)}
 .tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:36px}
-.tool{font-family:var(--mono);font-size:12px;padding:10px 16px;border-radius:100px;border:1px solid var(--edge-2);
-  color:var(--text-2);background:rgba(36,21,81,.4);transition:.25s}
-.tool:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-2px)}
+.tool{font-family:var(--mono);font-size:12px;padding:10px 16px;border-radius:100px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--card);transition:.25s}
+.tool:hover{border-color:var(--forest);color:var(--forest);transform:translateY(-2px)}
 
 /* ---------- experience ---------- */
 .xp{display:grid;grid-template-columns:280px 1fr;gap:42px}
 @media(max-width:900px){.xp{grid-template-columns:1fr;gap:24px}}
 .rail-tabs{display:flex;flex-direction:column;gap:10px}
 @media(max-width:900px){.rail-tabs{flex-direction:row;overflow-x:auto;padding-bottom:4px}}
-.xtab{text-align:left;font-family:inherit;cursor:pointer;flex-shrink:0;
-  border:1px solid var(--edge);border-radius:14px;padding:18px 20px;background:rgba(26,15,61,.5);transition:.26s}
+.xtab{text-align:left;font-family:inherit;cursor:pointer;flex-shrink:0;border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--card);transition:.26s}
 .xtab .co{display:block;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--text-2)}
 .xtab .dt{display:block;font-family:var(--mono);font-size:11px;color:var(--text-3);margin-top:5px}
 .xtab:hover{border-color:var(--edge-2);transform:translateX(3px)}
-.xtab[aria-selected="true"]{border-color:var(--c);background:linear-gradient(120deg,color-mix(in srgb,var(--c) 16%,transparent),rgba(26,15,61,.6));box-shadow:0 0 34px -10px var(--c)}
+.xtab[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb, var(--c) 9%, var(--card))}
 .xtab[aria-selected="true"] .co{color:var(--c)}
 .xpanel[hidden]{display:none}
 .xpanel h3{font-family:var(--disp);font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.03em}
@@ -247,31 +232,29 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- stack ---------- */
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px}
-.f{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:9px 16px;border-radius:100px;
-  border:1px solid var(--edge-2);background:rgba(36,21,81,.4);color:var(--text-2);cursor:pointer;transition:.22s}
+.f{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:9px 16px;border-radius:100px;border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);cursor:pointer;transition:.22s}
 .f:hover{color:var(--text);border-color:var(--vi)}
-.f[aria-pressed="true"]{background:linear-gradient(96deg,var(--cy),var(--vi));border-color:transparent;color:#0F0722;font-weight:600}
+.f[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:#FFFFFF;font-weight:600}
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:13px}
-.sc{border:1px solid var(--edge);border-radius:14px;padding:19px;background:rgba(26,15,61,.42);transition:.35s}
+.sc{border:1px solid var(--line);border-radius:14px;padding:19px;background:var(--card);transition:.35s}
 .sc:hover{border-color:var(--c);transform:translateY(-4px)}
-.sc.dim{opacity:.16;filter:saturate(.2)}
+.sc.dim{opacity:.3;filter:saturate(.25)}
 .sc .c{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
 .sc .n{font-size:16px;font-weight:500;margin:8px 0 9px}
 .sc .i{font-size:13.5px;color:var(--text-2);line-height:1.55}
 
 /* ---------- cert + contact ---------- */
-.cert{display:inline-flex;align-items:center;gap:16px;border:1px solid var(--edge-2);border-radius:16px;padding:18px 24px;
-  background:linear-gradient(120deg,rgba(34,211,238,.1),rgba(168,85,247,.07));transition:.3s}
-.cert:hover{border-color:var(--cy);box-shadow:0 0 40px -12px var(--cy)}
+.cert{display:inline-flex;align-items:center;gap:16px;border:1px solid var(--line-2);border-radius:16px;padding:18px 24px;background:var(--card);transition:.3s}
+.cert:hover{border-color:var(--forest);box-shadow:0 12px 30px -18px rgba(60,90,67,.6)}
 .cert .k{font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--cy)}
 .cert .v{font-size:14.5px;color:var(--text-2)}
 .cert .v b{display:block;color:var(--text);font-weight:500}
 .contact{padding:112px 0 96px;text-align:center}
 .contact h2{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,80px);line-height:.98;letter-spacing:-.05em}
-.contact h2 .g{background:linear-gradient(96deg,var(--cy),var(--vi) 50%,var(--mg));-webkit-background-clip:text;background-clip:text;color:transparent}
+.contact h2 .g{color:var(--forest)}
 .contact p{color:var(--text-2);max-width:44ch;margin:20px auto 0;font-size:18px}
 .contact .hcta{justify-content:center;opacity:1;animation:none}
-.foot{border-top:1px solid var(--edge);padding:30px 0;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-3)}
+.foot{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3)}
 
 .rv{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
@@ -311,8 +294,8 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="mark">NATALIA TARITA<i>.</i></div>
     <div class="nlinks">
-      <a href="#impact">Impact</a><a href="#experience">Experience</a>
-      <a href="#ai">AI work</a><a href="#trace">The trace</a><a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#ai">AI work</a><a href="#stack">Stack</a>
     </div>
     <button class="nbtn" id="printBtn">Save as PDF</button>
   </div>
@@ -337,8 +320,8 @@ a{color:inherit;text-decoration:none}
       <div class="pipe-h"><span class="t">The pipeline I build</span><span class="s">● reconciled</span></div>
       <div class="rail">
         <button class="stg" style="--c:var(--cy)"  data-go="#experience"><span class="node">01</span><span class="lb">Commit</span><span class="sb">merge to main</span></button>
-        <button class="stg" style="--c:var(--vi)"  data-go="#impact"><span class="node">02</span><span class="lb">Build</span><span class="sb">Packer AMI</span></button>
-        <button class="stg" style="--c:var(--mg)"  data-go="#impact"><span class="node">03</span><span class="lb">Scan</span><span class="sb">Trivy gate</span></button>
+        <button class="stg" style="--c:var(--vi)"  data-go="#experience"><span class="node">02</span><span class="lb">Build</span><span class="sb">Packer AMI</span></button>
+        <button class="stg" style="--c:var(--mg)"  data-go="#experience"><span class="node">03</span><span class="lb">Scan</span><span class="sb">Trivy gate</span></button>
         <button class="stg" style="--c:var(--am)"  data-go="#experience"><span class="node">04</span><span class="lb">Plan</span><span class="sb">Terraform</span></button>
         <button class="stg" style="--c:var(--li)"  data-go="#experience"><span class="node">05</span><span class="lb">Promote</span><span class="sb">dev → prod</span></button>
         <button class="stg" style="--c:var(--cy)"  data-go="#ai"><span class="node">06</span><span class="lb">Observe</span><span class="sb">alert &amp; trace</span></button>
@@ -347,26 +330,9 @@ a{color:inherit;text-decoration:none}
   </div>
 </header>
 
-<section class="sec" id="impact" style="--c:var(--cy)">
-  <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">01 — Impact</span>
-      <h2>What actually changed.</h2>
-      <p>Numbers from the platform work at Chowly. Each bar is the new figure against the old one, to scale.</p>
-    </div>
-    <div class="mg rv" id="metrics">
-      <div class="mc" style="--c:var(--cy)"><div class="lab">Deploy time</div><div class="big">8–10 min</div><div class="from">from <s>~30 min</s></div><div class="bar"><i style="--w:30%"></i></div></div>
-      <div class="mc" style="--c:var(--vi)"><div class="lab">Rollback time</div><div class="big">5–10 min</div><div class="from">from <s>20–30 min</s></div><div class="bar"><i style="--w:30%"></i></div></div>
-      <div class="mc" style="--c:var(--mg)"><div class="lab">Merge to production</div><div class="big">20–30 min</div><div class="from">from <s>2–4 hrs</s></div><div class="bar"><i style="--w:14%"></i></div></div>
-      <div class="mc" style="--c:var(--li)"><div class="lab">Failed prod deploys</div><div class="big">under 3%</div><div class="from">from <s>~10%</s></div><div class="bar"><i style="--w:30%"></i></div></div>
-      <div class="mc" style="--c:var(--am)"><div class="lab">Terraform plan review</div><div class="big">~20 min</div><div class="from">from <s>~50 min</s></div><div class="bar"><i style="--w:40%"></i></div></div>
-      <div class="mc" style="--c:var(--cy)"><div class="lab">Release cadence</div><div class="big">Multiple daily</div><div class="from">from <s>weekly</s></div><div class="bar"><i style="--w:100%"></i></div></div>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="experience" style="--c:var(--vi)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">02 — Experience</span>
+    <div class="sec-h rv"><span class="sec-n">01 — Experience</span>
       <h2>Where the numbers came from.</h2>
       <p>Two roles, five years, one throughline: replacing steps a human has to remember with steps a pipeline enforces.</p>
     </div>
@@ -407,7 +373,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="sec" id="ai" style="--c:var(--am)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">03 — AI-native platform work</span>
+    <div class="sec-h rv"><span class="sec-n">02 — AI-native platform work</span>
       <h2>Agents with a leash.</h2>
       <p>I use AI as a force multiplier on real infrastructure, not as a keyword. The interesting part isn't that an agent can write Terraform — it's deciding exactly what it's allowed to touch.</p>
     </div>
@@ -460,26 +426,9 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<section class="sec" id="trace" style="--c:var(--mg)">
-  <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">04 — The trace</span>
-      <h2>Alerts that fired into a void.</h2>
-      <p>Lab environment, individual work. The bug was four layers below where it looked. Scroll to follow the trace.</p>
-    </div>
-    <div class="tr" id="trace">
-      <div class="ts"><span class="dot">01</span><h4>The symptom</h4><p>CloudWatch → SNS → Lambda posted to Slack in under 5 seconds. Alertmanager rules evaluated and fired, and nothing reached the channel.</p></div>
-      <div class="ts"><span class="dot">02</span><h4>Ruled out the obvious</h4><p>Routing config, receiver definitions, and webhook URL all checked out. The rules were correct, so the failure was downstream of Alertmanager.</p></div>
-      <div class="ts"><span class="dot">03</span><h4>Read the actual error</h4><p>Alertmanager logs showed <code>context deadline exceeded</code> — timeouts, not rejections. Nothing was refusing the request; it was never arriving.</p></div>
-      <div class="ts"><span class="dot">04</span><h4>Isolated the boundary</h4><p>Pods reached AWS services fine over VPC endpoints, but timed out to <em>every</em> public IPv4 destination. Not a Slack problem — an egress problem.</p></div>
-      <div class="ts"><span class="dot">05</span><h4>Root cause</h4><p>The cluster was IPv6-only. Slack's API is IPv4-only. Reaching it depended on a NAT64 gateway that wasn't functioning — so every alert timed out at the network layer, far below the alerting stack.</p></div>
-    </div>
-    <div class="punch rv">The alerting was never broken. The block was cluster-level egress infrastructure — and naming that line, between "my config" and "the platform," is what saves an on-call engineer their evening.</div>
-  </div>
-</section>
-
 <section class="sec" id="stack" style="--c:var(--li)">
   <div class="wrap">
-    <div class="sec-h rv"><span class="sec-n">05 — Stack</span>
+    <div class="sec-h rv"><span class="sec-n">03 — Stack</span>
       <h2>What I build with.</h2>
       <p>Grouped by where each tool sits in the delivery path. Filter to see a slice.</p>
     </div>
@@ -515,7 +464,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="sec-n" style="--c:var(--mg)">06 — Contact</span>
+    <span class="sec-n" style="--c:var(--mg)">04 — Contact</span>
     <h2>Let's talk about<br><span class="g">your delivery path.</span></h2>
     <p>Open to platform, DevOps and cloud engineering roles in Chicago or remote.</p>
     <div class="hcta">
