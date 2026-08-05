@@ -353,6 +353,7 @@ a{color:inherit;text-decoration:none}
             <li>Wired the rest of it together so a merge builds the image and Terraform ships it. We rebuild monthly instead of patching by hand, which <b>ended the drift problems</b> we kept hitting.</li>
             <li>Moved 20 services onto <b>Argo CD</b>. Nobody runs kubectl against prod anymore. We went from weekly releases to <span class="m">several a day</span>, and merge-to-prod from <span class="m">2&#8211;4 hrs to under 30 min</span>.</li>
             <li>Put tests, security scans, config validation and Terraform checks on <b>35 repos</b>, so things break in review instead of in prod. Failed deploys went from <span class="m">10% to under 3%</span>.</li>
+            <li>Cut our <b>AWS bill by about 18%</b>, somewhere around <span class="m">$60&#8211;80K a year</span>. Right-sized EC2 workloads, deleted what nobody was using, put lifecycle policies on storage, and added monitoring so it wouldn't creep back up.</li>
           </ul>
         </div>
         <div class="xpanel" role="tabpanel" id="p-gh" aria-labelledby="t-gh" hidden style="--c:var(--cy)">
