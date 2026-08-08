@@ -220,11 +220,10 @@ a{color:inherit;text-decoration:none}
     <div class="logo">natalia tarita<i>_</i></div>
     <nav class="nav">
       <a href="#pillars">Pillars</a><a href="#work">Work</a>
-      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a>
+      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a><a href="#" id="navcv">Résumé</a>
     </nav>
     <div class="hdr-r">
-      <button class="btn" style="padding:9px 15px" onclick="window.print()">Résumé</button>
-      <div class="pill"><b></b><span>Open to roles</span></div>
+      <div class="pill"><b></b><span>Open to Platform Engineering roles</span></div>
       <a class="ico" href="https://github.com/Natally-1995" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
       </a>
@@ -249,22 +248,22 @@ a{color:inherit;text-decoration:none}
 
     <div class="mrow" id="metrics">
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n">under <span data-to="10">10</span> min</div>
+        <div class="n">8–10 min</div>
         <div class="l">Deploy time across 8 services and 3 environments</div>
         <div class="f">was ~30 min</div>
       </div>
       <div class="mcard rv" style="--c:var(--emerald)">
-        <div class="n">under <span data-to="3">3</span>%</div>
+        <div class="n">&lt;3%</div>
         <div class="l">Failed production deploys after PR-time gating</div>
         <div class="f">was ~10%</div>
       </div>
       <div class="mcard rv" style="--c:var(--amber)">
-        <div class="n"><span data-to="18">18</span>%</div>
+        <div class="n">−18%</div>
         <div class="l">AWS spend reduction, roughly $60–80K a year</div>
         <div class="f">right-sizing · cleanup · lifecycle</div>
       </div>
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n"><span data-to="20">20</span> min</div>
+        <div class="n">20 min</div>
         <div class="l">Terraform plan review, with agent assistance</div>
         <div class="f">was ~50 min</div>
       </div>
@@ -440,7 +439,7 @@ a{color:inherit;text-decoration:none}
             <div class="res">
               <div><span class="k">AWS spend</span><span class="v">−18%</span></div>
               <div><span class="k">Annualised</span><span class="v">~$60–80K</span></div>
-              <div><span class="k">Performance incidents</span><span class="v">none</span></div>
+              <div><span class="k">Perf. incidents from these changes</span><span class="v">0</span></div>
               <div><span class="k">Change path</span><span class="v">all Terraform</span></div>
             </div>
             <div class="plabel">Stack</div>
@@ -542,7 +541,7 @@ a{color:inherit;text-decoration:none}
       <div class="sg" style="--c:var(--amber)"><div class="h">Infrastructure as code</div>
         <ul><li>Terraform</li><li>Packer</li><li>Remote state</li><li>Modules</li></ul></div>
       <div class="sg" style="--c:var(--cyan)"><div class="h">CI/CD &amp; Security</div>
-        <ul><li>GitHub Actions</li><li>GitLab CI</li><li>Jenkins</li><li>Trivy</li><li>Terraform validation</li><li>GitOps</li></ul></div>
+        <ul><li>GitHub Actions</li><li>Jenkins</li><li>Trivy</li><li>Terraform validation</li><li>GitOps</li></ul></div>
       <div class="sg" style="--c:var(--emerald)"><div class="h">Observability</div>
         <ul><li>Prometheus</li><li>Grafana</li><li>Alertmanager</li><li>CloudWatch</li></ul></div>
       <div class="sg" style="--c:var(--amber)"><div class="h">AI &amp; scripting</div>
@@ -606,25 +605,10 @@ a{color:inherit;text-decoration:none}
     es.forEach(function(e){
       if(!e.isIntersecting) return;
       e.target.classList.add('in');
-      if(e.target.classList.contains('mcard')) count(e.target);
       io.unobserve(e.target);
     });
   },{threshold:.14});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
-
-  /* counters */
-  function count(card){
-    card.querySelectorAll('[data-to]').forEach(function(el){
-      var to = +el.dataset.to;
-      if(reduce) return;                    /* final value already in the markup */
-      var t0 = performance.now(), dur = 1100;
-      (function step(now){
-        var p = Math.min(1,(now-t0)/dur);
-        el.textContent = Math.round(to * (1-Math.pow(1-p,3)));
-        if(p<1) requestAnimationFrame(step);
-      })(t0);
-    });
-  }
 
   /* project tabs */
   var tabs = [].slice.call(document.querySelectorAll('.ptab'));
@@ -691,7 +675,7 @@ a{color:inherit;text-decoration:none}
       '<b>cloud</b>          AWS · EC2 · EKS · VPC · IAM · RDS · S3 · ECR · Route 53 · CloudWatch',
       '<b>orchestration</b>  Kubernetes · Docker · Helm · Argo CD · Linux',
       '<b>iac</b>            Terraform (modules, remote state) · Packer',
-      '<b>ci/cd</b>          GitHub Actions · GitLab CI · Jenkins · Trivy · Terraform validation · GitOps',
+      '<b>ci/cd</b>          GitHub Actions · Jenkins · Trivy · Terraform validation · GitOps',
       '<b>observability</b>  Prometheus · Grafana · Alertmanager · CloudWatch',
       '<b>ai</b>             Claude Code · MCP servers · CLAUDE.md · AGENTS.md',
       '<b>scripting</b>      Python · Bash'
@@ -804,6 +788,7 @@ a{color:inherit;text-decoration:none}
   });
 
   /* contact form → mail client */
+  document.getElementById('navcv').addEventListener('click', function(e){ e.preventDefault(); window.print(); });
   document.getElementById('cform').addEventListener('submit', function(e){
     e.preventDefault();
     var n = document.getElementById('cn').value,
