@@ -395,7 +395,7 @@ a{color:inherit;text-decoration:none}
           <div class="pright">
             <div class="plabel">Results</div>
             <div class="res">
-              <div><span class="k">Release cadence</span><span class="v"><s>weekly</s>several daily</span></div>
+              <div><span class="k">Release cadence</span><span class="v"><s>weekly</s>several times daily</span></div>
               <div><span class="k">Merge to production</span><span class="v"><s>2–4 hrs</s>&lt;30 min</span></div>
               <div><span class="k">Rollback</span><span class="v">git revert, ~1 min</span></div>
               <div><span class="k">Services migrated</span><span class="v">20</span></div>
@@ -439,7 +439,7 @@ a{color:inherit;text-decoration:none}
             <div class="res">
               <div><span class="k">AWS spend</span><span class="v">−18%</span></div>
               <div><span class="k">Annualised</span><span class="v">~$60–80K</span></div>
-              <div><span class="k">Perf. incidents from these changes</span><span class="v">0</span></div>
+              <div><span class="k">Incidents caused by the right-sizing</span><span class="v">none</span></div>
               <div><span class="k">Change path</span><span class="v">all Terraform</span></div>
             </div>
             <div class="plabel">Stack</div>
@@ -664,7 +664,7 @@ a{color:inherit;text-decoration:none}
       'Deploy time                 ~30 min       8–10 min',
       'Rollback                    20–30 min     5–10 min',
       'Merge to production         2–4 hrs       <30 min',
-      'Release cadence             weekly        several/day',
+      'Release cadence             weekly        several times daily',
       'Failed production deploys   ~10%          <3%',
       'Terraform plan review       ~50 min       ~20 min',
       'AWS spend                   baseline      <i>−18% (~$60–80K/yr)</i>',
@@ -685,7 +685,7 @@ a{color:inherit;text-decoration:none}
       '                              deploy 30 → 8–10 min, drift ended',
       '',
       '02  <b>GitOps migration</b>       20 services → Argo CD',
-      '                              weekly → several daily, CI lost prod creds',
+      '                              weekly → several times daily, CI lost prod creds',
       '',
       '03  <b>Cost reduction</b>         AWS spend −18%, ~$60–80K/yr',
       '                              right-sizing, cleanup, S3 lifecycle',
@@ -728,7 +728,7 @@ a{color:inherit;text-decoration:none}
     '  Two-person platform team supporting ~12 engineers.',
     '  · Read-only AI agents reviewing Terraform plans and IAM risk on PRs',
     '  · Packer AMIs via ASG refresh — deploy 30 → 8–10 min',
-    '  · 20 services to Argo CD GitOps — weekly → several daily',
+    '  · 20 services to Argo CD GitOps — weekly → several times daily',
     '  · 35 repos gated at PR time — failed deploys 10% → <3%',
     '  · AWS spend −18% (~$60–80K/yr)',
     '',
