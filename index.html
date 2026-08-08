@@ -223,6 +223,7 @@ a{color:inherit;text-decoration:none}
       <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a>
     </nav>
     <div class="hdr-r">
+      <button class="btn" style="padding:9px 15px" onclick="window.print()">Résumé</button>
       <div class="pill"><b></b><span>Open to roles</span></div>
       <a class="ico" href="https://github.com/Natally-1995" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
@@ -243,26 +244,27 @@ a{color:inherit;text-decoration:none}
       <a class="btn btn-p" href="#work">View the work</a>
       <a class="btn" href="#terminal">Open terminal</a>
       <a class="btn" href="mailto:nataliatarita95@gmail.com">Get in touch</a>
+      <button class="btn" onclick="window.print()">Download résumé</button>
     </div>
 
     <div class="mrow" id="metrics">
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n"><span data-to="8" data-suffix="">0</span>–10 min</div>
-        <div class="l">Deploy time, across 8 services and 3 environments</div>
+        <div class="n">under <span data-to="10">10</span> min</div>
+        <div class="l">Deploy time across 8 services and 3 environments</div>
         <div class="f">was ~30 min</div>
       </div>
       <div class="mcard rv" style="--c:var(--emerald)">
-        <div class="n">&lt;<span data-to="3">0</span>%</div>
+        <div class="n">under <span data-to="3">3</span>%</div>
         <div class="l">Failed production deploys after PR-time gating</div>
         <div class="f">was ~10%</div>
       </div>
       <div class="mcard rv" style="--c:var(--amber)">
-        <div class="n"><span data-to="18">0</span>%</div>
+        <div class="n"><span data-to="18">18</span>%</div>
         <div class="l">AWS spend reduction, roughly $60–80K a year</div>
         <div class="f">right-sizing · cleanup · lifecycle</div>
       </div>
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n"><span data-to="20">0</span> min</div>
+        <div class="n"><span data-to="20">20</span> min</div>
         <div class="l">Terraform plan review, with agent assistance</div>
         <div class="f">was ~50 min</div>
       </div>
@@ -288,7 +290,7 @@ a{color:inherit;text-decoration:none}
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>AI-governed review</h3>
         <p>Read-only agents read Terraform plans and flag IAM risk on pull requests. They comment. They can't apply, merge, or reach secrets.</p>
-        <div class="tags"><span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">Trivy</span><span class="tg">MCP</span></div>
+        <div class="tags"><span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">Trivy</span><span class="tg">MCP servers</span></div>
       </div>
       <div class="pc" style="--c:var(--amber)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></div>
@@ -484,7 +486,7 @@ a{color:inherit;text-decoration:none}
             </div>
             <div class="plabel">Stack</div>
             <div class="tags" style="margin-bottom:20px">
-              <span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">AGENTS.md</span><span class="tg">MCP</span><span class="tg">GitHub Actions</span><span class="tg">Terraform</span>
+              <span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">AGENTS.md</span><span class="tg">MCP servers</span><span class="tg">GitHub Actions</span><span class="tg">Terraform</span>
             </div>
             <div class="plabel">What it taught</div>
             <p style="font-size:14px;color:var(--tx2)">An agent that can apply is an agent that can cause an incident nobody chose. The constraint is the design, not a limitation to engineer around.</p>
@@ -544,7 +546,7 @@ a{color:inherit;text-decoration:none}
       <div class="sg" style="--c:var(--emerald)"><div class="h">Observability</div>
         <ul><li>Prometheus</li><li>Grafana</li><li>Alertmanager</li><li>CloudWatch</li></ul></div>
       <div class="sg" style="--c:var(--amber)"><div class="h">AI &amp; scripting</div>
-        <ul><li>Claude Code</li><li>Agent skills</li><li>MCP servers</li><li>CLAUDE.md</li><li>Python</li><li>Bash</li></ul></div>
+        <ul><li>Claude Code</li><li>MCP servers</li><li>CLAUDE.md</li><li>Python</li><li>Bash</li></ul></div>
     </div>
   </div>
 </section>
@@ -553,7 +555,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="shead rv">
       <span class="eyebrow">Contact</span>
-      <h2>Open to platform and DevOps roles.</h2>
+      <h2>Open to platform engineering roles.</h2>
       <p>Chicago or remote. CKAD certified.</p>
     </div>
     <div class="cgrid rv">
@@ -614,7 +616,7 @@ a{color:inherit;text-decoration:none}
   function count(card){
     card.querySelectorAll('[data-to]').forEach(function(el){
       var to = +el.dataset.to;
-      if(reduce){ el.textContent = to; return; }
+      if(reduce) return;                    /* final value already in the markup */
       var t0 = performance.now(), dur = 1100;
       (function step(now){
         var p = Math.min(1,(now-t0)/dur);
@@ -691,7 +693,7 @@ a{color:inherit;text-decoration:none}
       '<b>iac</b>            Terraform (modules, remote state) · Packer',
       '<b>ci/cd</b>          GitHub Actions · GitLab CI · Jenkins · Trivy · Terraform validation · GitOps',
       '<b>observability</b>  Prometheus · Grafana · Alertmanager · CloudWatch',
-      '<b>ai</b>             Claude Code · agent skills · MCP servers · CLAUDE.md',
+      '<b>ai</b>             Claude Code · MCP servers · CLAUDE.md · AGENTS.md',
       '<b>scripting</b>      Python · Bash'
     ],
     projects: [
