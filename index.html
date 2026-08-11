@@ -220,7 +220,7 @@ a{color:inherit;text-decoration:none}
     <div class="logo">natalia tarita<i>_</i></div>
     <nav class="nav">
       <a href="#pillars">Pillars</a><a href="#work">Work</a>
-      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a><a href="#" id="navcv">Résumé</a>
+      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a><a href="resume.html">Résumé</a>
     </nav>
     <div class="hdr-r">
       <div class="pill"><b></b><span>Open to Platform Engineering roles</span></div>
@@ -237,13 +237,13 @@ a{color:inherit;text-decoration:none}
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow">Platform Engineering · Chicago, IL</span>
-    <h1>Delivery that's fast, reversible, and <em>reviewed before it merges</em>.</h1>
-    <p class="sub">Two engineers run the delivery platform for a twelve-person engineering org, single region across multiple AZs, all of it recoverable from Terraform. Immutable builds, GitOps promotion, gates at pull-request time — and a layer of read-only AI agents that read every Terraform plan before a human approves it. The goal is a platform that makes itself unnecessary.</p>
+    <h1>I run the AWS platform <em>twelve engineers ship on</em>.</h1>
+    <p class="sub">Two-person platform team at Chowly. Twenty services on Argo CD across three EKS clusters, eight more on immutable AMIs, thirty-five repositories gated at pull-request time, and an AWS bill 18% lower than it was. Lately I build read-only Claude Code agents that review Terraform plans and flag IAM risk before a human approves them.</p>
     <div class="cta">
       <a class="btn btn-p" href="#work">View the work</a>
       <a class="btn" href="#terminal">Open terminal</a>
       <a class="btn" href="mailto:nataliatarita95@gmail.com">Get in touch</a>
-      <button class="btn" onclick="window.print()">Download résumé</button>
+      <a class="btn" href="resume.html">Résumé</a>
     </div>
 
     <div class="mrow" id="metrics">
@@ -288,14 +288,14 @@ a{color:inherit;text-decoration:none}
       <div class="pc" style="--c:var(--emerald)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>AI infrastructure review</h3>
-        <p>Read-only agents read Terraform plans and flag IAM risk on pull requests. They comment. They can't apply, merge, or reach secrets.</p>
+        <p>Read-only Claude Code agents with MCP review Terraform plans and flag IAM risk on pull requests. They comment. They can't apply, merge, or reach secrets.</p>
         <div class="tags"><span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">Trivy</span><span class="tg">MCP servers</span></div>
       </div>
       <div class="pc" style="--c:var(--amber)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></div>
-        <h3>Cost ownership</h3>
-        <p>Right-sizing from utilisation data, unused resource cleanup, S3 lifecycle policies — and monitoring so it doesn't drift back up.</p>
-        <div class="tags"><span class="tg">EC2</span><span class="tg">S3 lifecycle</span><span class="tg">CloudWatch</span></div>
+        <h3>Security &amp; cost</h3>
+        <p>IRSA and least-privilege IAM/RBAC removing long-lived credentials from workloads. Right-sizing, EBS cleanup and S3 lifecycle policies took ~18% off the bill.</p>
+        <div class="tags"><span class="tg">IRSA</span><span class="tg">Secrets Manager</span><span class="tg">Trivy</span><span class="tg">S3 lifecycle</span></div>
       </div>
       <div class="pc" style="--c:var(--cyan)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
@@ -537,13 +537,13 @@ a{color:inherit;text-decoration:none}
       <div class="sg" style="--c:var(--cyan)"><div class="h">Cloud</div>
         <ul><li>AWS</li><li>EC2</li><li>EKS</li><li>VPC</li><li>IAM</li><li>RDS</li><li>S3</li><li>ECR</li><li>Route 53</li><li>Secrets Manager</li></ul></div>
       <div class="sg" style="--c:var(--emerald)"><div class="h">Orchestration</div>
-        <ul><li>Kubernetes</li><li>Docker</li><li>Helm</li><li>Argo CD</li><li>Linux</li></ul></div>
+        <ul><li>Kubernetes</li><li>Karpenter</li><li>Helm</li><li>Kustomize</li><li>HPA</li><li>RBAC</li><li>Network Policies</li><li>Ingress</li><li>Docker</li></ul></div>
       <div class="sg" style="--c:var(--amber)"><div class="h">Infrastructure as code</div>
         <ul><li>Terraform</li><li>Packer</li><li>Remote state</li><li>Modules</li></ul></div>
       <div class="sg" style="--c:var(--cyan)"><div class="h">CI/CD &amp; Security</div>
-        <ul><li>GitHub Actions</li><li>Jenkins</li><li>Trivy</li><li>Terraform validation</li><li>GitOps</li></ul></div>
+        <ul><li>GitHub Actions</li><li>Jenkins</li><li>Trivy</li><li>IRSA</li><li>IAM least privilege</li><li>GitOps</li></ul></div>
       <div class="sg" style="--c:var(--emerald)"><div class="h">Observability</div>
-        <ul><li>Prometheus</li><li>Grafana</li><li>Alertmanager</li><li>CloudWatch</li></ul></div>
+        <ul><li>Prometheus</li><li>Grafana</li><li>Thanos</li><li>Alertmanager</li><li>CloudWatch</li></ul></div>
       <div class="sg" style="--c:var(--amber)"><div class="h">AI &amp; scripting</div>
         <ul><li>Claude Code</li><li>MCP servers</li><li>CLAUDE.md</li><li>Python</li><li>Bash</li></ul></div>
     </div>
@@ -788,7 +788,6 @@ a{color:inherit;text-decoration:none}
   });
 
   /* contact form → mail client */
-  document.getElementById('navcv').addEventListener('click', function(e){ e.preventDefault(); window.print(); });
   document.getElementById('cform').addEventListener('submit', function(e){
     e.preventDefault();
     var n = document.getElementById('cn').value,
