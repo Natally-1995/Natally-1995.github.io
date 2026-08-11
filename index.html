@@ -238,7 +238,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <span class="eyebrow">Platform Engineering · Chicago, IL</span>
     <h1>I run the AWS platform <em>twelve engineers ship on</em>.</h1>
-    <p class="sub">Two-person platform team at Chowly. Twenty services on Argo CD across three EKS clusters, eight more on immutable AMIs, thirty-five repositories gated at pull-request time, and an AWS bill 18% lower than it was. Lately I build read-only Claude Code agents that review Terraform plans and flag IAM risk before a human approves them.</p>
+    <p class="sub">Production AWS platform for a twelve-person engineering org: EKS with Karpenter scaling past 100 nodes, GitOps delivery through Argo CD, PR-time gates across 35 repositories, and read-only AI agents reviewing every Terraform plan and IAM change before approval.</p>
     <div class="cta">
       <a class="btn btn-p" href="#work">View the work</a>
       <a class="btn" href="#terminal">Open terminal</a>
@@ -263,9 +263,9 @@ a{color:inherit;text-decoration:none}
         <div class="f">right-sizing · cleanup · lifecycle</div>
       </div>
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n">20 min</div>
-        <div class="l">Terraform plan review, with agent assistance</div>
-        <div class="f">was ~50 min</div>
+        <div class="n">100+</div>
+        <div class="l">Nodes at peak, autoscaled with Karpenter across 3 EKS clusters</div>
+        <div class="f">3 clusters</div>
       </div>
     </div>
   </div>
@@ -301,7 +301,7 @@ a{color:inherit;text-decoration:none}
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
         <h3>Observability &amp; on-call</h3>
         <p>Prometheus and Grafana dashboards with the alert rules behind them, covering application and host health. I carried the pager too.</p>
-        <div class="tags"><span class="tg">Prometheus</span><span class="tg">Grafana</span><span class="tg">Alertmanager</span></div>
+        <div class="tags"><span class="tg">Prometheus</span><span class="tg">Grafana</span><span class="tg">Thanos</span><span class="tg">Alertmanager</span></div>
       </div>
     </div>
   </div>
@@ -666,10 +666,9 @@ a{color:inherit;text-decoration:none}
       'Merge to production         2–4 hrs       <30 min',
       'Release cadence             weekly        several times daily',
       'Failed production deploys   ~10%          <3%',
-      'Terraform plan review       ~50 min       ~20 min',
       'AWS spend                   baseline      <i>−18% (~$60–80K/yr)</i>',
       '',
-      'Scale: 8 services on EC2 / 3 envs · ~20 services on EKS · 35 repos gated'
+      'Scale: 8 services on EC2 / 3 envs · 20 services on EKS · 3 clusters · 100+ nodes at peak · 35 repos gated'
     ],
     skills: [
       '<b>cloud</b>          AWS · EC2 · EKS · VPC · IAM · RDS · S3 · ECR · Route 53 · CloudWatch',
