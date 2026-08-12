@@ -220,7 +220,7 @@ a{color:inherit;text-decoration:none}
     <div class="logo">natalia tarita<i>_</i></div>
     <nav class="nav">
       <a href="#pillars">Pillars</a><a href="#work">Work</a>
-      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#contact">Contact</a><a href="resume.html">Résumé</a>
+      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#colophon">Colophon</a><a href="#contact">Contact</a><a href="resume.html">Résumé</a>
     </nav>
     <div class="hdr-r">
       <div class="pill"><b></b><span>Open to Platform Engineering roles</span></div>
@@ -550,6 +550,43 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+
+<section class="sec" id="colophon">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Colophon</span>
+      <h2>How this site is built.</h2>
+      <p>Fair question to ask a platform engineer about her own site.</p>
+    </div>
+    <div class="pgrid rv">
+      <div class="pleft">
+        <div class="plabel">The stack</div>
+        <div class="arch">one file    <b>index.html</b> — markup, styles, and behaviour
+            no framework, no build step, no dependencies
+
+hosting     <b>GitHub Pages</b>, static, served from <i>main</i>
+
+deploy      <i>git push</i> ──▶ Pages build ──▶ live in ~60s
+
+client      vanilla JS. Tabs, filters and the terminal are
+            progressive enhancement — every number and every
+            case study renders with scripting disabled.</div>
+      </div>
+      <div class="pright">
+        <div class="plabel">Why so plain</div>
+        <p style="font-size:14.5px;color:var(--tx2);margin-bottom:18px">A static site needs no pipeline, and a pipeline that exists to prove a point is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
+        <div class="plabel">Inspect it</div>
+        <div class="clist" style="margin-top:10px">
+          <a class="crow" href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener">
+            <div class="ic2"><svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></div>
+            <div><div class="k">Source</div><div class="v">github.com/Natally-1995/Natally-1995.github.io</div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="contact">
   <div class="wrap">
     <div class="shead rv">
@@ -584,16 +621,16 @@ a{color:inherit;text-decoration:none}
           <div class="ic2"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
           <div><div class="k">Certification</div><div class="v">CKAD — verify on Credly</div></div>
         </a>
-        <button class="crow" onclick="window.print()" style="cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%">
+        <a class="crow" href="Natalia-Tarita-Resume.pdf" download>
           <div class="ic2"><svg viewBox="0 0 24 24"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zM8 3h8v4H8zm8 18H8v-5h8z"/></svg></div>
-          <div><div class="k">Résumé</div><div class="v">Save as PDF</div></div>
-        </button>
+          <div><div class="k">Résumé</div><div class="v">Download PDF</div></div>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="foot">© 2026 Natalia Tarita · Platform Engineering · Chicago, IL</footer>
+<footer class="foot">© 2026 Natalia Tarita · Platform Engineering · Chicago, IL · <a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--cyan)">source</a></footer>
 </div>
 
 <script>
