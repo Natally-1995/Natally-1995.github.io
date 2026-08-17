@@ -263,9 +263,9 @@ a{color:inherit;text-decoration:none}
         <div class="f">right-sizing · cleanup · lifecycle</div>
       </div>
       <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n">100+</div>
-        <div class="l">Nodes at peak, autoscaled with Karpenter across 3 EKS clusters</div>
-        <div class="f">3 clusters</div>
+        <div class="n">10–15/wk</div>
+        <div class="l">Deployments after CI/CD automation at Grubhub</div>
+        <div class="f">was 2–3 per week</div>
       </div>
     </div>
   </div>
@@ -705,7 +705,9 @@ client      vanilla JS. Tabs, filters and the terminal are
       'Failed production deploys   ~10%          <3%',
       'AWS spend                   baseline      <i>−18% (~$60–80K/yr)</i>',
       '',
-      'Scale: 8 services on EC2 / 3 envs · 20 services on EKS · 3 clusters · 100+ nodes at peak · 35 repos gated'
+      'Scale: 8 services on EC2 / 3 envs · 20 on EKS · 3 clusters · 100+ nodes · 35 repos gated',
+      '',
+      'Grubhub: deploys 2–3/wk → 10–15/wk · 30+ services, 100+ hosts monitored · 5–8 pages/wk'
     ],
     skills: [
       '<b>cloud</b>          AWS · EC2 · EKS · VPC · IAM · RDS · S3 · ECR · Route 53 · CloudWatch',
@@ -732,7 +734,7 @@ client      vanilla JS. Tabs, filters and the terminal are
       'Scroll up to the Work section for architecture and results.'
     ],
     agents: [
-      'Four read-only agents in the review path:',
+      'Four agents running in CI on every pull request:',
       '',
       '  · Terraform plan review     · IAM-risk PR review',
       '  · Runbook drafting          · Incident summaries',
@@ -741,7 +743,8 @@ client      vanilla JS. Tabs, filters and the terminal are
       '  read state                     terraform apply',
       '  run terraform plan             merge a pull request',
       '  comment on a PR                write to production',
-      '  propose a diff                 read or rotate secrets',
+      '  fail a check, block merge      approve or merge a PR',
+      '  write runbooks to the repo     read or rotate secrets',
       '',
       'One caught a security group rule opening a wider CIDR range than our',
       'standard — after it had already passed human review.',
