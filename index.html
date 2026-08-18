@@ -254,7 +254,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="mcard rv" style="--c:var(--emerald)">
         <div class="n">&lt;3%</div>
-        <div class="l">Failed production deploys after PR-time gating</div>
+        <div class="l">Failed production deploys after GitOps promotion on Argo CD</div>
         <div class="f">was ~10%</div>
       </div>
       <div class="mcard rv" style="--c:var(--amber)">
@@ -702,7 +702,7 @@ client      vanilla JS. Tabs, filters and the terminal are
       'Rollback                    20–30 min     5–10 min',
       'Merge to production         2–4 hrs       <30 min',
       'Release cadence             weekly        several times daily',
-      'Failed production deploys   ~10%          <3%',
+      'Failed production deploys   ~10%          <3%   (Argo CD promotion)',
       'AWS spend                   baseline      <i>−18% (~$60–80K/yr)</i>',
       '',
       'Scale: 8 services on EC2 / 3 envs · 20 on EKS · 3 clusters · 100+ nodes · 35 repos gated',
@@ -770,7 +770,7 @@ client      vanilla JS. Tabs, filters and the terminal are
       ' · AI agents gating PRs — fail the check on risky Terraform and IAM',
     '  · Packer AMIs via ASG refresh — deploy 30 → 8–10 min',
     '  · 20 services to Argo CD GitOps — weekly → several times daily',
-    '  · 35 repos gated at PR time — failed deploys 10% → <3%',
+    '  · 35 repos gated in CI — 10–15 high-risk changes stopped per month',
     '  · AWS spend −18% (~$60–80K/yr)',
     '',
     '<b>DEVOPS ENGINEER</b> · Grubhub · Jul 2021 – Nov 2023',
