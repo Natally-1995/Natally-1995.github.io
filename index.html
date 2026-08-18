@@ -238,7 +238,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <span class="eyebrow">Platform Engineering · Chicago, IL</span>
     <h1>I run the AWS platform <em>twelve engineers ship on</em>.</h1>
-    <p class="sub">Production AWS platform for a twelve-person engineering org: EKS with Karpenter scaling past 100 nodes, GitOps delivery through Argo CD, PR-time gates across 35 repositories, and AI agents that run in CI on every pull request, failing the check and blocking merge on high-risk Terraform and IAM changes.</p>
+    <p class="sub">Restaurant technology — POS systems, online ordering and delivery platforms. Two engineers own the AWS estate behind those integrations: 35 repositories, 20 services on EKS, 8 on EC2, 3 clusters, three environments. AI agents run in CI on every pull request, failing the check and blocking merge on high-risk Terraform and IAM changes.</p>
     <div class="cta">
       <a class="btn btn-p" href="#work">View the work</a>
       <a class="btn" href="#terminal">Open terminal</a>
@@ -288,13 +288,13 @@ a{color:inherit;text-decoration:none}
       <div class="pc" style="--c:var(--emerald)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>AI infrastructure review</h3>
-        <p>Claude Code agents with MCP run in CI on every pull request, failing the check and blocking merge on high-risk Terraform and IAM changes. Runbooks and incident summaries write straight into the docs repo.</p>
+        <p>Claude Code agents with MCP run in CI on every pull request, failing the check and blocking merge on high-risk Terraform and IAM changes. Runbook and incident-summary agents cover 8–12 incidents a month and have produced ~20 reusable runbooks.</p>
         <div class="tags"><span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">Trivy</span><span class="tg">MCP servers</span></div>
       </div>
       <div class="pc" style="--c:var(--amber)">
         <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></div>
         <h3>Security &amp; cost</h3>
-        <p>IRSA and least-privilege IAM/RBAC removing long-lived credentials from workloads. Right-sizing, EBS cleanup and S3 lifecycle policies took ~18% off the bill.</p>
+        <p>IRSA moved 20+ workloads onto per-service IAM identities and retired ~25 long-lived access keys. Least-privilege RBAC and Network Policies across 3 clusters and 20+ namespaces. AWS spend down ~18%.</p>
         <div class="tags"><span class="tg">IRSA</span><span class="tg">Secrets Manager</span><span class="tg">Trivy</span><span class="tg">S3 lifecycle</span></div>
       </div>
       <div class="pc" style="--c:var(--cyan)">
@@ -698,7 +698,7 @@ client      vanilla JS. Tabs, filters and the terminal are
     metrics: [
       '<b>METRIC</b>                      <b>BEFORE</b>        <b>AFTER</b>',
       '───────────────────────────────────────────────────',
-      'Deploy time                 ~30 min       8–10 min',
+      'Deploy (manual work → auto) ~30 min       8–10 min',
       'Rollback                    20–30 min     5–10 min',
       'Merge to production         2–4 hrs       <30 min',
       'Release cadence             weekly        several times daily',
@@ -729,6 +729,7 @@ client      vanilla JS. Tabs, filters and the terminal are
       '                              right-sizing, cleanup, S3 lifecycle',
       '',
       '04  <b>Agent review layer</b>     4 agents gating every PR across 35 repos',
+      '                              8–12 incidents/mo summarised · ~20 runbooks',
       '                              Terraform review 50 → 20 min',
       '',
       'Scroll up to the Work section for architecture and results.'
