@@ -16,6 +16,7 @@
   --line:#2B3138; --line-2:#3A424C;
   --tx:#EDF0F3; --tx2:#9AA5B1; --tx3:#6B7681;
   --ac:#3BA9D9; --ac-dim:rgba(59,169,217,.13); --ac-2:#5BC4EE;
+  --ok:#4FB783; --no:#C97A6D;
   --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
@@ -67,18 +68,18 @@ a{color:inherit;text-decoration:none}
 @media(max-width:720px){.flow{gap:14px}.link{display:none}.node,.gate{min-width:0;flex-direction:row}}
 
 /* ---------- metrics ---------- */
-.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
 @media(max-width:860px){.mrow{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.mrow{grid-template-columns:1fr}}
-.mc{border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--card);transition:.25s}
+.mc{border:1px solid var(--line);border-radius:10px;padding:26px 22px;background:var(--card);transition:.25s}
 .mc:hover{border-color:var(--line-2);transform:translateY(-2px)}
-.mc .n{font-family:var(--mono);font-size:clamp(21px,2.6vw,26px);font-weight:700;color:var(--ac);letter-spacing:-.02em}
-.mc .l{font-size:14px;color:var(--tx);margin-top:8px;font-weight:500}
+.mc .n{font-family:var(--mono);font-size:clamp(30px,4.2vw,40px);font-weight:700;color:var(--ok);letter-spacing:-.03em;line-height:1}
+.mc .l{font-size:13.5px;color:var(--tx2);margin-top:12px;font-weight:500}
 .mc .f{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:4px}
 
 /* ---------- sections ---------- */
-.sec{padding:72px 0;border-top:1px solid var(--line)}
-.sh{margin-bottom:34px;max-width:62ch}
+.sec{padding:96px 0;border-top:1px solid var(--line)}
+.sh{margin-bottom:44px;max-width:62ch}
 .sh h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-top:11px}
 .sh p{color:var(--tx2);margin-top:11px;font-size:16px}
 
@@ -114,7 +115,7 @@ a{color:inherit;text-decoration:none}
 .pj .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ac);white-space:nowrap}
 .pj .ttl{font-size:17.5px;font-weight:600;letter-spacing:-.015em}
 .pj .sub{font-family:var(--mono);font-size:12px;color:var(--tx3);margin-top:5px}
-.pj .fig{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ac);white-space:nowrap;text-align:right}
+.pj .fig{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--ok);white-space:nowrap;text-align:right}
 .pj .fig small{display:block;font-size:10.5px;font-weight:400;color:var(--tx3);letter-spacing:.06em;margin-top:3px}
 @media(max-width:760px){.pj summary{grid-template-columns:1fr;gap:10px}.pj .fig{text-align:left}}
 .pj .body{padding:0 26px 26px;border-top:1px solid var(--line);margin-top:2px;padding-top:22px}
@@ -128,7 +129,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:700px){.dg{gap:8px}.dg .ar{display:none}}
 .res{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .res div{font-family:var(--mono);font-size:12px;padding:6px 11px;border:1px solid var(--line-2);border-radius:6px;color:var(--tx2)}
-.res div b{color:var(--ac);font-weight:500}
+.res div b{color:var(--ok);font-weight:500}
 
 /* AI boundary */
 .gate-box{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:var(--card)}
@@ -139,12 +140,12 @@ a{color:inherit;text-decoration:none}
 @media(max-width:700px){.gcol+.gcol{border-left:0;border-top:1px solid var(--line)}}
 .gcol .hd{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
 .gcol.y .hd{color:var(--ac)}
-.gcol.n .hd{color:var(--tx3)}
+.gcol.n .hd{color:var(--no)}
 .gcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
 .gcol li{display:flex;gap:11px;font-size:14.5px;color:var(--tx2);align-items:baseline}
 .gcol li i{font-style:normal;flex:none;font-family:var(--mono);font-size:12px}
 .gcol.y li i{color:var(--ac)}
-.gcol.n li i{color:var(--tx3)}
+.gcol.n li i{color:var(--no)}
 .gcol.n li{color:var(--tx3)}
 .gate-f{border-top:1px solid var(--line);padding:18px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);background:var(--ac-dim)}
 .catch{margin-top:16px;font-size:14.5px;color:var(--tx2);border-left:2px solid var(--ac);padding-left:16px;max-width:72ch}
@@ -396,7 +397,7 @@ a{color:inherit;text-decoration:none}
           <h4>The permission boundary</h4>
           <p>This is the whole design, and it's below in full. The short version: the agent reads, plans and comments. A human approves and merges. That constraint is deliberate, not a limitation to engineer around.</p>
           <h4>Result</h4>
-          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div><div>Caught <b>an over-broad CIDR</b></div></div>
+          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div></div>
           <h4>What it taught</h4>
           <p>An agent that can apply is an agent that can cause an incident nobody chose. The value is a consistent second read on the lines people skim, not autonomy.</p>
         </div>
@@ -437,7 +438,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="gate-f">Human approves + merges</div>
     </div>
-    <p class="catch rv">It earned its keep on a security group rule that allowed a wider CIDR range than our standard, which is approved internal services only. It had already passed human review. CIDR blocks in a diff look like every other line of config.</p>
+    <p class="catch rv">It earned its keep on a security group rule that allowed a wider CIDR range than our standard for approved internal services. The rule had already passed human review — CIDR blocks in a diff look like every other line of config.</p>
   </div>
 </section>
 
@@ -505,7 +506,7 @@ a{color:inherit;text-decoration:none}
         <div class="crow"><span class="k">Résumé</span><a class="v" href="Natalia-Tarita-Resume.pdf" download>Download PDF</a></div>
       </div>
       <div class="box">
-        <div class="crow"><span class="k">Certified</span><span class="v">Certified Kubernetes Application Developer</span></div>
+        <div class="crow"><span class="k">Certified</span><span class="v">Kubernetes Application Developer (CKAD)</span></div>
         <div class="crow"><span class="k">Issued by</span><span class="v">The Linux Foundation / CNCF</span></div>
         <div class="crow"><span class="k">ID</span><span class="v" style="font-family:var(--mono);font-size:13px">LF-foco5c3jzm</span></div>
         <div class="crow"><span class="k">Verify</span><a class="v" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b" target="_blank" rel="noopener" style="color:var(--ac)">Credly →</a></div>
