@@ -277,7 +277,7 @@ code,.mono{font-family:var(--mono)}
         <div class="eyebrow" style="margin-bottom:14px">Platform Engineer · Chicago</div>
         <h1>I make production infrastructure faster, safer, and cheaper.</h1>
         <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
-        <p class="lede">I build and modernize AWS platforms across delivery automation, Kubernetes, reliability, cloud cost, and infrastructure security. More recently I've added human-reviewed AI workflows to infrastructure review and incident response.</p>
+        <p class="lede">I build and modernize AWS platforms across delivery automation, Kubernetes, reliability, cloud cost, and infrastructure security. I also added human-reviewed AI workflows to infrastructure review and incident investigation, without giving agents production write access.</p>
         <div class="cta">
           <a class="btn btn-p" href="#work">View my work</a>
           <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
@@ -442,7 +442,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Problem</h4>
           <p>Terraform plan output is long and tedious, and the dangerous lines look exactly like the safe ones. A forced replacement, an over-broad IAM policy, a widened security group — all of it reads as ordinary config in a big diff, and human review skims.</p>
           <h4>The permission boundary</h4>
-          <p>This is the whole design, and it's set out in full in the next section. The short version: the agent reads, plans and comments. A human approves and merges. That constraint is deliberate, not a limitation to engineer around.</p>
+          <p>Set out in full in the next section. The short version: the agent reads, plans and comments; a human approves and merges. I built the workflow and helped define those boundaries with my platform teammate — the constraint is deliberate, not a limitation to engineer around.</p>
           <h4>Result</h4>
           <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div></div>
           <h4>What it taught</h4>
@@ -474,7 +474,7 @@ code,.mono{font-family:var(--mono)}
       <p>Deciding what an agent is allowed to touch is the interesting part — not whether it can write Terraform.</p>
     </div>
     <div class="con rv">
-      <div class="con-h"><span class="t">Agent permissions</span><span class="s">terraform · iam · kubernetes</span></div>
+      <div class="con-h"><span class="t">Agent permissions</span><span class="s">enforced by IAM, not by prompt</span></div>
       <div class="perm">
         <div class="pr a"><span class="op">read cloud and cluster state</span><span class="vd">ALLOW</span></div>
         <div class="pr a"><span class="op">terraform plan</span><span class="vd">ALLOW</span></div>
@@ -488,7 +488,7 @@ code,.mono{font-family:var(--mono)}
         <div class="pr d"><span class="op">modify IAM policy</span><span class="vd">DENY</span></div>
       </div>
       <div class="con-f">
-        <span class="lk">🔒 Production write access: none</span>
+        <span class="lk">🔒 Read-only IAM role via OIDC · apply role unreachable</span>
         <span class="hu">Human approval required</span>
       </div>
     </div>
