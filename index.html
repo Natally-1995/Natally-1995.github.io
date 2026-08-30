@@ -4,198 +4,200 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Natalia Tarita · Platform Engineer</title>
-<meta name="description" content="Natalia Tarita — Platform Engineer in Chicago. AWS, Kubernetes, Terraform, GitOps. AI agents that gate every pull request, blocking merge on high-risk Terraform and IAM changes. CKAD certified.">
+<meta name="description" content="Platform Engineer in Chicago. AWS, Kubernetes, Terraform, GitOps. I make production infrastructure faster, safer, and cheaper.">
 <meta property="og:title" content="Natalia Tarita · Platform Engineer">
-<meta property="og:description" content="Deploys 30→8 min. Failed production deploys 10%→under 3%. AWS spend down 18%.">
+<meta property="og:description" content="Deploys 30→8 min. Failed deploys 10%→under 3%. AWS spend down 18%.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0F172A; --bg-2:#0A1122; --glass:rgba(30,41,59,.5); --glass-2:rgba(30,41,59,.28);
-  --line:#1E293B; --line-2:#334155;
-  --cyan:#06B6D4; --emerald:#10B981; --amber:#F59E0B; --rose:#F43F5E;
-  --tx:#E2E8F0; --tx2:#94A3B8; --tx3:#64748B;
-  --disp:"Sora",system-ui,sans-serif;
-  --body:"Inter",system-ui,-apple-system,sans-serif;
+  --bg:#16181C; --bg-2:#1B1E23; --card:#1E2228; --card-2:#232830;
+  --line:#2B3138; --line-2:#3A424C;
+  --tx:#EDF0F3; --tx2:#9AA5B1; --tx3:#6B7681;
+  --ac:#3BA9D9; --ac-dim:rgba(59,169,217,.13); --ac-2:#5BC4EE;
+  --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:var(--body);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--tx);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 @media(max-width:640px){.wrap{padding:0 18px}}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ac)}
 
-/* grid + glow field */
-.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none}
-.bgfx::before{content:"";position:absolute;inset:0;
-  background-image:linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(1200px 800px at 50% 0%,#000 20%,transparent 80%)}
-.bgfx::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(700px 460px at 12% -5%,rgba(6,182,212,.13),transparent 60%),
-             radial-gradient(620px 420px at 88% 8%,rgba(16,185,129,.10),transparent 58%),
-             radial-gradient(680px 500px at 60% 100%,rgba(6,182,212,.07),transparent 60%)}
-.page{position:relative;z-index:1}
-
-.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
-
-/* ---------- header ---------- */
-.hdr{position:sticky;top:0;z-index:70;backdrop-filter:blur(14px);
-  background:rgba(15,23,42,.78);border-bottom:1px solid var(--line)}
-.hdr .wrap{display:flex;align-items:center;gap:22px;height:66px}
-.logo{font-family:var(--disp);font-weight:800;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
-.logo i{font-style:normal;color:var(--cyan)}
-.nav{display:flex;gap:24px;margin-left:14px;font-size:14px;color:var(--tx2)}
-.nav a{transition:color .18s;position:relative}
-.nav a:hover{color:var(--tx)}
-.hdr-r{margin-left:auto;display:flex;align-items:center;gap:10px}
-.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
-  padding:7px 13px;border-radius:100px;border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.09);color:var(--emerald);cursor:default}
-.pill b{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);animation:pulse 2.4s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.ico{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line-2);border-radius:9px;
-  background:var(--glass-2);transition:.2s}
-.ico:hover{border-color:var(--cyan);box-shadow:0 0 18px -4px var(--cyan);color:var(--cyan)}
-.ico svg{width:17px;height:17px;fill:currentColor}
-@media(max-width:960px){.nav{display:none}}
-@media(max-width:520px){.pill span{display:none}}
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:80;backdrop-filter:blur(14px);background:rgba(22,24,28,.86);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.brand{font-weight:700;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+.brand i{font-style:normal;color:var(--ac)}
+.nlinks{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--tx2)}
+.nlinks a{transition:color .18s}
+.nlinks a:hover{color:var(--tx)}
+.nlinks a.cv{color:var(--ac)}
+@media(max-width:820px){.nlinks a:not(.cv){display:none}}
 
 /* ---------- hero ---------- */
-.hero{padding:92px 0 72px}
-.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5.4vw,62px);line-height:1.06;letter-spacing:-.035em;max-width:19ch;margin-top:20px}
-.hero h1 em{font-style:normal;background:linear-gradient(96deg,var(--cyan),var(--emerald));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p.sub{color:var(--tx2);font-size:clamp(16px,1.9vw,19px);max-width:62ch;margin-top:22px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.btn{font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;padding:13px 22px;border-radius:10px;
-  border:1px solid var(--line-2);background:var(--glass-2);cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:9px}
-.btn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 22px -6px var(--cyan);transform:translateY(-1px)}
-.btn-p{border-color:transparent;color:#06202B;font-weight:700;background:linear-gradient(96deg,var(--cyan),var(--emerald))}
-.btn-p:hover{color:#06202B;box-shadow:0 8px 28px -8px var(--cyan)}
+.hero{padding:80px 0 56px}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.08;letter-spacing:-.03em;margin:18px 0 0;max-width:16ch}
+.hero .stack{font-family:var(--mono);font-size:13px;letter-spacing:.05em;color:var(--tx3);margin-top:18px}
+.hero p{color:var(--tx2);font-size:17px;max-width:60ch;margin-top:20px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{font-size:14px;font-weight:500;padding:11px 20px;border-radius:7px;border:1px solid var(--line-2);background:var(--card);transition:.2s;cursor:pointer}
+.btn:hover{border-color:var(--ac);color:var(--ac)}
+.btn-p{background:var(--ac);border-color:var(--ac);color:#0C1418;font-weight:600}
+.btn-p:hover{background:var(--ac-2);border-color:var(--ac-2);color:#0C1418}
 
-/* metrics */
-.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px}
-@media(max-width:900px){.mrow{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.mrow{grid-template-columns:1fr}}
-.mcard{position:relative;border:1px solid var(--line);border-radius:14px;padding:22px;overflow:hidden;
-  background:linear-gradient(160deg,var(--glass),var(--glass-2));backdrop-filter:blur(8px);transition:.28s}
-.mcard::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.65}
-.mcard:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 34px -14px var(--c)}
-.mcard .n{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.03em;color:var(--c);line-height:1}
-.mcard .l{font-size:13.5px;color:var(--tx2);margin-top:10px;line-height:1.45}
-.mcard .f{font-family:var(--mono);font-size:11px;color:var(--tx3);margin-top:8px}
+/* signature: the delivery path */
+.path{margin-top:52px;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:26px 24px 22px;overflow:hidden}
+.path-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:22px}
+.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.node{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:74px}
+.node b{width:11px;height:11px;border-radius:50%;background:var(--line-2);display:block;transition:.4s}
+.node span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);transition:.4s;white-space:nowrap}
+.node.on b{background:var(--ac);box-shadow:0 0 0 4px var(--ac-dim)}
+.node.on span{color:var(--tx)}
+.link{flex:1;height:1px;background:var(--line-2);min-width:18px;position:relative;top:-9px}
+.gate{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:96px}
+.gate b{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--ac);background:var(--bg);display:block;position:relative}
+.gate b::after{content:"";position:absolute;inset:3px;border-radius:1px;background:var(--ac);opacity:.85}
+.gate span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);white-space:nowrap}
+@media(max-width:720px){.flow{gap:14px}.link{display:none}.node,.gate{min-width:0;flex-direction:row}}
+
+/* ---------- metrics ---------- */
+.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:860px){.mrow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.mrow{grid-template-columns:1fr}}
+.mc{border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--card);transition:.25s}
+.mc:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.mc .n{font-family:var(--mono);font-size:clamp(21px,2.6vw,26px);font-weight:700;color:var(--ac);letter-spacing:-.02em}
+.mc .l{font-size:14px;color:var(--tx);margin-top:8px;font-weight:500}
+.mc .f{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:4px}
 
 /* ---------- sections ---------- */
-.sec{padding:84px 0;border-top:1px solid var(--line)}
-.shead{max-width:64ch;margin-bottom:40px}
-.shead h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.03em;line-height:1.1;margin-top:12px}
-.shead p{color:var(--tx2);margin-top:12px;font-size:16.5px}
+.sec{padding:72px 0;border-top:1px solid var(--line)}
+.sh{margin-bottom:34px;max-width:62ch}
+.sh h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-top:11px}
+.sh p{color:var(--tx2);margin-top:11px;font-size:16px}
 
-/* pillars */
-.pil{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:1000px){.pil{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.pil{grid-template-columns:1fr}}
-.pc{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--glass-2);backdrop-filter:blur(6px);transition:.28s;position:relative;overflow:hidden}
-.pc:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 0 34px -16px var(--c)}
-.pc .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;margin-bottom:16px;
-  border:1px solid var(--c);color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
-.pc .ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
-.pc h3{font-family:var(--disp);font-size:16.5px;font-weight:600;letter-spacing:-.015em;margin-bottom:9px}
-.pc p{font-size:14px;color:var(--tx2);line-height:1.55}
-.pc .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
-.tg{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:5px;border:1px solid var(--line-2);color:var(--tx3)}
+/* experience */
+.xp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.xp{grid-template-columns:1fr}}
+.xc{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--card)}
+.xc h3{font-size:19px;font-weight:700;letter-spacing:-.015em}
+.xc .role{font-size:14.5px;color:var(--tx);margin-top:5px}
+.xc .when{font-family:var(--mono);font-size:12px;color:var(--tx3);margin-top:3px}
+.xc .what{font-size:14px;color:var(--tx2);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.xc .tools{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:12px;line-height:1.8}
 
-/* projects */
-.ptabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.ptab{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:10px 16px;border-radius:9px;
-  border:1px solid var(--line-2);background:var(--glass-2);color:var(--tx2);cursor:pointer;transition:.2s}
-.ptab:hover{color:var(--tx);border-color:var(--tx3)}
-.ptab[aria-selected="true"]{background:rgba(6,182,212,.12);border-color:var(--cyan);color:var(--cyan)}
-.ppanel[hidden]{display:none}
-.pgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-  background:linear-gradient(160deg,var(--glass),var(--glass-2));backdrop-filter:blur(8px)}
-@media(max-width:900px){.pgrid{grid-template-columns:1fr}}
-.pleft{padding:30px}
-.pright{padding:30px;border-left:1px solid var(--line);background:rgba(10,17,34,.4)}
-@media(max-width:900px){.pright{border-left:0;border-top:1px solid var(--line)}}
-.plabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tx3);margin-bottom:9px}
-.pleft h3{font-family:var(--disp);font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:16px}
-.pleft .blk{margin-bottom:20px}
-.pleft .blk p{font-size:14.5px;color:var(--tx2);line-height:1.6}
-.arch{font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--tx2);background:rgba(2,6,23,.55);
-  border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;white-space:pre}
-.arch b{color:var(--cyan);font-weight:500}
-.arch i{font-style:normal;color:var(--emerald)}
-.res{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
-.res div{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.res div:last-child{border-bottom:0}
-.res .k{font-size:13px;color:var(--tx2)}
-.res .v{font-family:var(--mono);font-size:14px;color:var(--emerald);white-space:nowrap}
-.res .v s{color:var(--tx3);margin-right:7px}
+/* philosophy */
+.thesis{font-size:clamp(19px,2.6vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.35;max-width:26ch;margin-bottom:30px}
+.thesis em{font-style:normal;color:var(--ac)}
+.pil{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:900px){.pil{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.pil{grid-template-columns:1fr}}
+.pc{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--card);transition:.25s}
+.pc:hover{border-color:var(--ac);transform:translateY(-3px)}
+.pc .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ac)}
+.pc h3{font-size:15.5px;font-weight:600;margin:10px 0 8px}
+.pc p{font-size:13.5px;color:var(--tx2);line-height:1.55}
 
-/* terminal */
-.term{border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:rgba(2,6,23,.82);backdrop-filter:blur(10px);
-  box-shadow:0 22px 60px -30px rgba(6,182,212,.5)}
-.tbar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(15,23,42,.7)}
-.tbar u{display:block;width:11px;height:11px;border-radius:50%}
-.tbar .t{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
-.tbody{padding:18px;height:340px;overflow-y:auto;font-family:var(--mono);font-size:13px;line-height:1.75}
-.tbody::-webkit-scrollbar{width:8px}
-.tbody::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
-.tline{white-space:pre-wrap;word-break:break-word}
-.tline.cmd{color:var(--tx)}
-.tline.cmd::before{content:"natalia@platform:~$ ";color:var(--emerald)}
-.tline.out{color:var(--tx2)}
-.tline.err{color:var(--rose)}
-.tline b{color:var(--cyan);font-weight:500}
-.tline i{font-style:normal;color:var(--amber)}
-.tinput{display:flex;align-items:center;gap:8px;padding:13px 18px;border-top:1px solid var(--line);background:rgba(15,23,42,.55)}
-.tinput span{font-family:var(--mono);font-size:13px;color:var(--emerald);white-space:nowrap}
-.tinput input{flex:1;background:none;border:0;outline:none;color:var(--tx);font-family:var(--mono);font-size:13px}
-.quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.qb{font-family:var(--mono);font-size:11.5px;padding:7px 13px;border-radius:8px;border:1px solid var(--line-2);
-  background:var(--glass-2);color:var(--tx2);cursor:pointer;transition:.2s}
-.qb:hover{border-color:var(--emerald);color:var(--emerald)}
+/* work */
+.work{display:flex;flex-direction:column;gap:12px}
+.pj{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;transition:border-color .25s}
+.pj:hover{border-color:var(--line-2)}
+.pj[open]{border-color:var(--ac)}
+.pj summary{list-style:none;cursor:pointer;padding:24px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
+.pj summary::-webkit-details-marker{display:none}
+.pj .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ac);white-space:nowrap}
+.pj .ttl{font-size:17.5px;font-weight:600;letter-spacing:-.015em}
+.pj .sub{font-family:var(--mono);font-size:12px;color:var(--tx3);margin-top:5px}
+.pj .fig{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--ac);white-space:nowrap;text-align:right}
+.pj .fig small{display:block;font-size:10.5px;font-weight:400;color:var(--tx3);letter-spacing:.06em;margin-top:3px}
+@media(max-width:760px){.pj summary{grid-template-columns:1fr;gap:10px}.pj .fig{text-align:left}}
+.pj .body{padding:0 26px 26px;border-top:1px solid var(--line);margin-top:2px;padding-top:22px}
+.pj .body h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:20px 0 8px}
+.pj .body h4:first-child{margin-top:0}
+.pj .body p{font-size:14.5px;color:var(--tx2);line-height:1.65;max-width:74ch}
+.dg{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:6px 0 4px;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--bg-2)}
+.dg .b{font-family:var(--mono);font-size:11.5px;padding:8px 13px;border:1px solid var(--line-2);border-radius:6px;color:var(--tx);white-space:nowrap;background:var(--card)}
+.dg .b.hi{border-color:var(--ac);color:var(--ac)}
+.dg .ar{color:var(--tx3);padding:0 9px;font-size:13px}
+@media(max-width:700px){.dg{gap:8px}.dg .ar{display:none}}
+.res{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.res div{font-family:var(--mono);font-size:12px;padding:6px 11px;border:1px solid var(--line-2);border-radius:6px;color:var(--tx2)}
+.res div b{color:var(--ac);font-weight:500}
+
+/* AI boundary */
+.gate-box{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:var(--card)}
+.gate-grid{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:700px){.gate-grid{grid-template-columns:1fr}}
+.gcol{padding:26px}
+.gcol+.gcol{border-left:1px solid var(--line)}
+@media(max-width:700px){.gcol+.gcol{border-left:0;border-top:1px solid var(--line)}}
+.gcol .hd{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.gcol.y .hd{color:var(--ac)}
+.gcol.n .hd{color:var(--tx3)}
+.gcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.gcol li{display:flex;gap:11px;font-size:14.5px;color:var(--tx2);align-items:baseline}
+.gcol li i{font-style:normal;flex:none;font-family:var(--mono);font-size:12px}
+.gcol.y li i{color:var(--ac)}
+.gcol.n li i{color:var(--tx3)}
+.gcol.n li{color:var(--tx3)}
+.gate-f{border-top:1px solid var(--line);padding:18px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);background:var(--ac-dim)}
+.catch{margin-top:16px;font-size:14.5px;color:var(--tx2);border-left:2px solid var(--ac);padding-left:16px;max-width:72ch}
 
 /* stack */
-.smat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:900px){.smat{grid-template-columns:1fr}}
-.sg{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--glass-2);transition:.25s}
-.sg:hover{border-color:var(--c)}
-.sg .h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:14px}
-.sg ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
-.sg li{font-size:13px;padding:5px 10px;border-radius:7px;border:1px solid var(--line-2);color:var(--tx2);transition:.18s}
-.sg li:hover{border-color:var(--c);color:var(--tx)}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:860px){.st{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.st{grid-template-columns:1fr}}
+.sg{border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--card)}
+.sg .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:13px}
+.sg ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.sg li{font-size:14px;color:var(--tx2)}
+.more{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--tx3);cursor:pointer;background:none;border:0;padding:0}
+.more:hover{color:var(--ac)}
+#extra[hidden]{display:none}
+#extra{margin-top:12px;font-family:var(--mono);font-size:12.5px;color:var(--tx3);line-height:2}
 
-/* contact */
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:820px){.cgrid{grid-template-columns:1fr}}
-.cbox{border:1px solid var(--line);border-radius:16px;padding:28px;background:linear-gradient(160deg,var(--glass),var(--glass-2));backdrop-filter:blur(8px)}
-.field{margin-bottom:14px}
-.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:7px}
-.field input,.field textarea{width:100%;background:rgba(2,6,23,.5);border:1px solid var(--line-2);border-radius:9px;
-  padding:11px 13px;color:var(--tx);font-family:var(--body);font-size:14.5px;outline:none;transition:.2s}
-.field input:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(6,182,212,.12)}
-.field textarea{resize:vertical;min-height:96px}
-.clist{display:flex;flex-direction:column;gap:12px}
-.crow{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);border-radius:11px;
-  background:rgba(2,6,23,.35);transition:.2s}
-.crow:hover{border-color:var(--cyan);transform:translateX(3px)}
-.crow .ic2{width:34px;height:34px;flex:none;border-radius:9px;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--cyan)}
-.crow .ic2 svg{width:16px;height:16px;fill:currentColor}
-.crow .k{font-size:11px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tx3)}
-.crow .v{font-size:14.5px;color:var(--tx);word-break:break-all}
-.copy{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:5px 9px;border-radius:6px;
-  border:1px solid var(--line-2);background:none;color:var(--tx3);cursor:pointer;transition:.18s;flex:none}
-.copy:hover{border-color:var(--emerald);color:var(--emerald)}
+/* terminal */
+.term{border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:#101216}
+.tbar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid var(--line);background:var(--card)}
+.tbar u{width:10px;height:10px;border-radius:50%;display:block;background:var(--line-2)}
+.tbar .t{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+.tbody{padding:17px;height:290px;overflow-y:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75}
+.tbody::-webkit-scrollbar{width:7px}
+.tbody::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
+.tl{white-space:pre-wrap;word-break:break-word;color:var(--tx2)}
+.tl.cmd{color:var(--tx)}
+.tl.cmd::before{content:"› ";color:var(--ac)}
+.tl.err{color:#D98A6A}
+.tl b{color:var(--ac);font-weight:500}
+.tin{display:flex;gap:8px;padding:12px 17px;border-top:1px solid var(--line);background:var(--card)}
+.tin span{font-family:var(--mono);font-size:12.5px;color:var(--ac)}
+.tin input{flex:1;background:none;border:0;outline:none;color:var(--tx);font-family:var(--mono);font-size:12.5px}
+.qk{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.qb{font-family:var(--mono);font-size:11.5px;padding:6px 12px;border-radius:6px;border:1px solid var(--line-2);background:var(--card);color:var(--tx2);cursor:pointer;transition:.2s}
+.qb:hover{border-color:var(--ac);color:var(--ac)}
 
-.foot{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+/* about + contact */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.box{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--card)}
+.box p{font-size:14.5px;color:var(--tx2);line-height:1.65}
+.crow{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.crow .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);min-width:78px}
+.crow .v{font-size:14.5px;word-break:break-all}
+.crow a:hover{color:var(--ac)}
+.cp{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:4px 9px;border-radius:5px;border:1px solid var(--line-2);background:none;color:var(--tx3);cursor:pointer;flex:none}
+.cp:hover{border-color:var(--ac);color:var(--ac)}
+.foot{border-top:1px solid var(--line);padding:24px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+.foot a{color:var(--ac)}
 
-.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.25,1)}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.25,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -203,385 +205,290 @@ a{color:inherit;text-decoration:none}
   html{scroll-behavior:auto}
 }
 @media print{
-  .bgfx,.hdr,.term,.quick,.cbox form,.cta{display:none!important}
+  .nav,.term,.qk,.cta,.path,.more{display:none!important}
   body{background:#fff;color:#000}
   .rv{opacity:1!important;transform:none!important}
-  .sec,.hero{padding:12px 0;border:0}
-  .ppanel[hidden]{display:block!important}
+  .pj .body{display:block!important}
+  .sec{padding:12px 0;border:0}
 }
 </style>
 </head>
 <body>
-<div class="bgfx"></div>
-<div class="page">
 
-<header class="hdr">
+<nav class="nav">
   <div class="wrap">
-    <div class="logo">natalia tarita<i>_</i></div>
-    <nav class="nav">
-      <a href="#pillars">Pillars</a><a href="#work">Work</a>
-      <a href="#terminal">Terminal</a><a href="#stack">Stack</a><a href="#colophon">Colophon</a><a href="#contact">Contact</a><a href="resume.html">Résumé</a>
-    </nav>
-    <div class="hdr-r">
-      <div class="pill"><b></b><span>Open to Platform Engineering roles</span></div>
-      <a class="ico" href="https://github.com/Natally-1995" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
-      </a>
-      <a class="ico" href="https://www.linkedin.com/in/nataliatarita/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg>
-      </a>
+    <div class="brand">Natalia Tarita<i>.</i></div>
+    <div class="nlinks">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="cv" href="Natalia-Tarita-Resume.pdf" download>Résumé</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Platform Engineer · Chicago</span>
+    <h1>I make production infrastructure faster, safer, and cheaper.</h1>
+    <p class="stack">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
+    <p>I build and modernize production platforms across delivery automation, Kubernetes, observability, cloud cost, and infrastructure security. More recently I've added human-reviewed AI workflows to infrastructure review and incident response.</p>
+    <div class="cta">
+      <a class="btn btn-p" href="#work">View my work</a>
+      <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé</a>
+      <a class="btn" href="https://linkedin.com/in/nataliatarita" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="path rv">
+      <div class="path-h">How a change reaches production</div>
+      <div class="flow" id="flow">
+        <div class="node"><b></b><span>Pull request</span></div><div class="link"></div>
+        <div class="node"><b></b><span>CI checks</span></div><div class="link"></div>
+        <div class="gate"><b></b><span>Human approves</span></div><div class="link"></div>
+        <div class="node"><b></b><span>Git</span></div><div class="link"></div>
+        <div class="node"><b></b><span>Argo CD</span></div><div class="link"></div>
+        <div class="node"><b></b><span>Production</span></div>
+      </div>
+    </div>
+
+    <div class="mrow">
+      <div class="mc rv"><div class="n">8–10 min</div><div class="l">Deploy time</div><div class="f">from ~30 min</div></div>
+      <div class="mc rv"><div class="n">&lt;3%</div><div class="l">Failed deploys</div><div class="f">from ~10%</div></div>
+      <div class="mc rv"><div class="n">−18%</div><div class="l">AWS spend</div><div class="f">~$60–80K a year</div></div>
+      <div class="mc rv"><div class="n">&lt;30 min</div><div class="l">Merge to production</div><div class="f">from 2–4 hours</div></div>
     </div>
   </div>
 </header>
 
-<section class="hero">
+<section class="sec" id="experience">
   <div class="wrap">
-    <span class="eyebrow">Platform Engineering · Chicago, IL</span>
-    <h1>One of two platform engineers behind <em>everything twelve developers ship</em>.</h1>
-    <p class="sub">Chowly builds restaurant technology — POS systems, online ordering and delivery platforms. Two of us own the AWS estate behind those integrations: 20 services on 3 Kubernetes clusters, 8 more on EC2, across development, staging and production. AI agents run in CI on every pull request, blocking merge on high-risk Terraform and IAM changes.</p>
-    <div class="cta">
-      <a class="btn btn-p" href="#work">View the work</a>
-      <a class="btn" href="#terminal">Open terminal</a>
-      <a class="btn" href="mailto:nataliatarita95@gmail.com">Get in touch</a>
-      <a class="btn" href="resume.html">Résumé</a>
-    </div>
-
-    <div class="mrow" id="metrics">
-      <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n">8–10 min</div>
-        <div class="l">Deploy time across 8 services and 3 environments</div>
-        <div class="f">was ~30 min</div>
+    <div class="sh rv"><span class="eyebrow">Experience</span><h2>Five years, two platforms.</h2></div>
+    <div class="xp rv">
+      <div class="xc">
+        <h3>Chowly</h3>
+        <div class="role">Platform Engineer</div>
+        <div class="when">Nov 2023 — Present · Chicago, IL</div>
+        <div class="what">Restaurant technology integrating third-party delivery marketplaces with restaurant POS systems.</div>
+        <div class="tools">AWS · EKS · Terraform · Argo CD · Karpenter<br>GitHub Actions · Prometheus · Thanos</div>
       </div>
-      <div class="mcard rv" style="--c:var(--emerald)">
-        <div class="n">&lt;3%</div>
-        <div class="l">Failed production deploys after GitOps promotion on Argo CD</div>
-        <div class="f">was ~10%</div>
-      </div>
-      <div class="mcard rv" style="--c:var(--amber)">
-        <div class="n">−18%</div>
-        <div class="l">AWS spend reduction, roughly $60–80K a year</div>
-        <div class="f">right-sizing · cleanup · lifecycle</div>
-      </div>
-      <div class="mcard rv" style="--c:var(--cyan)">
-        <div class="n">10–15/wk</div>
-        <div class="l">Deployments after CI/CD automation at Grubhub</div>
-        <div class="f">was 2–3 per week</div>
+      <div class="xc">
+        <h3>Grubhub</h3>
+        <div class="role">DevOps Engineer</div>
+        <div class="when">Jul 2021 — Nov 2023 · Chicago, IL</div>
+        <div class="what">High-volume online ordering and delivery platform running production services on AWS and Kubernetes.</div>
+        <div class="tools">AWS · Kubernetes · Terraform · Jenkins<br>Helm · Docker · Prometheus · Grafana</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="pillars">
+<section class="sec" id="philosophy">
   <div class="wrap">
-    <div class="shead rv">
-      <span class="eyebrow">What I own</span>
-      <h2>Four things the platform has to do.</h2>
-      <p>A two-person team supporting twelve engineers only works if the platform makes itself unnecessary.</p>
-    </div>
+    <div class="sh rv"><span class="eyebrow">How I think about platforms</span></div>
+    <p class="thesis rv">The platform should make the <em>safe path</em> the easy path.</p>
     <div class="pil rv">
-      <div class="pc" style="--c:var(--cyan)">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
-        <h3>Delivery automation</h3>
-        <p>Immutable Packer AMIs rolled through ASGs, and GitOps promotion via Argo CD. Deploying is a merge; rolling back is a revert.</p>
-        <div class="tags"><span class="tg">Packer</span><span class="tg">Argo CD</span><span class="tg">Helm</span><span class="tg">GitHub Actions</span></div>
-      </div>
-      <div class="pc" style="--c:var(--emerald)">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>AI infrastructure review</h3>
-        <p>Claude Code agents with MCP run in CI on every pull request, failing the check and blocking merge on high-risk Terraform and IAM changes. No IAM grant, security-group rule, or production Terraform change reaches merge without review. Runbook and incident-summary agents give whoever is on call a written procedure instead of paging the engineer who last saw the problem.</p>
-        <div class="tags"><span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">Trivy</span><span class="tg">MCP servers</span></div>
-      </div>
-      <div class="pc" style="--c:var(--amber)">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></div>
-        <h3>Security &amp; cost</h3>
-        <p>IRSA moved 20+ workloads onto per-service IAM identities and retired ~25 long-lived access keys. Least-privilege RBAC and Network Policies across 3 clusters and 20+ namespaces. AWS spend down ~18%.</p>
-        <div class="tags"><span class="tg">IRSA</span><span class="tg">Secrets Manager</span><span class="tg">Trivy</span><span class="tg">S3 lifecycle</span></div>
-      </div>
-      <div class="pc" style="--c:var(--cyan)">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
-        <h3>Observability &amp; on-call</h3>
-        <p>Prometheus and Grafana dashboards with the alert rules behind them, covering application and host health. I carried the pager too.</p>
-        <div class="tags"><span class="tg">Prometheus</span><span class="tg">Grafana</span><span class="tg">Thanos</span><span class="tg">Alertmanager</span></div>
-      </div>
+      <div class="pc"><div class="k">SHIP</div><h3>Delivery automation</h3><p>Git is the deployment path. Merging ships; reverting rolls back. Nothing reaches production by hand.</p></div>
+      <div class="pc"><div class="k">PROTECT</div><h3>Security &amp; review</h3><p>Per-service identities instead of shared credentials, and infrastructure changes reviewed before they merge, not after they break.</p></div>
+      <div class="pc"><div class="k">CONTROL</div><h3>Cloud cost</h3><p>Right-size from utilisation data, delete what nobody uses, and monitor so it doesn't drift back up.</p></div>
+      <div class="pc"><div class="k">UNDERSTAND</div><h3>Observability</h3><p>Alert on symptoms, not causes. On-call should start in one place and narrow from there.</p></div>
     </div>
   </div>
 </section>
 
 <section class="sec" id="work">
   <div class="wrap">
-    <div class="shead rv">
+    <div class="sh rv">
       <span class="eyebrow">Selected work</span>
-      <h2>Three migrations and a review layer.</h2>
-      <p>Each one started with something that was slow, fragile, or expensive — and a number that proves it moved.</p>
+      <h2>Four decisions, and what came of them.</h2>
+      <p>Each one names the alternative I rejected and why. Open any of them for the architecture.</p>
     </div>
 
-    <div class="ptabs rv" role="tablist" aria-label="Projects">
-      <button class="ptab" role="tab" id="t1" aria-controls="p1" aria-selected="true">01 · Immutable deploys</button>
-      <button class="ptab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">02 · GitOps migration</button>
-      <button class="ptab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">03 · Cost reduction</button>
-      <button class="ptab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">04 · Agent review layer</button>
+    <div class="work rv">
+      <details class="pj">
+        <summary>
+          <span class="cat">01 — DELIVERY</span>
+          <span><span class="ttl">Immutable deployments</span><span class="sub">Packer · Terraform · EC2 · ASG</span></span>
+          <span class="fig">~30 → 8–10 min<small>DEPLOY TIME</small></span>
+        </summary>
+        <div class="body">
+          <h4>Problem</h4>
+          <p>Eight services deployed by hand over SSH. The thirty minutes was human work — connecting to each host, restarting services in sequence, validating one at a time. Hosts drifted apart over months, so the same service in staging and production genuinely weren't the same, and every incident investigation ended at an undocumented change somebody made long ago.</p>
+          <h4>Architecture</h4>
+          <div class="dg">
+            <span class="b">merge to main</span><span class="ar">→</span>
+            <span class="b">Packer build</span><span class="ar">→</span>
+            <span class="b">AMI id to SSM</span><span class="ar">→</span>
+            <span class="b">Terraform</span><span class="ar">→</span>
+            <span class="b hi">ASG refresh</span><span class="ar">→</span>
+            <span class="b">ALB health check</span>
+          </div>
+          <h4>Why not the alternatives</h4>
+          <p>Configuration management fixes repeatability but not drift — the host still accumulates state between runs. Containers were the other option, and other services did move to EKS, but these eight didn't need the elasticity.</p>
+          <h4>Result</h4>
+          <div class="res"><div>Deploy <b>~30 → 8–10 min</b></div><div>Rollback <b>20–30 → 5–10 min</b></div><div>Downtime <b>zero</b></div><div>Config drift <b>ended</b></div></div>
+          <h4>What it taught</h4>
+          <p>Image build time became the new bottleneck, so we split into a scheduled base image and a thin application layer. Moving work around doesn't remove it — you choose which step gets to be slow, and deploy-time is the one that matters.</p>
+        </div>
+      </details>
+
+      <details class="pj">
+        <summary>
+          <span class="cat">02 — GITOPS</span>
+          <span><span class="ttl">Taking production credentials out of CI</span><span class="sub">Argo CD · EKS · Helm · ECR</span></span>
+          <span class="fig">2–4 hrs → &lt;30 min<small>MERGE TO PRODUCTION</small></span>
+        </summary>
+        <div class="body">
+          <h4>Problem</h4>
+          <p>Releases went out weekly because deploying was expensive: a pipeline pushing into the cluster with somebody watching it. Batched releases meant bigger, riskier changes and harder attribution when something broke. And CI held credentials that could modify production — a wide blast radius for a system that runs code from pull requests.</p>
+          <h4>Architecture</h4>
+          <div class="dg">
+            <span class="b">CI build + test</span><span class="ar">→</span>
+            <span class="b">ECR</span><span class="ar">→</span>
+            <span class="b">Helm values repo</span><span class="ar">→</span>
+            <span class="b hi">Argo CD reconciles</span><span class="ar">→</span>
+            <span class="b">dev → staging → prod</span>
+          </div>
+          <h4>Why pull, not push</h4>
+          <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the truth and drift corrects itself. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
+          <h4>Result</h4>
+          <div class="res"><div><b>20 services</b> migrated</div><div>Merge to prod <b>2–4 hrs → &lt;30 min</b></div><div>Failed deploys <b>~10% → &lt;3%</b></div><div>Rollback <b>a git revert</b></div></div>
+          <h4>What it taught</h4>
+          <p>Someone patched a deployment by hand and Argo reverted it within a minute. Correct behaviour, and it looked like a bug to them. The rollout needed the explanation to ship before the enforcement did.</p>
+        </div>
+      </details>
+
+      <details class="pj">
+        <summary>
+          <span class="cat">03 — FINOPS</span>
+          <span><span class="ttl">Cutting AWS waste without trading reliability</span><span class="sub">EC2 · EBS · S3 · Terraform</span></span>
+          <span class="fig">−18%<small>~$60–80K A YEAR</small></span>
+        </summary>
+        <div class="body">
+          <h4>Problem</h4>
+          <p>Spend had grown gradually rather than deliberately, which is the hard version — nothing was obviously wrong. Infrastructure gets provisioned for a launch, the launch happens, and nobody revisits whether the instance is still the right size two years later.</p>
+          <h4>Method</h4>
+          <div class="dg">
+            <span class="b">utilisation data</span><span class="ar">→</span>
+            <span class="b">unused resources</span><span class="ar">→</span>
+            <span class="b">storage lifecycle</span><span class="ar">→</span>
+            <span class="b hi">monitoring</span>
+          </div>
+          <h4>Why not just buy reserved capacity</h4>
+          <p>Commitment discounts reward you for spending. A three-year commitment on an oversized workload locks in the wrong shape — you get a discount on waste. Right-size first, then commit.</p>
+          <h4>Result</h4>
+          <div class="res"><div>Spend <b>−18%</b></div><div><b>~$60–80K</b> annualised</div><div>Incidents caused <b>none</b></div><div>All changes <b>via Terraform</b></div></div>
+          <h4>What it taught</h4>
+          <p>Some of the saving decayed as new resources appeared without the same scrutiny. Cost control isn't a project, it's a habit with a dashboard — running it as a one-off was my mistake.</p>
+        </div>
+      </details>
+
+      <details class="pj">
+        <summary>
+          <span class="cat">04 — AI + PLATFORM</span>
+          <span><span class="ttl">AI review without production access</span><span class="sub">Claude Code · MCP · Terraform</span></span>
+          <span class="fig">~50 → ~20 min<small>PLAN REVIEW</small></span>
+        </summary>
+        <div class="body">
+          <h4>Problem</h4>
+          <p>Terraform plan output is long and tedious, and the dangerous lines look exactly like the safe ones. A forced replacement, an over-broad IAM policy, a widened security group — all of it reads as ordinary config in a big diff, and human review skims.</p>
+          <h4>The permission boundary</h4>
+          <p>This is the whole design, and it's below in full. The short version: the agent reads, plans and comments. A human approves and merges. That constraint is deliberate, not a limitation to engineer around.</p>
+          <h4>Result</h4>
+          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div><div>Caught <b>an over-broad CIDR</b></div></div>
+          <h4>What it taught</h4>
+          <p>An agent that can apply is an agent that can cause an incident nobody chose. The value is a consistent second read on the lines people skim, not autonomy.</p>
+        </div>
+      </details>
     </div>
+  </div>
+</section>
 
-    <div class="rv">
-      <div class="ppanel" role="tabpanel" id="p1" aria-labelledby="t1">
-        <div class="pgrid">
-          <div class="pleft">
-            <div class="plabel">Problem</div>
-            <h3>Deploys meant SSH-ing into production</h3>
-            <div class="blk"><p>Eight services deployed by hand over SSH. Thirty minutes each, worse to roll back, and hosts drifted apart over time — the same service in staging and production genuinely weren't the same. Every incident investigation ended at an undocumented change someone made months earlier.</p></div>
-            <div class="plabel">Solution architecture</div>
-            <div class="arch">merge to main
-   │
-   ├─▶ <b>Packer</b> build ──▶ AMI baked with app + deps
-   │                          │
-   │                          ▼
-   │                    <b>SSM Parameter Store</b>  (AMI id)
-   │                          │
-   └─────────────────────────▶ <b>Terraform</b> updates launch template
-                              │
-                              ▼
-                        <b>ASG</b> instance refresh
-                              │
-                       new hosts ──▶ <i>ALB health check</i> ──▶ drain old</div>
-            <div class="blk" style="margin-top:18px">
-              <div class="plabel">Why not the alternatives</div>
-              <p>Configuration management fixes repeatability but not drift: the host still accumulates state between runs. Containers were the other option, and other services did move to EKS, but these eight didn't need the elasticity.</p>
-            </div>
-          </div>
-          <div class="pright">
-            <div class="plabel">Results</div>
-            <div class="res">
-              <div><span class="k">Deploy time</span><span class="v"><s>~30 min</s>8–10 min</span></div>
-              <div><span class="k">Rollback</span><span class="v"><s>20–30 min</s>5–10 min</span></div>
-              <div><span class="k">Downtime</span><span class="v">zero</span></div>
-              <div><span class="k">Config drift incidents</span><span class="v">ended</span></div>
-            </div>
-            <div class="plabel">Stack</div>
-            <div class="tags" style="margin-bottom:20px">
-              <span class="tg">Packer</span><span class="tg">Terraform</span><span class="tg">EC2</span><span class="tg">ASG</span><span class="tg">ALB</span><span class="tg">SSM</span><span class="tg">GitHub Actions</span>
-            </div>
-            <div class="plabel">What it taught</div>
-            <p style="font-size:14px;color:var(--tx2)">Image build time became the new bottleneck. Split into a scheduled base image and a thin app layer. Moving work around doesn't remove it — you choose which step gets to be slow.</p>
-          </div>
+<section class="sec" id="ai">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">AI &amp; platform</span>
+      <h2>What the agent may do, and what it may not.</h2>
+      <p>Deciding what an agent is allowed to touch is the interesting part — not whether it can write Terraform.</p>
+    </div>
+    <div class="gate-box rv">
+      <div class="gate-grid">
+        <div class="gcol y">
+          <div class="hd">The agent may</div>
+          <ul>
+            <li><i>✓</i>Read cloud and cluster state</li>
+            <li><i>✓</i>Run <code>terraform plan</code> and analyse the diff</li>
+            <li><i>✓</i>Comment on a pull request</li>
+            <li><i>✓</i>Correlate monitoring signals with recent changes</li>
+            <li><i>✓</i>Draft runbooks and incident summaries</li>
+          </ul>
+        </div>
+        <div class="gcol n">
+          <div class="hd">The agent may not</div>
+          <ul>
+            <li><i>✕</i>Run <code>terraform apply</code></li>
+            <li><i>✕</i>Merge a pull request</li>
+            <li><i>✕</i>Write to production</li>
+            <li><i>✕</i>Read or rotate secrets</li>
+            <li><i>✕</i>Change IAM policy</li>
+          </ul>
         </div>
       </div>
+      <div class="gate-f">Human approves + merges</div>
+    </div>
+    <p class="catch rv">It earned its keep on a security group rule that allowed a wider CIDR range than our standard, which is approved internal services only. It had already passed human review. CIDR blocks in a diff look like every other line of config.</p>
+  </div>
+</section>
 
-      <div class="ppanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
-        <div class="pgrid">
-          <div class="pleft">
-            <div class="plabel">Problem</div>
-            <h3>CI held production credentials</h3>
-            <div class="blk"><p>Releases went out weekly because deploying was expensive — a pipeline pushing into the cluster with someone watching, two to four hours from merge to production. Batched releases meant bigger, riskier changes. And CI held credentials that could modify production, which is a wide blast radius for a system running code from pull requests.</p></div>
-            <div class="plabel">Solution architecture</div>
-            <div class="arch">CI  ──▶ build + test ──▶ push image to <b>ECR</b>
-                          │
-                          ▼
-              commit image tag to <b>Helm values repo</b>
-                          │
-        ┌─────────────────┴─────────────────┐
-        │   git is the source of truth      │
-        └─────────────────┬─────────────────┘
-                          ▼
-                    <b>Argo CD</b> reconciles cluster
-                          │
-              dev ──▶ staging ──▶ <i>prod</i>
-                          │
-              drift detected ──▶ reverted automatically</div>
-            <div class="blk" style="margin-top:18px">
-              <div class="plabel">Why pull over push</div>
-              <p>With push, git records intent and the cluster holds truth — they drift. With pull, git is the truth and drift self-corrects. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
-            </div>
-          </div>
-          <div class="pright">
-            <div class="plabel">Results</div>
-            <div class="res">
-              <div><span class="k">Release cadence</span><span class="v"><s>weekly</s>several times daily</span></div>
-              <div><span class="k">Merge to production</span><span class="v"><s>2–4 hrs</s>&lt;30 min</span></div>
-              <div><span class="k">Rollback</span><span class="v">git revert, ~1 min</span></div>
-              <div><span class="k">Services migrated</span><span class="v">20</span></div>
-              <div><span class="k">CI prod credentials</span><span class="v">removed</span></div>
-            </div>
-            <div class="plabel">Stack</div>
-            <div class="tags" style="margin-bottom:20px">
-              <span class="tg">Argo CD</span><span class="tg">EKS</span><span class="tg">Helm</span><span class="tg">ECR</span><span class="tg">GitHub Actions</span><span class="tg">Secrets Manager</span>
-            </div>
-            <div class="plabel">What it taught</div>
-            <p style="font-size:14px;color:var(--tx2)">Someone patched a deployment by hand and Argo reverted it within a minute. Correct behaviour, and it looked like a bug to them. The rollout needed the explanation to ship before the enforcement did.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="ppanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
-        <div class="pgrid">
-          <div class="pleft">
-            <div class="plabel">Problem</div>
-            <h3>Nobody owned the bill</h3>
-            <div class="blk"><p>Spend had grown gradually rather than deliberately, which is the hard version — nothing was obviously wrong. Infrastructure gets provisioned for a launch, the launch happens, and nobody revisits whether the instance is still the right size two years later.</p></div>
-            <div class="plabel">Method</div>
-            <div class="arch">1  <b>utilisation data</b>  ──▶ compare against provisioned
-                        │
-2  <b>unused resources</b> ──▶ unattached EBS, old snapshots,
-                        │    idle load balancers, dead envs
-                        │
-3  <b>storage lifecycle</b> ─▶ S3 tiering, snapshot retention
-                        │
-4  <b>monitoring</b>       ──▶ so it doesn't creep back
-
-   sequencing by risk:  <i>unused ▸ storage ▸ right-size</i>
-   all changes through Terraform — reviewable, revertible</div>
-            <div class="blk" style="margin-top:18px">
-              <div class="plabel">Why not just buy reserved capacity</div>
-              <p>Commitment discounts reward you for spending. A three-year commitment on an oversized workload locks in the wrong shape — you get a discount on waste. Right-size first, then commit.</p>
-            </div>
-          </div>
-          <div class="pright">
-            <div class="plabel">Results</div>
-            <div class="res">
-              <div><span class="k">AWS spend</span><span class="v">−18%</span></div>
-              <div><span class="k">Annualised</span><span class="v">~$60–80K</span></div>
-              <div><span class="k">Incidents caused by the right-sizing</span><span class="v">none</span></div>
-              <div><span class="k">Change path</span><span class="v">all Terraform</span></div>
-            </div>
-            <div class="plabel">Stack</div>
-            <div class="tags" style="margin-bottom:20px">
-              <span class="tg">EC2</span><span class="tg">EBS</span><span class="tg">S3</span><span class="tg">CloudWatch</span><span class="tg">Terraform</span>
-            </div>
-            <div class="plabel">What it taught</div>
-            <p style="font-size:14px;color:var(--tx2)">Some of the saving decayed as new resources appeared without the same scrutiny. Cost control isn't a project, it's a habit with a dashboard — running it as a one-off was my mistake.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="ppanel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
-        <div class="pgrid">
-          <div class="pleft">
-            <div class="plabel">Problem</div>
-            <h3>CIDR blocks look like every other line in a diff</h3>
-            <div class="blk"><p>Terraform plan output is long and tedious, and the dangerous lines look exactly like the safe ones. A forced replacement, an over-broad IAM policy, a widened security group — all of it reads as ordinary config in a big diff, and human review skims.</p></div>
-            <div class="plabel">Permission boundary</div>
-            <div class="arch">  <i>AGENT MAY</i>                    <b>AGENT MAY NOT</b>
-  ─────────────                   ─────────────────
-  read cluster + cloud state      terraform apply
-  run terraform plan              merge a pull request
-  comment on a PR                 write to production
-  draft runbooks                  read or rotate secrets
-  propose a diff                  change IAM directly
-
-           ╔═══════════════════════════╗
-           ║   HUMAN APPROVES + MERGES ║
-           ╚═══════════════════════════╝</div>
-            <div class="blk" style="margin-top:18px">
-              <div class="plabel">The catch that paid for it</div>
-              <p>An agent flagged a security group rule allowing a wider CIDR range than our standard, which is approved internal services only. It had already passed human review. I checked the plan, confirmed it, and worked with the engineer to narrow the range and add a validation check so the pipeline catches that class of change earlier.</p>
-            </div>
-          </div>
-          <div class="pright">
-            <div class="plabel">Results</div>
-            <div class="res">
-              <div><span class="k">Terraform review</span><span class="v"><s>~50 min</s>~20 min</span></div>
-              <div><span class="k">Engineers using it</span><span class="v">5, daily</span></div>
-              <div><span class="k">Agents in the loop</span><span class="v">4</span></div>
-              <div><span class="k">Apply / merge rights</span><span class="v">none</span></div>
-            </div>
-            <div class="plabel">Stack</div>
-            <div class="tags" style="margin-bottom:20px">
-              <span class="tg">Claude Code</span><span class="tg">CLAUDE.md</span><span class="tg">AGENTS.md</span><span class="tg">MCP servers</span><span class="tg">GitHub Actions</span><span class="tg">Terraform</span>
-            </div>
-            <div class="plabel">What it taught</div>
-            <p style="font-size:14px;color:var(--tx2)">An agent that can apply is an agent that can cause an incident nobody chose. The constraint is the design, not a limitation to engineer around.</p>
-          </div>
-        </div>
-      </div>
+<section class="sec" id="stack">
+  <div class="wrap">
+    <div class="sh rv"><span class="eyebrow">Stack</span><h2>What I work with.</h2></div>
+    <div class="st rv">
+      <div class="sg"><div class="h">Platform</div><ul><li>AWS</li><li>Kubernetes / EKS</li><li>Docker</li><li>Linux</li></ul></div>
+      <div class="sg"><div class="h">Delivery</div><ul><li>Terraform</li><li>Argo CD</li><li>GitHub Actions</li><li>Helm</li></ul></div>
+      <div class="sg"><div class="h">Reliability</div><ul><li>Prometheus</li><li>Grafana</li><li>Thanos</li><li>Alertmanager</li></ul></div>
+      <div class="sg"><div class="h">Automation</div><ul><li>Python</li><li>Bash</li><li>Claude Code</li><li>MCP</li></ul></div>
+    </div>
+    <button class="more rv" id="moreBtn" aria-expanded="false" aria-controls="extra">+ View full stack</button>
+    <div id="extra" hidden>
+      EC2 · ECR · VPC · IAM · S3 · RDS · Route 53 · CloudWatch · ALB/NLB · ASG · SSM · Secrets Manager<br>
+      Karpenter · HPA · RBAC · IRSA · Kustomize · Network Policies · Ingress<br>
+      Packer · Jenkins · Git · GitOps · Trivy · least-privilege IAM
     </div>
   </div>
 </section>
 
 <section class="sec" id="terminal">
   <div class="wrap">
-    <div class="shead rv">
-      <span class="eyebrow">Interactive</span>
-      <h2>Ask directly.</h2>
-      <p>Type a command, or use the buttons. Try <code style="font-family:var(--mono);color:var(--cyan)">help</code> to start.</p>
-    </div>
+    <div class="sh rv"><span class="eyebrow">For the curious</span><h2>Ask directly.</h2><p>Type <code style="font-family:var(--mono);color:var(--ac)">help</code>, or use the buttons.</p></div>
     <div class="term rv">
-      <div class="tbar">
-        <u style="background:#F43F5E"></u><u style="background:#F59E0B"></u><u style="background:#10B981"></u>
-        <span class="t">natalia@platform — zsh — 96×24</span>
-      </div>
+      <div class="tbar"><u></u><u></u><u></u><span class="t">natalia@platform</span></div>
       <div class="tbody" id="tout" aria-live="polite"></div>
-      <form class="tinput" id="tform">
-        <span>natalia@platform:~$</span>
-        <input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input">
-      </form>
+      <form class="tin" id="tform"><span>›</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input"></form>
     </div>
-    <div class="quick">
-      <button class="qb" data-cmd="whoami">whoami</button>
-      <button class="qb" data-cmd="metrics">metrics</button>
-      <button class="qb" data-cmd="skills">skills</button>
-      <button class="qb" data-cmd="projects">projects</button>
-      <button class="qb" data-cmd="cat resume.txt">cat resume.txt</button>
-      <button class="qb" data-cmd="contact">contact</button>
-      <button class="qb" data-cmd="clear">clear</button>
+    <div class="qk">
+      <button class="qb" data-c="whoami">whoami</button>
+      <button class="qb" data-c="metrics">metrics</button>
+      <button class="qb" data-c="stack">stack</button>
+      <button class="qb" data-c="agents">agents</button>
+      <button class="qb" data-c="contact">contact</button>
+      <button class="qb" data-c="clear">clear</button>
     </div>
   </div>
 </section>
 
-<section class="sec" id="stack">
+<section class="sec" id="about">
   <div class="wrap">
-    <div class="shead rv">
-      <span class="eyebrow">Stack</span>
-      <h2>What's actually in production.</h2>
-      <p>Grouped by where each sits in the delivery path.</p>
-    </div>
-    <div class="smat rv">
-      <div class="sg" style="--c:var(--cyan)"><div class="h">Cloud</div>
-        <ul><li>AWS</li><li>EC2</li><li>EKS</li><li>VPC</li><li>IAM</li><li>RDS</li><li>S3</li><li>ECR</li><li>Route 53</li><li>Secrets Manager</li></ul></div>
-      <div class="sg" style="--c:var(--emerald)"><div class="h">Orchestration</div>
-        <ul><li>Kubernetes</li><li>Karpenter</li><li>Helm</li><li>Kustomize</li><li>HPA</li><li>RBAC</li><li>Network Policies</li><li>Ingress</li><li>Docker</li></ul></div>
-      <div class="sg" style="--c:var(--amber)"><div class="h">Infrastructure as code</div>
-        <ul><li>Terraform</li><li>Packer</li><li>Remote state</li><li>Modules</li></ul></div>
-      <div class="sg" style="--c:var(--cyan)"><div class="h">CI/CD &amp; Security</div>
-        <ul><li>GitHub Actions</li><li>Jenkins</li><li>Trivy</li><li>IRSA</li><li>IAM least privilege</li><li>GitOps</li></ul></div>
-      <div class="sg" style="--c:var(--emerald)"><div class="h">Observability</div>
-        <ul><li>Prometheus</li><li>Grafana</li><li>Thanos</li><li>Alertmanager</li><li>CloudWatch</li></ul></div>
-      <div class="sg" style="--c:var(--amber)"><div class="h">AI &amp; scripting</div>
-        <ul><li>Claude Code</li><li>MCP servers</li><li>CLAUDE.md</li><li>Python</li><li>Bash</li></ul></div>
-    </div>
-  </div>
-</section>
-
-
-<section class="sec" id="colophon">
-  <div class="wrap">
-    <div class="shead rv">
-      <span class="eyebrow">Colophon</span>
-      <h2>How this site is built.</h2>
-      <p>Fair question to ask a platform engineer about her own site.</p>
-    </div>
-    <div class="pgrid rv">
-      <div class="pleft">
-        <div class="plabel">The stack</div>
-        <div class="arch">one file    <b>index.html</b> — markup, styles, and behaviour
-            no framework, no build step, no dependencies
-
-hosting     <b>GitHub Pages</b>, static, served from <i>main</i>
-
-deploy      <i>git push</i> ──▶ Pages build ──▶ live in ~60s
-
-client      vanilla JS. Tabs, filters and the terminal are
-            progressive enhancement — every number and every
-            case study renders with scripting disabled.</div>
+    <div class="sh rv"><span class="eyebrow">About this site</span><h2>No framework. No unnecessary pipeline.</h2></div>
+    <div class="two rv">
+      <div class="box">
+        <p>One HTML file. No framework, no build step, no dependencies. Hosted on GitHub Pages, served straight from <code style="font-family:var(--mono);color:var(--ac)">main</code>, live about a minute after a push.</p>
+        <p style="margin-top:14px">The tabs, filters and terminal are progressive enhancement — every number and every case study renders with scripting disabled.</p>
       </div>
-      <div class="pright">
-        <div class="plabel">Why so plain</div>
-        <p style="font-size:14.5px;color:var(--tx2);margin-bottom:18px">A static site needs no pipeline, and a pipeline that exists to prove a point is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
-        <div class="plabel">Inspect it</div>
-        <div class="clist" style="margin-top:10px">
-          <a class="crow" href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener">
-            <div class="ic2"><svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></div>
-            <div><div class="k">Source</div><div class="v">github.com/Natally-1995/Natally-1995.github.io</div></div>
-          </a>
-        </div>
+      <div class="box">
+        <p>A static site needs no pipeline, and a pipeline built to demonstrate pipelines is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
+        <p style="margin-top:14px"><a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--ac)">Read the source →</a></p>
       </div>
     </div>
   </div>
@@ -589,254 +496,112 @@ client      vanilla JS. Tabs, filters and the terminal are
 
 <section class="sec" id="contact">
   <div class="wrap">
-    <div class="shead rv">
-      <span class="eyebrow">Contact</span>
-      <h2>Open to platform engineering roles.</h2>
-      <p>Chicago or remote. CKAD certified.</p>
-    </div>
-    <div class="cgrid rv">
-      <div class="cbox">
-        <form id="cform">
-          <div class="field"><label for="cn">Name</label><input id="cn" required></div>
-          <div class="field"><label for="ce">Email</label><input id="ce" type="email" required></div>
-          <div class="field"><label for="cm">Message</label><textarea id="cm" required></textarea></div>
-          <button class="btn btn-p" type="submit" style="width:100%;justify-content:center">Send message</button>
-        </form>
+    <div class="sh rv"><span class="eyebrow">Contact</span><h2>Open to platform engineering roles.</h2><p>Chicago or remote.</p></div>
+    <div class="two rv">
+      <div class="box">
+        <div class="crow"><span class="k">Email</span><a class="v" href="mailto:nataliatarita95@gmail.com">nataliatarita95@gmail.com</a><button class="cp" data-copy="nataliatarita95@gmail.com">copy</button></div>
+        <div class="crow"><span class="k">LinkedIn</span><a class="v" href="https://linkedin.com/in/nataliatarita" target="_blank" rel="noopener">linkedin.com/in/nataliatarita</a></div>
+        <div class="crow"><span class="k">GitHub</span><a class="v" href="https://github.com/Natally-1995" target="_blank" rel="noopener">github.com/Natally-1995</a></div>
+        <div class="crow"><span class="k">Résumé</span><a class="v" href="Natalia-Tarita-Resume.pdf" download>Download PDF</a></div>
       </div>
-      <div class="clist">
-        <div class="crow">
-          <div class="ic2"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></div>
-          <div><div class="k">Email</div><div class="v">nataliatarita95@gmail.com</div></div>
-          <button class="copy" data-copy="nataliatarita95@gmail.com">copy</button>
-        </div>
-        <a class="crow" href="https://github.com/Natally-1995" target="_blank" rel="noopener">
-          <div class="ic2"><svg viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.5 4.7 18.5 5 18.5 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></div>
-          <div><div class="k">GitHub</div><div class="v">github.com/Natally-1995</div></div>
-        </a>
-        <a class="crow" href="https://www.linkedin.com/in/nataliatarita/" target="_blank" rel="noopener">
-          <div class="ic2"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg></div>
-          <div><div class="k">LinkedIn</div><div class="v">linkedin.com/in/nataliatarita</div></div>
-        </a>
-        <a class="crow" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b" target="_blank" rel="noopener">
-          <div class="ic2"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
-          <div><div class="k">Certification</div><div class="v">CKAD — verify on Credly</div></div>
-        </a>
-        <a class="crow" href="Natalia-Tarita-Resume.pdf" download>
-          <div class="ic2"><svg viewBox="0 0 24 24"><path d="M19 8H5a3 3 0 0 0-3 3v6h4v4h12v-4h4v-6a3 3 0 0 0-3-3zM8 3h8v4H8zm8 18H8v-5h8z"/></svg></div>
-          <div><div class="k">Résumé</div><div class="v">Download PDF</div></div>
-        </a>
+      <div class="box">
+        <div class="crow"><span class="k">Certified</span><span class="v">Certified Kubernetes Application Developer</span></div>
+        <div class="crow"><span class="k">Issued by</span><span class="v">The Linux Foundation / CNCF</span></div>
+        <div class="crow"><span class="k">ID</span><span class="v" style="font-family:var(--mono);font-size:13px">LF-foco5c3jzm</span></div>
+        <div class="crow"><span class="k">Verify</span><a class="v" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b" target="_blank" rel="noopener" style="color:var(--ac)">Credly →</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="foot">© 2026 Natalia Tarita · Platform Engineering · Chicago, IL · <a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--cyan)">source</a></footer>
-</div>
+<footer class="foot">© 2026 Natalia Tarita · Platform Engineering · Chicago, IL · <a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener">source</a></footer>
 
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  /* reveal */
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    });
-  },{threshold:.14});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 
-  /* project tabs */
-  var tabs = [].slice.call(document.querySelectorAll('.ptab'));
-  function pick(tab){
-    tabs.forEach(function(t){
-      var on = t===tab;
-      t.setAttribute('aria-selected', on?'true':'false');
-      t.tabIndex = on?0:-1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-  }
-  tabs.forEach(function(t){
-    t.addEventListener('click', function(){ pick(t); });
-    t.addEventListener('keydown', function(e){
-      var i=tabs.indexOf(t), n=null;
-      if(e.key==='ArrowRight'||e.key==='ArrowDown') n=tabs[(i+1)%tabs.length];
-      if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=tabs[(i-1+tabs.length)%tabs.length];
-      if(n){ e.preventDefault(); pick(n); n.focus(); }
-    });
+  /* delivery path: light each node in sequence */
+  var nodes=[].slice.call(document.querySelectorAll('#flow .node, #flow .gate'));
+  if(!reduce && nodes.length){
+    var i=0;
+    setInterval(function(){
+      nodes.forEach(function(n){ n.classList.remove('on'); });
+      nodes[i].classList.add('on');
+      i=(i+1)%nodes.length;
+    },900);
+  } else { nodes.forEach(function(n){ n.classList.add('on'); }); }
+
+  /* full stack toggle */
+  var mb=document.getElementById('moreBtn'), ex=document.getElementById('extra');
+  mb.addEventListener('click',function(){
+    var open=ex.hidden;
+    ex.hidden=!open; mb.setAttribute('aria-expanded',open?'true':'false');
+    mb.textContent=open?'− Hide full stack':'+ View full stack';
   });
 
   /* terminal */
-  var out = document.getElementById('tout'),
-      form = document.getElementById('tform'),
-      inp = document.getElementById('tin'),
-      hist = [], hi = -1;
-
-  var CMDS = {
-    help: [
-      'Available commands:',
-      '',
-      '  <b>whoami</b>          who you are talking to',
-      '  <b>metrics</b>         the numbers, before and after',
-      '  <b>skills</b>          stack, grouped',
-      '  <b>projects</b>        selected work',
-      '  <b>agents</b>          the AI review layer and its boundary',
-      '  <b>cat resume.txt</b>  plain-text resume',
-      '  <b>contact</b>         how to reach me',
-      '  <b>clear</b>           clear the screen'
-    ],
-    whoami: [
-      'Natalia Tarita — Platform Engineer, Chicago IL',
-      '',
-      'Five years on AWS with Kubernetes and Terraform. One of two engineers',
-      'running the delivery platform for a ~12-person engineering org.',
-      '',
-      'Builds AI agents that run in CI and block merges on risky Terraform and IAM',
-      'risk before merge. CKAD certified.'
-    ],
-    metrics: [
-      '<b>METRIC</b>                      <b>BEFORE</b>        <b>AFTER</b>',
-      '───────────────────────────────────────────────────',
-      'Deploy (manual work → auto) ~30 min       8–10 min',
-      'Rollback                    20–30 min     5–10 min',
-      'Merge to production         2–4 hrs       <30 min',
-      'Release cadence             weekly        several times daily',
-      'Failed production deploys   ~10%          <3%   (Argo CD promotion)',
-      'AWS spend                   baseline      <i>−18% (~$60–80K/yr)</i>',
-      '',
-      'Scale: 8 services on EC2 / 3 envs · 20 on EKS · 3 clusters · 100+ nodes · 35 repos gated',
-      '',
-      'Grubhub: deploys 2–3/wk → 10–15/wk · 30+ services, 100+ hosts monitored',
-      '         non-actionable pages roughly halved after alert tuning'
-    ],
-    skills: [
-      '<b>cloud</b>          AWS · EC2 · EKS · VPC · IAM · RDS · S3 · ECR · Route 53 · CloudWatch',
-      '<b>orchestration</b>  Kubernetes · Docker · Helm · Argo CD · Linux',
-      '<b>iac</b>            Terraform (modules, remote state) · Packer',
-      '<b>ci/cd</b>          GitHub Actions · Jenkins · Trivy · Terraform validation · GitOps',
-      '<b>observability</b>  Prometheus · Grafana · Alertmanager · CloudWatch',
-      '<b>ai</b>             Claude Code · MCP servers · CLAUDE.md · AGENTS.md',
-      '<b>scripting</b>      Python · Bash'
-    ],
-    projects: [
-      '01  <b>Immutable deploys</b>      SSH → Packer AMIs via ASG refresh',
-      '                              deploy 30 → 8–10 min, drift ended',
-      '',
-      '02  <b>GitOps migration</b>       20 services → Argo CD',
-      '                              weekly → several times daily, CI lost prod creds',
-      '',
-      '03  <b>Cost reduction</b>         AWS spend −18%, ~$60–80K/yr',
-      '                              right-sizing, cleanup, S3 lifecycle',
-      '',
-      '04  <b>Agent review layer</b>     4 agents gating every PR across 35 repos',
-      '                              no IAM or prod Terraform change merges unreviewed',
-      '                              Terraform review 50 → 20 min',
-      '',
-      'Scroll up to the Work section for architecture and results.'
-    ],
-    agents: [
-      'Four agents running in CI on every pull request:',
-      '',
-      '  · Terraform plan review     · IAM-risk PR review',
-      '  · Runbook drafting          · Incident summaries',
-      '',
-      '<b>AGENT MAY</b>                     <i>AGENT MAY NOT</i>',
-      '  read state                     terraform apply',
-      '  run terraform plan             merge a pull request',
-      '  comment on a PR                write to production',
-      '  fail a check, block merge      approve or merge a PR',
-      '  write runbooks to the repo     read or rotate secrets',
-      '',
-      'One caught a security group rule opening a wider CIDR range than our',
-      'standard — after it had already passed human review.',
-      '',
-      'An agent that can apply is an agent that can cause an incident nobody chose.'
-    ],
-    contact: [
-      'email     nataliatarita95@gmail.com',
-      'github    github.com/Natally-1995',
-      'linkedin  linkedin.com/in/nataliatarita',
-      'location  Chicago, IL — open to Chicago or remote',
-      'cert      CKAD (The Linux Foundation) — LF-foco5c3jzm'
-    ]
+  var out=document.getElementById('tout'), form=document.getElementById('tform'),
+      inp=document.getElementById('tin'), hist=[], hi=-1;
+  var C={
+    help:['Commands:','','  <b>whoami</b>     who you are talking to','  <b>metrics</b>    the numbers, before and after',
+          '  <b>stack</b>      what I work with','  <b>agents</b>     the AI permission boundary',
+          '  <b>contact</b>    how to reach me','  <b>clear</b>      clear the screen'],
+    whoami:['Natalia Tarita — Platform Engineer, Chicago IL','',
+            'Five years building and operating production AWS platforms.','Kubernetes, Terraform, GitOps, observability, cloud cost.','',
+            'Currently at Chowly. Previously Grubhub. CKAD certified.'],
+    metrics:['<b>METRIC</b>                    <b>BEFORE</b>       <b>AFTER</b>','────────────────────────────────────────────',
+             'Deploy time               ~30 min      8–10 min','Rollback                  20–30 min    5–10 min',
+             'Merge to production       2–4 hrs      <30 min','Failed production deploys ~10%         <3%',
+             'Terraform plan review     ~50 min      ~20 min','AWS spend                 baseline     −18% (~$60–80K/yr)','',
+             'Scale: 20 services on EKS · 3 clusters · 3 environments'],
+    stack:['<b>platform</b>     AWS · Kubernetes/EKS · Docker · Linux',
+           '<b>delivery</b>     Terraform · Argo CD · GitHub Actions · Helm · Packer',
+           '<b>reliability</b>  Prometheus · Grafana · Thanos · Alertmanager · CloudWatch',
+           '<b>security</b>     IRSA · IAM least privilege · RBAC · Secrets Manager',
+           '<b>automation</b>   Python · Bash · Claude Code · MCP'],
+    agents:['The boundary, in full:','',
+            '<b>MAY</b>                          MAY NOT','  read cloud + cluster state    terraform apply',
+            '  run terraform plan            merge a pull request','  comment on a PR               write to production',
+            '  correlate monitoring signals  read or rotate secrets','  draft runbooks                change IAM policy','',
+            'A human approves and merges. Always.','',
+            'It caught a security group opening a wider CIDR than our','standard — after human review had already passed it.'],
+    contact:['email     nataliatarita95@gmail.com','linkedin  linkedin.com/in/nataliatarita',
+             'github    github.com/Natally-1995','location  Chicago, IL — open to Chicago or remote',
+             'cert      CKAD (The Linux Foundation) — LF-foco5c3jzm']
   };
-  CMDS['cat resume.txt'] = [
-    '<b>NATALIA TARITA</b> — AI-Native Platform Engineer',
-    'Chicago, IL · nataliatarita95@gmail.com',
-    '',
-    '<b>PLATFORM ENGINEER</b> · Chowly · Nov 2023 – present',
-    '  Two-person platform team supporting ~12 engineers.',
-      ' · AI agents gating PRs — fail the check on risky Terraform and IAM',
-    '  · Packer AMIs via ASG refresh — deploy 30 → 8–10 min',
-    '  · 20 services to Argo CD GitOps — weekly → several times daily',
-    '  · 35 repos gated in CI — nothing merges unreviewed',
-    '  · AWS spend −18% (~$60–80K/yr)',
-    '',
-    '<b>DEVOPS ENGINEER</b> · Grubhub · Jul 2021 – Nov 2023',
-    '  · Terraform modules — env standup days → hours',
-    '  · CI/CD for 10+ services, GitHub Actions + Jenkins',
-    '  · Prometheus/Grafana dashboards and alerting; on-call rotation',
-    '',
-    '<b>CERT</b>  CKAD — The Linux Foundation / CNCF · LF-foco5c3jzm'
-  ];
-
-  function line(txt, cls){
-    var d = document.createElement('div');
-    d.className = 'tline ' + (cls||'out');
-    d.innerHTML = txt;
-    out.appendChild(d);
-  }
+  function line(t,c){ var d=document.createElement('div'); d.className='tl '+(c||''); d.innerHTML=t; out.appendChild(d); }
   function run(cmd){
-    cmd = cmd.trim();
-    if(!cmd) return;
-    line(cmd, 'cmd');
-    hist.push(cmd); hi = hist.length;
-    var key = cmd.toLowerCase();
-    if(key === 'clear'){ out.innerHTML = ''; return; }
-    if(key === 'sudo' || key.indexOf('sudo ') === 0){
-      line('Nice try. The agents can\'t apply either.', 'err');
-    } else if(CMDS[key]){
-      CMDS[key].forEach(function(l){ line(l); });
-    } else {
-      line('command not found: ' + cmd + ' — try <b>help</b>', 'err');
-    }
-    line('');
-    out.scrollTop = out.scrollHeight;
+    cmd=cmd.trim(); if(!cmd) return;
+    line(cmd,'cmd'); hist.push(cmd); hi=hist.length;
+    var k=cmd.toLowerCase();
+    if(k==='clear'){ out.innerHTML=''; return; }
+    if(k.indexOf('sudo')===0){ line('Nice try. The agent can\'t apply either.','err'); }
+    else if(C[k]){ C[k].forEach(function(l){ line(l); }); }
+    else { line('command not found: '+cmd+' — try <b>help</b>','err'); }
+    line(''); out.scrollTop=out.scrollHeight;
   }
-
-  form.addEventListener('submit', function(e){ e.preventDefault(); run(inp.value); inp.value=''; });
-  inp.addEventListener('keydown', function(e){
+  form.addEventListener('submit',function(e){ e.preventDefault(); run(inp.value); inp.value=''; });
+  inp.addEventListener('keydown',function(e){
     if(e.key==='ArrowUp'){ e.preventDefault(); if(hi>0){ hi--; inp.value=hist[hi]; } }
     if(e.key==='ArrowDown'){ e.preventDefault(); if(hi<hist.length-1){ hi++; inp.value=hist[hi]; } else { hi=hist.length; inp.value=''; } }
   });
   document.querySelectorAll('.qb').forEach(function(b){
-    b.addEventListener('click', function(){ run(b.dataset.cmd); inp.focus(); });
+    b.addEventListener('click',function(){ run(b.dataset.c); inp.focus(); });
   });
-  line('natalia@platform — platform engineering shell');
-  line('Type <b>help</b> for available commands.');
-  line('');
+  line('natalia@platform — type <b>help</b> to start'); line('');
 
-  /* copy */
-  document.querySelectorAll('.copy').forEach(function(b){
-    b.addEventListener('click', function(e){
+  document.querySelectorAll('.cp').forEach(function(b){
+    b.addEventListener('click',function(e){
       e.preventDefault();
       navigator.clipboard.writeText(b.dataset.copy).then(function(){
-        var o = b.textContent; b.textContent = 'copied';
-        setTimeout(function(){ b.textContent = o; }, 1400);
+        var o=b.textContent; b.textContent='copied'; setTimeout(function(){ b.textContent=o; },1400);
       });
     });
-  });
-
-  /* contact form → mail client */
-  document.getElementById('cform').addEventListener('submit', function(e){
-    e.preventDefault();
-    var n = document.getElementById('cn').value,
-        em = document.getElementById('ce').value,
-        m = document.getElementById('cm').value;
-    location.href = 'mailto:nataliatarita95@gmail.com'
-      + '?subject=' + encodeURIComponent('Portfolio enquiry from ' + n)
-      + '&body=' + encodeURIComponent(m + '\n\n— ' + n + ' (' + em + ')');
   });
 })();
 </script>
