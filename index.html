@@ -9,214 +9,253 @@
 <meta property="og:description" content="Deploys 30→8 min. Failed deploys 10%→under 3%. AWS spend down 18%.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#16181C; --bg-2:#1B1E23; --card:#1E2228; --card-2:#232830;
-  --line:#2B3138; --line-2:#3A424C;
-  --tx:#EDF0F3; --tx2:#9AA5B1; --tx3:#6B7681;
-  --ac:#3BA9D9; --ac-dim:rgba(59,169,217,.13); --ac-2:#5BC4EE;
-  --ok:#4FB783; --no:#C97A6D;
-  --body:"Instrument Sans",system-ui,-apple-system,sans-serif;
+  --bg:#080B12; --bg-2:#0D111B; --card:#111722; --card-2:#151C29;
+  --line:#202938; --line-2:#2C3849;
+  --tx:#F5F7FA; --tx2:#94A3B8; --tx3:#64748B;
+  --blue:#5B8CFF; --cyan:#22D3EE; --ok:#34D399; --no:#FB7185; --violet:#8B8CFF;
+  --sans:"Manrope",system-ui,-apple-system,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--ac);outline-offset:3px;border-radius:3px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 30px}
 @media(max-width:640px){.wrap{padding:0 18px}}
-.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ac)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+
+/* ambient depth */
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(760px 520px at 18% -4%, rgba(37,99,235,.16), transparent 62%),
+             radial-gradient(620px 460px at 88% 6%, rgba(6,182,212,.09), transparent 60%),
+             radial-gradient(700px 520px at 60% 102%, rgba(91,140,255,.06), transparent 62%)}
+.page{position:relative;z-index:1}
 
 /* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:80;backdrop-filter:blur(14px);background:rgba(22,24,28,.86);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.nav{position:sticky;top:0;z-index:90;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.stuck{background:rgba(8,11,18,.75);backdrop-filter:blur(16px);border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
 .brand{font-weight:700;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
-.brand i{font-style:normal;color:var(--ac)}
-.nlinks{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--tx2)}
+.brand i{font-style:normal;color:var(--blue)}
+.nlinks{display:flex;align-items:center;gap:24px;margin-left:auto;font-size:14px;color:var(--tx2)}
 .nlinks a{transition:color .18s}
 .nlinks a:hover{color:var(--tx)}
-.nlinks a.cv{color:var(--ac)}
-@media(max-width:820px){.nlinks a:not(.cv){display:none}}
+.nlinks a.cv{color:var(--blue);border:1px solid var(--line-2);padding:7px 14px;border-radius:7px;font-size:13.5px;font-weight:500;transition:.2s}
+.nlinks a.cv:hover{border-color:var(--blue);background:rgba(91,140,255,.08)}
+@media(max-width:860px){.nlinks a:not(.cv){display:none}}
 
 /* ---------- hero ---------- */
-.hero{padding:80px 0 56px}
-.hero h1{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.08;letter-spacing:-.03em;margin:18px 0 0;max-width:16ch}
-.hero .stack{font-family:var(--mono);font-size:13px;letter-spacing:.05em;color:var(--tx3);margin-top:18px}
-.hero p{color:var(--tx2);font-size:17px;max-width:60ch;margin-top:20px}
+.hero{padding:76px 0 40px}
+.hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+@media(max-width:940px){.hgrid{grid-template-columns:1fr;gap:44px}}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ok);
+  border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.07);padding:6px 12px;border-radius:100px;margin-bottom:20px}
+.status b{width:6px;height:6px;border-radius:50%;background:var(--ok);display:block;animation:beat 2.6s infinite}
+@keyframes beat{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(52,211,153,0)}}
+.hero h1{font-size:clamp(33px,4.8vw,52px);font-weight:800;line-height:1.08;letter-spacing:-.035em;max-width:15ch}
+.hero .stk{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--tx3);margin-top:20px}
+.hero p.lede{color:var(--tx2);font-size:16.5px;max-width:52ch;margin-top:18px}
 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-.btn{font-size:14px;font-weight:500;padding:11px 20px;border-radius:7px;border:1px solid var(--line-2);background:var(--card);transition:.2s;cursor:pointer}
-.btn:hover{border-color:var(--ac);color:var(--ac)}
-.btn-p{background:var(--ac);border-color:var(--ac);color:#0C1418;font-weight:600}
-.btn-p:hover{background:var(--ac-2);border-color:var(--ac-2);color:#0C1418}
+.btn{font-size:14px;font-weight:600;padding:12px 20px;border-radius:8px;border:1px solid var(--line-2);background:var(--card);transition:.2s;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.btn-p{background:var(--blue);border-color:var(--blue);color:#08101F}
+.btn-p:hover{background:#7AA1FF;border-color:#7AA1FF;color:#08101F}
 
-/* signature: the delivery path */
-.path{margin-top:52px;border:1px solid var(--line);border-radius:12px;background:var(--card);padding:26px 24px 22px;overflow:hidden}
-.path-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:22px}
-.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap}
-.node{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:74px}
-.node b{width:11px;height:11px;border-radius:50%;background:var(--line-2);display:block;transition:.4s}
-.node span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);transition:.4s;white-space:nowrap}
-.node.on b{background:var(--ac);box-shadow:0 0 0 4px var(--ac-dim)}
-.node.on span{color:var(--tx)}
-.link{flex:1;height:1px;background:var(--line-2);min-width:18px;position:relative;top:-9px}
-.gate{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:96px}
-.gate b{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--ac);background:var(--bg);display:block;position:relative}
-.gate b::after{content:"";position:absolute;inset:3px;border-radius:1px;background:var(--ac);opacity:.85}
-.gate span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);white-space:nowrap}
-@media(max-width:720px){.flow{gap:14px}.link{display:none}.node,.gate{min-width:0;flex-direction:row}}
+/* deployment visualization */
+.viz{border:1px solid var(--line);border-radius:14px;background:linear-gradient(165deg,var(--card),rgba(13,17,27,.6));padding:24px;position:relative;overflow:hidden}
+.viz-h{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tx3);margin-bottom:20px}
+.viz-h em{font-style:normal;color:var(--ok);opacity:0;transition:opacity .4s}
+.viz-h em.on{opacity:1}
+.steps{display:flex;flex-direction:column;gap:0}
+.stp{display:flex;align-items:center;gap:13px;padding:9px 0}
+.stp .dot{width:9px;height:9px;border-radius:50%;background:var(--line-2);flex:none;transition:.35s}
+.stp .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--tx3);transition:.35s}
+.stp.on .dot{background:var(--blue);box-shadow:0 0 0 4px rgba(91,140,255,.16)}
+.stp.on .lbl{color:var(--tx)}
+.stp.gate .dot{border-radius:2px;background:none;border:1.5px solid var(--tx3);width:10px;height:10px}
+.stp.gate.on .dot{border-color:var(--ok);background:rgba(52,211,153,.25);box-shadow:0 0 0 4px rgba(52,211,153,.14)}
+.stp.gate.on .lbl{color:var(--ok)}
+.conn{width:1px;height:13px;background:var(--line-2);margin-left:4px}
 
-/* ---------- metrics ---------- */
-.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
-@media(max-width:860px){.mrow{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.mrow{grid-template-columns:1fr}}
-.mc{border:1px solid var(--line);border-radius:10px;padding:26px 22px;background:var(--card);transition:.25s}
-.mc:hover{border-color:var(--line-2);transform:translateY(-2px)}
-.mc .n{font-family:var(--mono);font-size:clamp(30px,4.2vw,40px);font-weight:700;color:var(--ok);letter-spacing:-.03em;line-height:1}
-.mc .l{font-size:13.5px;color:var(--tx2);margin-top:12px;font-weight:500}
-.mc .f{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:4px}
+/* ---------- bento metrics ---------- */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:12px;margin-top:52px}
+@media(max-width:860px){.bento{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.bento{grid-template-columns:1fr}}
+.bx{border:1px solid var(--line);border-radius:13px;padding:24px;background:var(--card);position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.bx:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.bx .n{font-family:var(--mono);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ok)}
+.bx .l{font-size:13.5px;color:var(--tx2);margin-top:11px;font-weight:500}
+.bx .f{font-family:var(--mono);font-size:11px;color:var(--tx3);margin-top:5px}
+.bx.big{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:center}
+.bx.big .n{font-size:clamp(40px,6vw,62px)}
+.bx.big .l{font-size:15px;margin-top:14px}
+.bx .n{font-size:clamp(26px,3.4vw,34px)}
+@media(max-width:860px){.bx.big{grid-column:span 2;grid-row:span 1}}
+@media(max-width:520px){.bx.big{grid-column:span 1}}
+.bar{margin-top:16px;display:flex;flex-direction:column;gap:7px}
+.bar div{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;color:var(--tx3)}
+.bar i{display:block;height:4px;border-radius:3px;transition:width 1.1s cubic-bezier(.2,.8,.25,1);width:0}
+.bx.in .bar i{width:var(--w)}
+.bar .was i{background:var(--line-2)}
+.bar .now i{background:var(--ok)}
+.spark{margin-top:16px;height:34px;display:block;width:100%}
 
 /* ---------- sections ---------- */
-.sec{padding:96px 0;border-top:1px solid var(--line)}
-.sh{margin-bottom:44px;max-width:62ch}
-.sh h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;letter-spacing:-.025em;line-height:1.15;margin-top:11px}
-.sh p{color:var(--tx2);margin-top:11px;font-size:16px}
+.sec{padding:104px 0;border-top:1px solid var(--line)}
+.sh{margin-bottom:46px;max-width:64ch}
+.sh h2{font-size:clamp(25px,3.4vw,34px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-top:12px}
+.sh p{color:var(--tx2);margin-top:12px;font-size:16px}
 
-/* experience */
-.xp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:760px){.xp{grid-template-columns:1fr}}
-.xc{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--card)}
-.xc h3{font-size:19px;font-weight:700;letter-spacing:-.015em}
-.xc .role{font-size:14.5px;color:var(--tx);margin-top:5px}
-.xc .when{font-family:var(--mono);font-size:12px;color:var(--tx3);margin-top:3px}
-.xc .what{font-size:14px;color:var(--tx2);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-.xc .tools{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:12px;line-height:1.8}
+/* ---------- work ---------- */
+.work{display:flex;flex-direction:column;gap:14px}
+.pj{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;transition:border-color .3s;position:relative}
+.pj::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb, var(--c) 13%, transparent), transparent 62%)}
+.pj:hover{border-color:var(--c)}
+.pj:hover::before{opacity:1}
+.pj summary{list-style:none;cursor:pointer;padding:28px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;position:relative}
+.pj summary::-webkit-details-marker{display:none}
+.pj .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;color:var(--c);white-space:nowrap}
+.pj .ttl{font-size:19px;font-weight:700;letter-spacing:-.02em;display:block}
+.pj .sub{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:7px;display:block}
+.pj .fig{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--ok);white-space:nowrap;text-align:right}
+.pj .fig small{display:block;font-size:10px;font-weight:400;color:var(--tx3);letter-spacing:.1em;margin-top:5px}
+.pj .arw{font-family:var(--mono);font-size:13px;color:var(--c);transition:transform .25s;margin-left:4px}
+.pj:hover .arw{transform:translateX(5px)}
+@media(max-width:780px){.pj summary{grid-template-columns:1fr;gap:12px}.pj .fig{text-align:left}}
+.pj .body{padding:0 28px 28px;border-top:1px solid var(--line);padding-top:24px}
+.pj .body h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:22px 0 9px}
+.pj .body h4:first-child{margin-top:0}
+.pj .body p{font-size:14.5px;color:var(--tx2);line-height:1.68;max-width:76ch}
+.dg{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:8px 0 4px;padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--bg-2)}
+.dg .b{font-family:var(--mono);font-size:11.5px;padding:9px 14px;border:1px solid var(--line-2);border-radius:7px;color:var(--tx2);white-space:nowrap;background:var(--card)}
+.dg .b.hi{border-color:var(--c);color:var(--c)}
+.dg .ar{color:var(--tx3);padding:0 10px;font-size:12px}
+@media(max-width:700px){.dg{gap:8px}.dg .ar{display:none}}
+.res{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.res div{font-family:var(--mono);font-size:11.5px;padding:7px 12px;border:1px solid var(--line-2);border-radius:7px;color:var(--tx2)}
+.res div b{color:var(--ok);font-weight:500}
 
-/* philosophy */
-.thesis{font-size:clamp(19px,2.6vw,25px);font-weight:600;letter-spacing:-.02em;line-height:1.35;max-width:26ch;margin-bottom:30px}
-.thesis em{font-style:normal;color:var(--ac)}
+/* ---------- philosophy ---------- */
+.thesis{font-size:clamp(20px,2.8vw,27px);font-weight:700;letter-spacing:-.025em;line-height:1.35;max-width:24ch;margin-bottom:34px}
+.thesis em{font-style:normal;color:var(--blue)}
 .pil{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:900px){.pil{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.pil{grid-template-columns:1fr}}
-.pc{border:1px solid var(--line);border-radius:10px;padding:22px;background:var(--card);transition:.25s}
-.pc:hover{border-color:var(--ac);transform:translateY(-3px)}
-.pc .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ac)}
-.pc h3{font-size:15.5px;font-weight:600;margin:10px 0 8px}
-.pc p{font-size:13.5px;color:var(--tx2);line-height:1.55}
+.pc{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);transition:.28s}
+.pc:hover{border-color:var(--blue);transform:translateY(-3px)}
+.pc .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--blue)}
+.pc h3{font-size:15.5px;font-weight:700;margin:11px 0 9px}
+.pc p{font-size:13.5px;color:var(--tx2);line-height:1.58}
 
-/* work */
-.work{display:flex;flex-direction:column;gap:12px}
-.pj{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;transition:border-color .25s}
-.pj:hover{border-color:var(--line-2)}
-.pj[open]{border-color:var(--ac)}
-.pj summary{list-style:none;cursor:pointer;padding:24px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
-.pj summary::-webkit-details-marker{display:none}
-.pj .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ac);white-space:nowrap}
-.pj .ttl{font-size:17.5px;font-weight:600;letter-spacing:-.015em}
-.pj .sub{font-family:var(--mono);font-size:12px;color:var(--tx3);margin-top:5px}
-.pj .fig{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--ok);white-space:nowrap;text-align:right}
-.pj .fig small{display:block;font-size:10.5px;font-weight:400;color:var(--tx3);letter-spacing:.06em;margin-top:3px}
-@media(max-width:760px){.pj summary{grid-template-columns:1fr;gap:10px}.pj .fig{text-align:left}}
-.pj .body{padding:0 26px 26px;border-top:1px solid var(--line);margin-top:2px;padding-top:22px}
-.pj .body h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx3);margin:20px 0 8px}
-.pj .body h4:first-child{margin-top:0}
-.pj .body p{font-size:14.5px;color:var(--tx2);line-height:1.65;max-width:74ch}
-.dg{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:6px 0 4px;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--bg-2)}
-.dg .b{font-family:var(--mono);font-size:11.5px;padding:8px 13px;border:1px solid var(--line-2);border-radius:6px;color:var(--tx);white-space:nowrap;background:var(--card)}
-.dg .b.hi{border-color:var(--ac);color:var(--ac)}
-.dg .ar{color:var(--tx3);padding:0 9px;font-size:13px}
-@media(max-width:700px){.dg{gap:8px}.dg .ar{display:none}}
-.res{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.res div{font-family:var(--mono);font-size:12px;padding:6px 11px;border:1px solid var(--line-2);border-radius:6px;color:var(--tx2)}
-.res div b{color:var(--ok);font-weight:500}
+/* ---------- AI console ---------- */
+.con{border:1px solid var(--line-2);border-radius:14px;overflow:hidden;background:var(--card)}
+.con-h{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 22px;border-bottom:1px solid var(--line);background:var(--bg-2);flex-wrap:wrap}
+.con-h .t{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tx2)}
+.con-h .s{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3)}
+.perm{display:flex;flex-direction:column}
+.pr{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:13px 22px;border-bottom:1px solid rgba(32,41,56,.6);font-family:var(--mono);font-size:13px}
+.pr:last-child{border-bottom:0}
+.pr .op{color:var(--tx2);letter-spacing:.02em}
+.pr .vd{font-size:10.5px;letter-spacing:.14em;padding:4px 11px;border-radius:5px;white-space:nowrap}
+.pr.a .vd{color:var(--ok);border:1px solid rgba(52,211,153,.32);background:rgba(52,211,153,.08)}
+.pr.d .vd{color:var(--no);border:1px solid rgba(251,113,133,.3);background:rgba(251,113,133,.07)}
+.pr.d .op{color:var(--tx3)}
+.con-f{padding:20px 22px;border-top:1px solid var(--line);background:var(--bg-2);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.con-f .lk{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--no)}
+.con-f .hu{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ok)}
+.catch{margin-top:20px;font-size:14.5px;color:var(--tx2);border-left:2px solid var(--blue);padding-left:17px;max-width:74ch;line-height:1.68}
 
-/* AI boundary */
-.gate-box{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:var(--card)}
-.gate-grid{display:grid;grid-template-columns:1fr 1fr}
-@media(max-width:700px){.gate-grid{grid-template-columns:1fr}}
-.gcol{padding:26px}
-.gcol+.gcol{border-left:1px solid var(--line)}
-@media(max-width:700px){.gcol+.gcol{border-left:0;border-top:1px solid var(--line)}}
-.gcol .hd{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
-.gcol.y .hd{color:var(--ac)}
-.gcol.n .hd{color:var(--no)}
-.gcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.gcol li{display:flex;gap:11px;font-size:14.5px;color:var(--tx2);align-items:baseline}
-.gcol li i{font-style:normal;flex:none;font-family:var(--mono);font-size:12px}
-.gcol.y li i{color:var(--ac)}
-.gcol.n li i{color:var(--no)}
-.gcol.n li{color:var(--tx3)}
-.gate-f{border-top:1px solid var(--line);padding:18px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);background:var(--ac-dim)}
-.catch{margin-top:16px;font-size:14.5px;color:var(--tx2);border-left:2px solid var(--ac);padding-left:16px;max-width:72ch}
+/* ---------- experience timeline ---------- */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--blue),var(--line-2))}
+.ti{position:relative;padding-bottom:34px}
+.ti:last-child{padding-bottom:0}
+.ti::before{content:"";position:absolute;left:-26px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--line-2)}
+.ti.now::before{border-color:var(--blue);background:var(--blue);box-shadow:0 0 0 4px rgba(91,140,255,.15)}
+.ti .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--tx3);margin-bottom:8px}
+.ti.now .yr{color:var(--blue)}
+.ti h3{font-size:19px;font-weight:700;letter-spacing:-.015em}
+.ti .role{font-size:14.5px;color:var(--tx);margin-top:4px}
+.ti .what{font-size:14px;color:var(--tx2);margin-top:9px;max-width:64ch}
+.ti .tools{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:11px}
 
-/* stack */
+/* ---------- stack ---------- */
 .st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:860px){.st{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.st{grid-template-columns:1fr}}
-.sg{border:1px solid var(--line);border-radius:10px;padding:20px;background:var(--card)}
-.sg .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:13px}
-.sg ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.sg{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--card)}
+.sg .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.sg ul{list-style:none;display:flex;flex-direction:column;gap:8px}
 .sg li{font-size:14px;color:var(--tx2)}
-.more{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--tx3);cursor:pointer;background:none;border:0;padding:0}
-.more:hover{color:var(--ac)}
+.more{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--tx3);cursor:pointer;background:none;border:0;padding:0}
+.more:hover{color:var(--blue)}
 #extra[hidden]{display:none}
-#extra{margin-top:12px;font-family:var(--mono);font-size:12.5px;color:var(--tx3);line-height:2}
+#extra{margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--tx3);line-height:2}
 
-/* terminal */
-.term{border:1px solid var(--line-2);border-radius:10px;overflow:hidden;background:#101216}
-.tbar{display:flex;align-items:center;gap:7px;padding:11px 15px;border-bottom:1px solid var(--line);background:var(--card)}
-.tbar u{width:10px;height:10px;border-radius:50%;display:block;background:var(--line-2)}
-.tbar .t{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
-.tbody{padding:17px;height:290px;overflow-y:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75}
+/* ---------- terminal ---------- */
+.term{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:#070A10}
+.tbar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.tbar u{width:10px;height:10px;border-radius:50%;display:block}
+.tbar .t{margin-left:10px;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+.tbody{padding:18px;height:290px;overflow-y:auto;font-family:var(--mono);font-size:12.5px;line-height:1.75}
 .tbody::-webkit-scrollbar{width:7px}
 .tbody::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:4px}
-.tl{white-space:pre-wrap;word-break:break-word;color:var(--tx2)}
-.tl.cmd{color:var(--tx)}
-.tl.cmd::before{content:"› ";color:var(--ac)}
-.tl.err{color:#D98A6A}
-.tl b{color:var(--ac);font-weight:500}
-.tin{display:flex;gap:8px;padding:12px 17px;border-top:1px solid var(--line);background:var(--card)}
-.tin span{font-family:var(--mono);font-size:12.5px;color:var(--ac)}
+.tl2{white-space:pre-wrap;word-break:break-word;color:var(--tx2);animation:fin .18s ease}
+@keyframes fin{from{opacity:0}to{opacity:1}}
+.tl2.cmd{color:var(--tx)}
+.tl2.cmd::before{content:"$ ";color:var(--blue)}
+.tl2.err{color:var(--no)}
+.tl2 b{color:var(--cyan);font-weight:500}
+.tin{display:flex;gap:8px;padding:13px 18px;border-top:1px solid var(--line);background:var(--card)}
+.tin span{font-family:var(--mono);font-size:12.5px;color:var(--blue)}
 .tin input{flex:1;background:none;border:0;outline:none;color:var(--tx);font-family:var(--mono);font-size:12.5px}
-.qk{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.qb{font-family:var(--mono);font-size:11.5px;padding:6px 12px;border-radius:6px;border:1px solid var(--line-2);background:var(--card);color:var(--tx2);cursor:pointer;transition:.2s}
-.qb:hover{border-color:var(--ac);color:var(--ac)}
+.qk{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.qb{font-family:var(--mono);font-size:11.5px;padding:7px 13px;border-radius:7px;border:1px solid var(--line-2);background:var(--card);color:var(--tx2);cursor:pointer;transition:.2s}
+.qb:hover{border-color:var(--blue);color:var(--blue)}
 
-/* about + contact */
+/* ---------- about + contact ---------- */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:760px){.two{grid-template-columns:1fr}}
-.box{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--card)}
-.box p{font-size:14.5px;color:var(--tx2);line-height:1.65}
-.crow{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+.box{border:1px solid var(--line);border-radius:12px;padding:26px;background:var(--card)}
+.box p{font-size:14.5px;color:var(--tx2);line-height:1.68}
+.crow{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
 .crow:last-child{border-bottom:0}
-.crow .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx3);min-width:78px}
+.crow .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--tx3);min-width:80px}
 .crow .v{font-size:14.5px;word-break:break-all}
-.crow a:hover{color:var(--ac)}
-.cp{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:4px 9px;border-radius:5px;border:1px solid var(--line-2);background:none;color:var(--tx3);cursor:pointer;flex:none}
-.cp:hover{border-color:var(--ac);color:var(--ac)}
-.foot{border-top:1px solid var(--line);padding:24px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
-.foot a{color:var(--ac)}
+.crow a.v:hover{color:var(--blue)}
+.cp{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:5px 10px;border-radius:6px;border:1px solid var(--line-2);background:none;color:var(--tx3);cursor:pointer;flex:none}
+.cp:hover{border-color:var(--ok);color:var(--ok)}
+.foot{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--tx3)}
+.foot a{color:var(--blue)}
 
-.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.25,1)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.25,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
+  .bx .bar i{width:var(--w)}
   html{scroll-behavior:auto}
 }
 @media print{
-  .nav,.term,.qk,.cta,.path,.more{display:none!important}
+  .glow,.nav,.term,.qk,.cta,.viz,.more{display:none!important}
   body{background:#fff;color:#000}
   .rv{opacity:1!important;transform:none!important}
   .pj .body{display:block!important}
-  .sec{padding:12px 0;border:0}
+  .sec{padding:14px 0;border:0}
 }
 </style>
 </head>
 <body>
+<div class="glow"></div>
+<div class="page">
 
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="wrap">
     <div class="brand">Natalia Tarita<i>.</i></div>
     <div class="nlinks">
@@ -225,93 +264,101 @@ a{color:inherit;text-decoration:none}
       <a href="#stack">Stack</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-      <a class="cv" href="Natalia-Tarita-Resume.pdf" download>Résumé</a>
+      <a class="cv" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
     </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Platform Engineer · Chicago</span>
-    <h1>I make production infrastructure faster, safer, and cheaper.</h1>
-    <p class="stack">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
-    <p>I build and modernize production platforms across delivery automation, Kubernetes, observability, cloud cost, and infrastructure security. More recently I've added human-reviewed AI workflows to infrastructure review and incident response.</p>
-    <div class="cta">
-      <a class="btn btn-p" href="#work">View my work</a>
-      <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé</a>
-      <a class="btn" href="https://linkedin.com/in/nataliatarita" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
+    <div class="hgrid">
+      <div>
+        <span class="status"><b></b>Open to platform engineering roles</span>
+        <div class="eyebrow" style="margin-bottom:14px">Platform Engineer · Chicago</div>
+        <h1>I make production infrastructure faster, safer, and cheaper.</h1>
+        <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
+        <p class="lede">I build and modernize AWS platforms across delivery automation, Kubernetes, reliability, cloud cost, and infrastructure security. More recently I've added human-reviewed AI workflows to infrastructure review and incident response.</p>
+        <div class="cta">
+          <a class="btn btn-p" href="#work">View my work</a>
+          <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
+          <a class="btn" href="https://linkedin.com/in/nataliatarita" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
 
-    <div class="path rv">
-      <div class="path-h">How a change reaches production</div>
-      <div class="flow" id="flow">
-        <div class="node"><b></b><span>Pull request</span></div><div class="link"></div>
-        <div class="node"><b></b><span>CI checks</span></div><div class="link"></div>
-        <div class="gate"><b></b><span>Human approves</span></div><div class="link"></div>
-        <div class="node"><b></b><span>Git</span></div><div class="link"></div>
-        <div class="node"><b></b><span>Argo CD</span></div><div class="link"></div>
-        <div class="node"><b></b><span>Production</span></div>
+      <div class="viz rv">
+        <div class="viz-h"><span>Delivery path</span><em id="done">✓ deployed</em></div>
+        <div class="steps" id="steps">
+          <div class="stp"><span class="dot"></span><span class="lbl">Pull request</span></div>
+          <div class="conn"></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">CI · tests, scan, plan</span></div>
+          <div class="conn"></div>
+          <div class="stp gate"><span class="dot"></span><span class="lbl">Human approves</span></div>
+          <div class="conn"></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Git</span></div>
+          <div class="conn"></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Argo CD reconciles</span></div>
+          <div class="conn"></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Production</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="mrow">
-      <div class="mc rv"><div class="n">8–10 min</div><div class="l">Deploy time</div><div class="f">from ~30 min</div></div>
-      <div class="mc rv"><div class="n">&lt;3%</div><div class="l">Failed deploys</div><div class="f">from ~10%</div></div>
-      <div class="mc rv"><div class="n">−18%</div><div class="l">AWS spend</div><div class="f">~$60–80K a year</div></div>
-      <div class="mc rv"><div class="n">&lt;30 min</div><div class="l">Merge to production</div><div class="f">from 2–4 hours</div></div>
+    <div class="bento">
+      <div class="bx big rv">
+        <div class="n">8–10 min</div>
+        <div class="l">Deploy time, across 8 services and 3 environments</div>
+        <div class="f">from ~30 minutes of manual work</div>
+        <div class="bar">
+          <div class="was"><i style="--w:100%"></i><span>~30 min</span></div>
+          <div class="now"><i style="--w:31%"></i><span>8–10 min</span></div>
+        </div>
+      </div>
+      <div class="bx rv">
+        <div class="n">&lt;3%</div>
+        <div class="l">Failed production deploys</div>
+        <div class="f">from ~10%</div>
+        <div class="bar">
+          <div class="was"><i style="--w:100%"></i><span>10%</span></div>
+          <div class="now"><i style="--w:30%"></i><span>&lt;3%</span></div>
+        </div>
+      </div>
+      <div class="bx rv">
+        <div class="n">−18%</div>
+        <div class="l">AWS spend</div>
+        <div class="f">~$60–80K a year</div>
+        <svg class="spark" viewBox="0 0 120 34" preserveAspectRatio="none" aria-hidden="true">
+          <polyline points="0,9 20,8 40,10 60,9 80,17 100,23 120,24" fill="none" stroke="#34D399" stroke-width="1.6"/>
+          <polyline points="0,9 20,8 40,10 60,9" fill="none" stroke="#2C3849" stroke-width="1.6"/>
+        </svg>
+      </div>
+      <div class="bx rv">
+        <div class="n">&lt;30 min</div>
+        <div class="l">Merge to production</div>
+        <div class="f">from 2–4 hours</div>
+      </div>
+      <div class="bx rv">
+        <div class="n">20</div>
+        <div class="l">Services on GitOps</div>
+        <div class="f">3 Kubernetes clusters</div>
+      </div>
     </div>
   </div>
 </header>
-
-<section class="sec" id="experience">
-  <div class="wrap">
-    <div class="sh rv"><span class="eyebrow">Experience</span><h2>Five years, two platforms.</h2></div>
-    <div class="xp rv">
-      <div class="xc">
-        <h3>Chowly</h3>
-        <div class="role">Platform Engineer</div>
-        <div class="when">Nov 2023 — Present · Chicago, IL</div>
-        <div class="what">Restaurant technology integrating third-party delivery marketplaces with restaurant POS systems.</div>
-        <div class="tools">AWS · EKS · Terraform · Argo CD · Karpenter<br>GitHub Actions · Prometheus · Thanos</div>
-      </div>
-      <div class="xc">
-        <h3>Grubhub</h3>
-        <div class="role">DevOps Engineer</div>
-        <div class="when">Jul 2021 — Nov 2023 · Chicago, IL</div>
-        <div class="what">High-volume online ordering and delivery platform running production services on AWS and Kubernetes.</div>
-        <div class="tools">AWS · Kubernetes · Terraform · Jenkins<br>Helm · Docker · Prometheus · Grafana</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="philosophy">
-  <div class="wrap">
-    <div class="sh rv"><span class="eyebrow">How I think about platforms</span></div>
-    <p class="thesis rv">The platform should make the <em>safe path</em> the easy path.</p>
-    <div class="pil rv">
-      <div class="pc"><div class="k">SHIP</div><h3>Delivery automation</h3><p>Git is the deployment path. Merging ships; reverting rolls back. Nothing reaches production by hand.</p></div>
-      <div class="pc"><div class="k">PROTECT</div><h3>Security &amp; review</h3><p>Per-service identities instead of shared credentials, and infrastructure changes reviewed before they merge, not after they break.</p></div>
-      <div class="pc"><div class="k">CONTROL</div><h3>Cloud cost</h3><p>Right-size from utilisation data, delete what nobody uses, and monitor so it doesn't drift back up.</p></div>
-      <div class="pc"><div class="k">UNDERSTAND</div><h3>Observability</h3><p>Alert on symptoms, not causes. On-call should start in one place and narrow from there.</p></div>
-    </div>
-  </div>
-</section>
 
 <section class="sec" id="work">
   <div class="wrap">
     <div class="sh rv">
       <span class="eyebrow">Selected work</span>
       <h2>Four decisions, and what came of them.</h2>
-      <p>Each one names the alternative I rejected and why. Open any of them for the architecture.</p>
+      <p>Each one names the alternative I rejected and why. Open any card for the architecture.</p>
     </div>
 
-    <div class="work rv">
-      <details class="pj">
+    <div class="work">
+      <details class="pj rv" style="--c:var(--blue)">
         <summary>
-          <span class="cat">01 — DELIVERY</span>
+          <span class="cat">01 / DELIVERY</span>
           <span><span class="ttl">Immutable deployments</span><span class="sub">Packer · Terraform · EC2 · ASG</span></span>
-          <span class="fig">~30 → 8–10 min<small>DEPLOY TIME</small></span>
+          <span class="fig">~30 → 8–10 min<small>DEPLOY TIME</small><span class="arw">View architecture →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -334,11 +381,11 @@ a{color:inherit;text-decoration:none}
         </div>
       </details>
 
-      <details class="pj">
+      <details class="pj rv" style="--c:var(--cyan)">
         <summary>
-          <span class="cat">02 — GITOPS</span>
+          <span class="cat">02 / GITOPS</span>
           <span><span class="ttl">Taking production credentials out of CI</span><span class="sub">Argo CD · EKS · Helm · ECR</span></span>
-          <span class="fig">2–4 hrs → &lt;30 min<small>MERGE TO PRODUCTION</small></span>
+          <span class="fig">2–4 hrs → &lt;30 min<small>MERGE TO PRODUCTION</small><span class="arw">View architecture →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -360,11 +407,11 @@ a{color:inherit;text-decoration:none}
         </div>
       </details>
 
-      <details class="pj">
+      <details class="pj rv" style="--c:var(--ok)">
         <summary>
-          <span class="cat">03 — FINOPS</span>
+          <span class="cat">03 / FINOPS</span>
           <span><span class="ttl">Cutting AWS waste without trading reliability</span><span class="sub">EC2 · EBS · S3 · Terraform</span></span>
-          <span class="fig">−18%<small>~$60–80K A YEAR</small></span>
+          <span class="fig">−18%<small>~$60–80K A YEAR</small><span class="arw">View method →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -385,17 +432,17 @@ a{color:inherit;text-decoration:none}
         </div>
       </details>
 
-      <details class="pj">
+      <details class="pj rv" style="--c:var(--violet)">
         <summary>
-          <span class="cat">04 — AI + PLATFORM</span>
+          <span class="cat">04 / AI + PLATFORM</span>
           <span><span class="ttl">AI review without production access</span><span class="sub">Claude Code · MCP · Terraform</span></span>
-          <span class="fig">~50 → ~20 min<small>PLAN REVIEW</small></span>
+          <span class="fig">~50 → ~20 min<small>PLAN REVIEW</small><span class="arw">View boundary →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
           <p>Terraform plan output is long and tedious, and the dangerous lines look exactly like the safe ones. A forced replacement, an over-broad IAM policy, a widened security group — all of it reads as ordinary config in a big diff, and human review skims.</p>
           <h4>The permission boundary</h4>
-          <p>This is the whole design, and it's below in full. The short version: the agent reads, plans and comments. A human approves and merges. That constraint is deliberate, not a limitation to engineer around.</p>
+          <p>This is the whole design, and it's set out in full in the next section. The short version: the agent reads, plans and comments. A human approves and merges. That constraint is deliberate, not a limitation to engineer around.</p>
           <h4>Result</h4>
           <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div></div>
           <h4>What it taught</h4>
@@ -406,39 +453,68 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
+<section class="sec" id="philosophy">
+  <div class="wrap">
+    <div class="sh rv"><span class="eyebrow">How I think about platform engineering</span></div>
+    <p class="thesis rv">The <em>safe path</em> should also be the easy path.</p>
+    <div class="pil rv">
+      <div class="pc"><div class="k">DELIVERY</div><h3>Repeatable and reversible</h3><p>Git is the deployment path. Merging ships; reverting rolls back. Nothing reaches production by hand.</p></div>
+      <div class="pc"><div class="k">SECURITY</div><h3>Constrain blast radius</h3><p>Per-service identities instead of shared credentials. Changes reviewed before they merge, not after they break.</p></div>
+      <div class="pc"><div class="k">COST</div><h3>Continuously remove waste</h3><p>Right-size from utilisation data, delete what nobody uses, and monitor so it doesn't drift back up.</p></div>
+      <div class="pc"><div class="k">OBSERVABILITY</div><h3>Make failures understandable</h3><p>Alert on symptoms, not causes. On-call should start in one place and narrow from there.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="ai">
   <div class="wrap">
     <div class="sh rv">
       <span class="eyebrow">AI &amp; platform</span>
-      <h2>What the agent may do, and what it may not.</h2>
+      <h2>AI with a deliberately small blast radius.</h2>
       <p>Deciding what an agent is allowed to touch is the interesting part — not whether it can write Terraform.</p>
     </div>
-    <div class="gate-box rv">
-      <div class="gate-grid">
-        <div class="gcol y">
-          <div class="hd">The agent may</div>
-          <ul>
-            <li><i>✓</i>Read cloud and cluster state</li>
-            <li><i>✓</i>Run <code>terraform plan</code> and analyse the diff</li>
-            <li><i>✓</i>Comment on a pull request</li>
-            <li><i>✓</i>Correlate monitoring signals with recent changes</li>
-            <li><i>✓</i>Draft runbooks and incident summaries</li>
-          </ul>
-        </div>
-        <div class="gcol n">
-          <div class="hd">The agent may not</div>
-          <ul>
-            <li><i>✕</i>Run <code>terraform apply</code></li>
-            <li><i>✕</i>Merge a pull request</li>
-            <li><i>✕</i>Write to production</li>
-            <li><i>✕</i>Read or rotate secrets</li>
-            <li><i>✕</i>Change IAM policy</li>
-          </ul>
-        </div>
+    <div class="con rv">
+      <div class="con-h"><span class="t">Agent permissions</span><span class="s">terraform · iam · kubernetes</span></div>
+      <div class="perm">
+        <div class="pr a"><span class="op">read cloud and cluster state</span><span class="vd">ALLOW</span></div>
+        <div class="pr a"><span class="op">terraform plan</span><span class="vd">ALLOW</span></div>
+        <div class="pr a"><span class="op">analyse diff / comment on pull request</span><span class="vd">ALLOW</span></div>
+        <div class="pr a"><span class="op">correlate monitoring signals with changes</span><span class="vd">ALLOW</span></div>
+        <div class="pr a"><span class="op">draft runbooks and incident summaries</span><span class="vd">ALLOW</span></div>
+        <div class="pr d"><span class="op">terraform apply</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">merge pull request</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">write to production</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">read or rotate secrets</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">modify IAM policy</span><span class="vd">DENY</span></div>
       </div>
-      <div class="gate-f">Human approves + merges</div>
+      <div class="con-f">
+        <span class="lk">🔒 Production write access: none</span>
+        <span class="hu">Human approval required</span>
+      </div>
     </div>
-    <p class="catch rv">It earned its keep on a security group rule that allowed a wider CIDR range than our standard for approved internal services. The rule had already passed human review — CIDR blocks in a diff look like every other line of config.</p>
+    <p class="catch rv">It caught a security group rule allowing a wider CIDR range than our standard for approved internal services. The rule had already passed human review — CIDR blocks in a diff look like every other line of config.</p>
+  </div>
+</section>
+
+<section class="sec" id="experience">
+  <div class="wrap">
+    <div class="sh rv"><span class="eyebrow">Experience</span><h2>Five years, two platforms.</h2></div>
+    <div class="tl rv">
+      <div class="ti now">
+        <div class="yr">NOW</div>
+        <h3>Chowly</h3>
+        <div class="role">Platform Engineer · Nov 2023 — Present · Chicago, IL</div>
+        <div class="what">Restaurant technology integrating third-party delivery marketplaces with restaurant POS systems. I own the delivery path, Kubernetes platform, cloud cost and infrastructure security.</div>
+        <div class="tools">AWS · EKS · Terraform · Argo CD · Karpenter · GitHub Actions · Prometheus · Thanos</div>
+      </div>
+      <div class="ti">
+        <div class="yr">2021</div>
+        <h3>Grubhub</h3>
+        <div class="role">DevOps Engineer · Jul 2021 — Nov 2023 · Chicago, IL</div>
+        <div class="what">High-volume online ordering and delivery platform. I built the Terraform module library and the monitoring the on-call rotation ran on, and carried the pager myself.</div>
+        <div class="tools">AWS · Kubernetes · Terraform · Jenkins · Helm · Docker · Prometheus · Grafana</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -462,11 +538,11 @@ a{color:inherit;text-decoration:none}
 
 <section class="sec" id="terminal">
   <div class="wrap">
-    <div class="sh rv"><span class="eyebrow">For the curious</span><h2>Ask directly.</h2><p>Type <code style="font-family:var(--mono);color:var(--ac)">help</code>, or use the buttons.</p></div>
+    <div class="sh rv"><span class="eyebrow">For the curious</span><h2>Ask directly.</h2><p>Type <code style="color:var(--cyan)">help</code>, or use the buttons.</p></div>
     <div class="term rv">
-      <div class="tbar"><u></u><u></u><u></u><span class="t">natalia@platform</span></div>
+      <div class="tbar"><u style="background:#FB7185"></u><u style="background:#F5B84A"></u><u style="background:#34D399"></u><span class="t">natalia@platform</span></div>
       <div class="tbody" id="tout" aria-live="polite"></div>
-      <form class="tin" id="tform"><span>›</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input"></form>
+      <form class="tin" id="tform"><span>$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input"></form>
     </div>
     <div class="qk">
       <button class="qb" data-c="whoami">whoami</button>
@@ -484,12 +560,12 @@ a{color:inherit;text-decoration:none}
     <div class="sh rv"><span class="eyebrow">About this site</span><h2>No framework. No unnecessary pipeline.</h2></div>
     <div class="two rv">
       <div class="box">
-        <p>One HTML file. No framework, no build step, no dependencies. Hosted on GitHub Pages, served straight from <code style="font-family:var(--mono);color:var(--ac)">main</code>, live about a minute after a push.</p>
-        <p style="margin-top:14px">The tabs, filters and terminal are progressive enhancement — every number and every case study renders with scripting disabled.</p>
+        <p>One HTML file. No framework, no build step, no dependencies. Hosted on GitHub Pages, served straight from <code style="color:var(--cyan)">main</code>, live about a minute after a push.</p>
+        <p style="margin-top:14px">Everything renders with scripting disabled — the motion is enhancement, not structure.</p>
       </div>
       <div class="box">
-        <p>A static site needs no pipeline, and a pipeline built to demonstrate pipelines is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
-        <p style="margin-top:14px"><a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--ac)">Read the source →</a></p>
+        <p>A pipeline built to demonstrate pipelines is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
+        <p style="margin-top:14px"><a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--blue)">Read the source →</a></p>
       </div>
     </div>
   </div>
@@ -503,39 +579,59 @@ a{color:inherit;text-decoration:none}
         <div class="crow"><span class="k">Email</span><a class="v" href="mailto:nataliatarita95@gmail.com">nataliatarita95@gmail.com</a><button class="cp" data-copy="nataliatarita95@gmail.com">copy</button></div>
         <div class="crow"><span class="k">LinkedIn</span><a class="v" href="https://linkedin.com/in/nataliatarita" target="_blank" rel="noopener">linkedin.com/in/nataliatarita</a></div>
         <div class="crow"><span class="k">GitHub</span><a class="v" href="https://github.com/Natally-1995" target="_blank" rel="noopener">github.com/Natally-1995</a></div>
-        <div class="crow"><span class="k">Résumé</span><a class="v" href="Natalia-Tarita-Resume.pdf" download>Download PDF</a></div>
+        <div class="crow"><span class="k">Résumé</span><a class="v" href="Natalia-Tarita-Resume.pdf" download>Download PDF ↓</a></div>
       </div>
       <div class="box">
         <div class="crow"><span class="k">Certified</span><span class="v">Kubernetes Application Developer (CKAD)</span></div>
         <div class="crow"><span class="k">Issued by</span><span class="v">The Linux Foundation / CNCF</span></div>
-        <div class="crow"><span class="k">ID</span><span class="v" style="font-family:var(--mono);font-size:13px">LF-foco5c3jzm</span></div>
-        <div class="crow"><span class="k">Verify</span><a class="v" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b" target="_blank" rel="noopener" style="color:var(--ac)">Credly →</a></div>
+        <div class="crow"><span class="k">ID</span><span class="v mono" style="font-size:13px">LF-foco5c3jzm</span></div>
+        <div class="crow"><span class="k">Verify</span><a class="v" href="https://www.credly.com/badges/6c6024f2-9ab8-4094-bf6f-02a3768f001b" target="_blank" rel="noopener" style="color:var(--blue)">Credly →</a></div>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="foot">© 2026 Natalia Tarita · Platform Engineering · Chicago, IL · <a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener">source</a></footer>
+</div>
 
 <script>
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
+  /* glass nav on scroll */
+  var nav=document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('stuck', scrollY>12); }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* scroll reveal */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{threshold:.12});
+  },{threshold:.1});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 
-  /* delivery path: light each node in sequence */
-  var nodes=[].slice.call(document.querySelectorAll('#flow .node, #flow .gate'));
-  if(!reduce && nodes.length){
+  /* delivery path loop */
+  var steps=[].slice.call(document.querySelectorAll('#steps .stp')), done=document.getElementById('done');
+  if(!reduce && steps.length){
     var i=0;
     setInterval(function(){
-      nodes.forEach(function(n){ n.classList.remove('on'); });
-      nodes[i].classList.add('on');
-      i=(i+1)%nodes.length;
-    },900);
-  } else { nodes.forEach(function(n){ n.classList.add('on'); }); }
+      if(i===0){ steps.forEach(function(s){ s.classList.remove('on'); }); done.classList.remove('on'); }
+      steps[i].classList.add('on');
+      if(i===steps.length-1) setTimeout(function(){ done.classList.add('on'); },320);
+      i=(i+1)%(steps.length+2);
+      if(i>steps.length-1 && i<steps.length+2) i=(i===steps.length+1)?0:i;
+    },780);
+  } else { steps.forEach(function(s){ s.classList.add('on'); }); done.classList.add('on'); }
+
+  /* cursor glow on project cards */
+  if(!reduce){
+    document.querySelectorAll('.pj').forEach(function(c){
+      c.addEventListener('mousemove',function(e){
+        var r=c.getBoundingClientRect();
+        c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+        c.style.setProperty('--my',(e.clientY-r.top)+'px');
+      });
+    });
+  }
 
   /* full stack toggle */
   var mb=document.getElementById('moreBtn'), ex=document.getElementById('extra');
@@ -565,17 +661,19 @@ a{color:inherit;text-decoration:none}
            '<b>reliability</b>  Prometheus · Grafana · Thanos · Alertmanager · CloudWatch',
            '<b>security</b>     IRSA · IAM least privilege · RBAC · Secrets Manager',
            '<b>automation</b>   Python · Bash · Claude Code · MCP'],
-    agents:['The boundary, in full:','',
-            '<b>MAY</b>                          MAY NOT','  read cloud + cluster state    terraform apply',
-            '  run terraform plan            merge a pull request','  comment on a PR               write to production',
-            '  correlate monitoring signals  read or rotate secrets','  draft runbooks                change IAM policy','',
-            'A human approves and merges. Always.','',
-            'It caught a security group opening a wider CIDR than our','standard — after human review had already passed it.'],
+    agents:['<b>AGENT PERMISSIONS</b>','',
+            '  read cloud + cluster state      ALLOW','  terraform plan                  ALLOW',
+            '  comment on a pull request       ALLOW','  correlate monitoring signals    ALLOW',
+            '  draft runbooks                  ALLOW','',
+            '  terraform apply                 DENY','  merge pull request              DENY',
+            '  write to production             DENY','  read or rotate secrets          DENY',
+            '  modify IAM policy               DENY','',
+            'Production write access: none. Human approval required.'],
     contact:['email     nataliatarita95@gmail.com','linkedin  linkedin.com/in/nataliatarita',
              'github    github.com/Natally-1995','location  Chicago, IL — open to Chicago or remote',
              'cert      CKAD (The Linux Foundation) — LF-foco5c3jzm']
   };
-  function line(t,c){ var d=document.createElement('div'); d.className='tl '+(c||''); d.innerHTML=t; out.appendChild(d); }
+  function line(t,c){ var d=document.createElement('div'); d.className='tl2 '+(c||''); d.innerHTML=t; out.appendChild(d); }
   function run(cmd){
     cmd=cmd.trim(); if(!cmd) return;
     line(cmd,'cmd'); hist.push(cmd); hi=hist.length;
