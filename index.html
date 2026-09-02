@@ -358,7 +358,7 @@ code,.mono{font-family:var(--mono)}
         <summary>
           <span class="cat">01 / DELIVERY</span>
           <span><span class="ttl">Immutable deployments</span><span class="sub">Packer · Terraform · EC2 · ASG</span></span>
-          <span class="fig">~30 → 8–10 min<small>DEPLOY TIME</small><span class="arw">View architecture →</span></span>
+          <span class="fig">SSH → Packer<small>PRODUCTION ACCESS</small><span class="arw">View architecture →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -653,7 +653,7 @@ code,.mono{font-family:var(--mono)}
             'Currently at Chowly. Previously Grubhub. CKAD certified.'],
     metrics:['<b>METRIC</b>                    <b>BEFORE</b>       <b>AFTER</b>','────────────────────────────────────────────',
              'Deploy time               ~30 min      8–10 min','Rollback                  20–30 min    5–10 min',
-             'Merge to production       2–4 hrs      <30 min','Failed production deploys ~10%         <3%',
+             'Merge to production       2–4 hrs      <30 min','IAM: shared access        many keys    20+ per-service identities',
              'Terraform plan review     ~50 min      ~20 min','AWS spend                 baseline     −18% (~$60–80K/yr)','',
              'Scale: 20 services on EKS · 3 clusters · 3 environments'],
     stack:['<b>platform</b>     AWS · Kubernetes/EKS · Docker · Linux',
