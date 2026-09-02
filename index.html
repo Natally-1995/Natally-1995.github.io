@@ -314,13 +314,9 @@ code,.mono{font-family:var(--mono)}
         </div>
       </div>
       <div class="bx rv">
-        <div class="n">&lt;3%</div>
-        <div class="l">Failed production deploys</div>
-        <div class="f">from ~10%</div>
-        <div class="bar">
-          <div class="was"><i style="--w:100%"></i><span>10%</span></div>
-          <div class="now"><i style="--w:30%"></i><span>&lt;3%</span></div>
-        </div>
+        <div class="n">20+</div>
+        <div class="l">EKS workloads on per-service IAM identities</div>
+        <div class="f">via IRSA, ~25 long-lived keys retired</div>
       </div>
       <div class="bx rv">
         <div class="n">−18%</div>
@@ -399,9 +395,9 @@ code,.mono{font-family:var(--mono)}
             <span class="b">dev → staging → prod</span>
           </div>
           <h4>Why pull, not push</h4>
-          <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the truth and drift corrects itself. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
+          <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the single source of desired state and the cluster reconciles to match it. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
           <h4>Result</h4>
-          <div class="res"><div><b>20 services</b> migrated</div><div>Merge to prod <b>2–4 hrs → &lt;30 min</b></div><div>Failed deploys <b>~10% → &lt;3%</b></div><div>Rollback <b>a git revert</b></div></div>
+          <div class="res"><div><b>20 services</b> migrated</div><div>Merge to prod <b>2–4 hrs → &lt;30 min</b></div><div>CI production credentials <b>removed</b></div><div>Rollback <b>a git revert</b></div></div>
           <h4>What it taught</h4>
           <p>Someone patched a deployment by hand and Argo reverted it within a minute. Correct behaviour, and it looked like a bug to them. The rollout needed the explanation to ship before the enforcement did.</p>
         </div>
