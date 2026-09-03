@@ -452,7 +452,7 @@ code,.mono{font-family:var(--mono)}
 <section class="sec" id="philosophy">
   <div class="wrap">
     <div class="sh rv"><span class="eyebrow">How I think about platform engineering</span></div>
-    <p class="thesis rv">The <em>safe path</em> should also be the easy path.</p>
+    <p class="thesis rv">The agent can <em>read</em> every environment. It can <em>apply</em> to none of them.</p>
     <div class="pil rv">
       <div class="pc"><div class="k">DELIVERY</div><h3>Repeatable and reversible</h3><p>Git is the deployment path. Merging ships; reverting rolls back. No deployment reaches production by hand.</p></div>
       <div class="pc"><div class="k">SECURITY</div><h3>Constrain blast radius</h3><p>Per-service identities instead of shared credentials. Changes reviewed before they merge, not after they break.</p></div>
@@ -484,8 +484,8 @@ code,.mono{font-family:var(--mono)}
         <div class="pr d"><span class="op">modify IAM policy</span><span class="vd">DENY</span></div>
       </div>
       <div class="con-f">
-        <span class="lk">🔒 Read-only IAM role via OIDC · apply role unreachable</span>
-        <span class="hu">Human approval required</span>
+        <span class="lk">🔒 Deny-all on terraform apply — dev, staging, and prod</span>
+        <span class="hu">No exceptions by environment</span>
       </div>
     </div>
     <p class="catch rv">It flagged a security group rule widening internal access from a /16 to a /8 after an initial human review had accepted it. CIDR blocks in a diff look like every other line of config.</p>
@@ -661,10 +661,10 @@ code,.mono{font-family:var(--mono)}
             '  read cloud + cluster state      ALLOW','  terraform plan                  ALLOW',
             '  comment on a pull request       ALLOW','  correlate monitoring signals    ALLOW',
             '  draft runbooks                  ALLOW','',
-            '  terraform apply                 DENY','  merge pull request              DENY',
+            '  terraform apply                 DENY  (dev, staging, prod — no exceptions)','  merge pull request              DENY',
             '  write to production             DENY','  read or rotate secrets          DENY',
             '  modify IAM policy               DENY','',
-            'Production write access: none. Human approval required.'],
+            'Deny-all on apply across every environment. No dev or sandbox exception.'],
     contact:['email     nataliatarita95@gmail.com','linkedin  linkedin.com/in/nataliatarita',
              'github    github.com/Natally-1995','location  Chicago, IL — open to Chicago or remote',
              'cert      CKAD (The Linux Foundation) — LF-foco5c3jzm']
