@@ -185,6 +185,17 @@ code,.mono{font-family:var(--mono)}
 .ti .what{font-size:14px;color:var(--tx2);margin-top:9px;max-width:64ch}
 .ti .tools{font-family:var(--mono);font-size:11.5px;color:var(--tx3);margin-top:11px}
 
+/* ---------- activity ---------- */
+.activity{display:flex;flex-direction:column;gap:10px}
+.act-row{display:flex;align-items:baseline;gap:16px;padding:16px 20px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13.5px}
+.act-row .kind{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);flex:none;width:52px}
+.act-row .desc{color:var(--tx);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.act-row .repo{font-family:var(--mono);font-size:11.5px;color:var(--tx3);flex:none}
+.act-row .when{font-family:var(--mono);font-size:11px;color:var(--tx3);flex:none;width:74px;text-align:right}
+.act-row:hover{border-color:var(--line-2)}
+.act-empty{padding:24px;border:1px dashed var(--line-2);border-radius:10px;color:var(--tx3);font-size:14px;text-align:center}
+.act-empty a{color:var(--blue)}
+
 /* ---------- stack ---------- */
 .st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:860px){.st{grid-template-columns:repeat(2,1fr)}}
@@ -261,6 +272,7 @@ code,.mono{font-family:var(--mono)}
     <div class="nlinks">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
+      <a href="#activity" id="navActivity" hidden>Activity</a>
       <a href="#stack">Stack</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
@@ -344,9 +356,9 @@ code,.mono{font-family:var(--mono)}
 <section class="sec" id="work">
   <div class="wrap">
     <div class="sh rv">
-      <span class="eyebrow">Selected work</span>
+      <span class="eyebrow">Selected work · Chowly</span>
       <h2>Four decisions, and what came of them.</h2>
-      <p>Each one names the alternative I rejected and why. Open any card for the architecture.</p>
+      <p>Platform work at Chowly, a Chicago restaurant-technology company that integrates delivery marketplaces with restaurant POS systems. Each case study names the alternative I rejected and why. Open any card for the architecture.</p>
     </div>
 
     <div class="work">
@@ -362,7 +374,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Architecture</h4>
           <div class="dg">
             <span class="b">merge to main</span><span class="ar">→</span>
-            <span class="b">Packer build</span><span class="ar">→</span>
+            <span class="b">Packer build (<code>orders-service</code>)</span><span class="ar">→</span>
             <span class="b">AMI id to SSM</span><span class="ar">→</span>
             <span class="b">Terraform</span><span class="ar">→</span>
             <span class="b hi">ASG refresh</span><span class="ar">→</span>
@@ -390,10 +402,11 @@ code,.mono{font-family:var(--mono)}
           <div class="dg">
             <span class="b">CI build + test</span><span class="ar">→</span>
             <span class="b">ECR</span><span class="ar">→</span>
-            <span class="b">Helm values repo</span><span class="ar">→</span>
+            <span class="b"><code>values-prod.yaml</code></span><span class="ar">→</span>
             <span class="b hi">Argo CD reconciles</span><span class="ar">→</span>
             <span class="b">dev → staging → prod</span>
           </div>
+          <p style="font-size:12.5px;color:var(--tx3);margin-top:8px">Representative structure — one Helm values file per environment, not the literal repo layout.</p>
           <h4>Why pull, not push</h4>
           <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the single source of desired state and the cluster reconciles to match it. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
           <h4>Result</h4>
@@ -439,8 +452,11 @@ code,.mono{font-family:var(--mono)}
           <p>Terraform plan output is long and tedious, and the dangerous lines look exactly like the safe ones. A forced replacement, an over-broad IAM policy, a widened security group — all of it reads as ordinary config in a big diff, and human review skims.</p>
           <h4>The permission boundary</h4>
           <p>Set out in full in the next section. The short version: the agent reads, plans and comments; a human approves and merges. I built the workflow and helped define those boundaries with my platform teammate — the constraint is deliberate, not a limitation to engineer around.</p>
+          <h4>Case study: the CIDR it caught</h4>
+          <p>A pull request widened a security group's ingress rule from a /16 to a /8. Both were private RFC1918 ranges — this was never about public internet exposure. The actual issue was blast radius: the /8 gave the service reachability from a much larger slice of internal network than it needed, which is a least-privilege problem, not an open-firewall one. It's also the kind of change that deterministic scanning tools don't reliably catch, since neither range is a hard-coded bad pattern like <code>0.0.0.0/0</code> — a /8 is a technically valid private range, just an unnecessarily wide one for this service.</p>
+          <p>The PR had already passed an initial human review before the agent's pass. The agent didn't block the merge or apply anything — it isn't able to. It surfaced the finding as a PR comment, for a person to weigh. A human then narrowed the rule.</p>
           <h4>Result</h4>
-          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div></div>
+          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div><div>This finding <b>surfaced, not auto-blocked</b></div></div>
           <h4>What it taught</h4>
           <p>An agent that can apply is an agent that can cause an incident nobody chose. The value is a consistent second read on the lines people skim, not autonomy.</p>
         </div>
@@ -488,7 +504,7 @@ code,.mono{font-family:var(--mono)}
         <span class="hu">No exceptions by environment</span>
       </div>
     </div>
-    <p class="catch rv">It flagged a security group rule widening internal access from a /16 to a /8 after an initial human review had accepted it. CIDR blocks in a diff look like every other line of config.</p>
+    <p class="catch rv">The <a href="#work" style="color:var(--blue)">case study above</a> covers a real finding in detail — a security-group rule widened from a /16 to a /8. CIDR blocks in a diff look like every other line of config, and neither range trips a hard-coded rule.</p>
   </div>
 </section>
 
@@ -511,6 +527,13 @@ code,.mono{font-family:var(--mono)}
         <div class="tools">AWS · Kubernetes · Terraform · Jenkins · Helm · Docker · Prometheus · Grafana</div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="sec" id="activity" hidden>
+  <div class="wrap">
+    <div class="sh rv"><span class="eyebrow">Recent work</span><h2>Real commits, not a claim.</h2><p>Pulled from public GitHub activity at build time — refreshed on every push and once daily. No manufactured entries.</p></div>
+    <div id="activityList" class="activity rv" aria-live="polite"></div>
   </div>
 </section>
 
@@ -604,6 +627,35 @@ code,.mono{font-family:var(--mono)}
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   },{threshold:.1});
   document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  /* recent activity — reads the static JSON a GitHub Action writes at build time.
+     No token, no live API call from the browser; this file is only ever fetched.
+     Section and nav link stay hidden entirely until there's real qualifying
+     activity — no placeholder or empty state shown to visitors. */
+  (function(){
+    var section = document.getElementById('activity');
+    var box = document.getElementById('activityList');
+    var navLink = document.getElementById('navActivity');
+    if(!section || !box) return;
+    fetch('data/activity.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('no data'); return r.json(); })
+      .then(function(items){
+        if(!items || !items.length) return; // stay hidden, no empty state
+        box.innerHTML = items.slice(0,8).map(function(it){
+          var kind = it.kind === 'pr' ? 'PR' : 'COMMIT';
+          var when = it.when || '';
+          return '<a class="act-row" href="'+it.url+'" target="_blank" rel="noopener">'
+            + '<span class="kind">'+kind+'</span>'
+            + '<span class="desc">'+it.desc+'</span>'
+            + '<span class="repo">'+it.repo+'</span>'
+            + '<span class="when">'+when+'</span>'
+            + '</a>';
+        }).join('');
+        section.hidden = false;
+        if(navLink) navLink.hidden = false;
+      })
+      .catch(function(){ /* stay hidden */ });
+  })();
 
   /* delivery path loop */
   var steps=[].slice.call(document.querySelectorAll('#steps .stp')), done=document.getElementById('done');
