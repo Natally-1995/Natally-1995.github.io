@@ -316,15 +316,6 @@ code,.mono{font-family:var(--mono)}
     </div>
 
     <div class="bento">
-      <div class="bx big rv">
-        <div class="n">8–10 min</div>
-        <div class="l">Deploy time, across 8 services and 3 environments</div>
-        <div class="f">from ~30 minutes of manual work</div>
-        <div class="bar">
-          <div class="was"><i style="--w:100%"></i><span>~30 min</span></div>
-          <div class="now"><i style="--w:31%"></i><span>8–10 min</span></div>
-        </div>
-      </div>
       <div class="bx rv">
         <div class="n">20+</div>
         <div class="l">EKS workloads on per-service IAM identities</div>
@@ -338,11 +329,6 @@ code,.mono{font-family:var(--mono)}
           <polyline points="0,9 20,8 40,10 60,9 80,17 100,23 120,24" fill="none" stroke="#34D399" stroke-width="1.6"/>
           <polyline points="0,9 20,8 40,10 60,9" fill="none" stroke="#2C3849" stroke-width="1.6"/>
         </svg>
-      </div>
-      <div class="bx rv">
-        <div class="n">&lt;30 min</div>
-        <div class="l">Merge to production</div>
-        <div class="f">from 2–4 hours</div>
       </div>
       <div class="bx rv">
         <div class="n">20</div>
@@ -383,7 +369,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Why not the alternatives</h4>
           <p>Configuration management fixes repeatability but not drift — the host still accumulates state between runs. Containers were the other option, and other services did move to EKS, but these eight didn't need the elasticity.</p>
           <h4>Result</h4>
-          <div class="res"><div>Deploy <b>~30 → 8–10 min</b></div><div>Rollback <b>20–30 → 5–10 min</b></div><div>Downtime <b>zero</b></div><div>Config drift <b>ended</b></div></div>
+          <div class="res"><div>Rollback <b>20–30 → 5–10 min</b></div><div>Downtime <b>zero</b></div><div>Config drift <b>ended</b></div></div>
           <h4>What it taught</h4>
           <p>Image build time became the new bottleneck, so we split into a scheduled base image and a thin application layer. Moving work around doesn't remove it — you choose which step gets to be slow, and deploy-time is the one that matters.</p>
         </div>
@@ -393,7 +379,7 @@ code,.mono{font-family:var(--mono)}
         <summary>
           <span class="cat">02 / GITOPS</span>
           <span><span class="ttl">Taking production credentials out of CI</span><span class="sub">Argo CD · EKS · Helm · ECR</span></span>
-          <span class="fig">2–4 hrs → &lt;30 min<small>MERGE TO PRODUCTION</small><span class="arw">View architecture →</span></span>
+          <span class="fig">CI → Argo CD<small>PRODUCTION CREDENTIALS</small><span class="arw">View architecture →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -410,7 +396,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Why pull, not push</h4>
           <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the single source of desired state and the cluster reconciles to match it. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
           <h4>Result</h4>
-          <div class="res"><div><b>20 services</b> migrated</div><div>Merge to prod <b>2–4 hrs → &lt;30 min</b></div><div>CI production credentials <b>removed</b></div><div>Rollback <b>a git revert</b></div></div>
+          <div class="res"><div><b>20 services</b> migrated</div><div>CI production credentials <b>removed</b></div><div>Rollback <b>a git revert</b></div></div>
           <h4>What it taught</h4>
           <p>Someone patched a deployment by hand and Argo reverted it within a minute. Correct behaviour, and it looked like a bug to them. The rollout needed the explanation to ship before the enforcement did.</p>
         </div>
@@ -445,7 +431,7 @@ code,.mono{font-family:var(--mono)}
         <summary>
           <span class="cat">04 / AI + PLATFORM</span>
           <span><span class="ttl">AI review without production access</span><span class="sub">Claude Code · MCP · Terraform</span></span>
-          <span class="fig">~50 → ~20 min<small>PLAN REVIEW</small><span class="arw">View boundary →</span></span>
+          <span class="fig">Plan → PR comment<small>NO APPLY OR MERGE</small><span class="arw">View boundary →</span></span>
         </summary>
         <div class="body">
           <h4>Problem</h4>
@@ -456,7 +442,7 @@ code,.mono{font-family:var(--mono)}
           <p>A pull request widened a security group's ingress rule from a /16 to a /8. Both were private RFC1918 ranges — this was never about public internet exposure. The actual issue was blast radius: the /8 gave the service reachability from a much larger slice of internal network than it needed, which is a least-privilege problem, not an open-firewall one. It's also the kind of change that deterministic scanning tools don't reliably catch, since neither range is a hard-coded bad pattern like <code>0.0.0.0/0</code> — a /8 is a technically valid private range, just an unnecessarily wide one for this service.</p>
           <p>The PR had already passed an initial human review before the agent's pass. The agent didn't block the merge or apply anything — it isn't able to. It surfaced the finding as a PR comment, for a person to weigh. A human then narrowed the rule.</p>
           <h4>Result</h4>
-          <div class="res"><div>Plan review <b>~50 → ~20 min</b></div><div>Production access <b>none</b></div><div>This finding <b>surfaced, not auto-blocked</b></div></div>
+          <div class="res"><div>Production access <b>none</b></div><div>This finding <b>surfaced, not auto-blocked</b></div></div>
           <h4>What it taught</h4>
           <p>An agent that can apply is an agent that can cause an incident nobody chose. The value is a consistent second read on the lines people skim, not autonomy.</p>
         </div>
@@ -517,13 +503,13 @@ code,.mono{font-family:var(--mono)}
         <h3>Chowly</h3>
         <div class="role">Platform Engineer · Nov 2023 — Present · Chicago, IL</div>
         <div class="what">Restaurant technology integrating third-party delivery marketplaces with restaurant POS systems. I own the delivery path, Kubernetes platform, cloud cost and infrastructure security.</div>
-        <div class="tools">AWS · EKS · Terraform · Argo CD · Karpenter · GitHub Actions · Prometheus · Thanos</div>
+        <div class="tools">AWS · EKS · Terraform · Argo CD · GitHub Actions · Prometheus</div>
       </div>
       <div class="ti">
         <div class="yr">2021</div>
         <h3>Grubhub</h3>
         <div class="role">DevOps Engineer · Jul 2021 — Nov 2023 · Chicago, IL</div>
-        <div class="what">High-volume online ordering and delivery platform. I built the Terraform module library and the monitoring the on-call rotation ran on, and carried the pager myself.</div>
+        <div class="what">High-volume online ordering and delivery platform. I built the Terraform module library and the monitoring the on-call rotation ran on.</div>
         <div class="tools">AWS · Kubernetes · Terraform · Jenkins · Helm · Docker · Prometheus · Grafana</div>
       </div>
     </div>
@@ -543,13 +529,13 @@ code,.mono{font-family:var(--mono)}
     <div class="st rv">
       <div class="sg"><div class="h">Platform</div><ul><li>AWS</li><li>Kubernetes / EKS</li><li>Docker</li><li>Linux</li></ul></div>
       <div class="sg"><div class="h">Delivery</div><ul><li>Terraform</li><li>Argo CD</li><li>GitHub Actions</li><li>Helm</li></ul></div>
-      <div class="sg"><div class="h">Reliability</div><ul><li>Prometheus</li><li>Grafana</li><li>Thanos</li><li>Alertmanager</li></ul></div>
+      <div class="sg"><div class="h">Reliability</div><ul><li>Prometheus</li><li>Grafana</li><li>Alertmanager</li></ul></div>
       <div class="sg"><div class="h">Automation</div><ul><li>Python</li><li>Bash</li><li>Claude Code</li><li>MCP</li></ul></div>
     </div>
     <button class="more rv" id="moreBtn" aria-expanded="false" aria-controls="extra">+ View full stack</button>
     <div id="extra" hidden>
       EC2 · ECR · VPC · IAM · S3 · RDS · Route 53 · CloudWatch · ALB/NLB · ASG · SSM · Secrets Manager<br>
-      Karpenter · HPA · RBAC · IRSA · Kustomize · Network Policies · Ingress<br>
+      HPA · RBAC · IRSA · Kustomize · Network Policies · Ingress<br>
       Packer · Jenkins · Git · GitOps · Trivy · least-privilege IAM
     </div>
   </div>
@@ -700,13 +686,13 @@ code,.mono{font-family:var(--mono)}
             'Five years building and operating production AWS platforms.','Kubernetes, Terraform, GitOps, observability, cloud cost.','',
             'Currently at Chowly. Previously Grubhub. CKAD certified.'],
     metrics:['<b>METRIC</b>                    <b>BEFORE</b>       <b>AFTER</b>','────────────────────────────────────────────',
-             'Deploy time               ~30 min      8–10 min','Rollback                  20–30 min    5–10 min',
-             'Merge to production       2–4 hrs      <30 min','IAM: shared access        many keys    20+ per-service identities',
-             'Terraform plan review     ~50 min      ~20 min','AWS spend                 baseline     −18% (~$60–80K/yr)','',
+             'Rollback                  20–30 min    5–10 min',
+             'IAM: shared access        many keys    20+ per-service identities',
+             'AWS spend                 baseline     −18% (~$60–80K/yr)','',
              'Scale: 20 services on EKS · 3 clusters · 3 environments'],
     stack:['<b>platform</b>     AWS · Kubernetes/EKS · Docker · Linux',
            '<b>delivery</b>     Terraform · Argo CD · GitHub Actions · Helm · Packer',
-           '<b>reliability</b>  Prometheus · Grafana · Thanos · Alertmanager · CloudWatch',
+           '<b>reliability</b>  Prometheus · Grafana · Alertmanager · CloudWatch',
            '<b>security</b>     IRSA · IAM least privilege · RBAC · Secrets Manager',
            '<b>automation</b>   Python · Bash · Claude Code · MCP'],
     agents:['<b>AGENT PERMISSIONS</b>','',
