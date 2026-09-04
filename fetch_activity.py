@@ -20,6 +20,12 @@ from datetime import datetime, timezone
 API = "https://api.github.com"
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
+# The portfolio repo is never eligible for the feed, no matter what's in
+# repos.json. Its commits are about building this site, not engineering
+# work — mixing the two defeats the point of the feed. Enforced here rather
+# than by convention, so a future edit to repos.json can't reintroduce it.
+EXCLUDED_REPOS = {"natally-1995/natally-1995.github.io"}
+
 
 def gh(path):
     req = urllib.request.Request(API + path)
@@ -106,6 +112,9 @@ def main():
 
     all_items = []
     for repo in repos:
+        if repo.strip().lower() in EXCLUDED_REPOS:
+            print(f"skipping {repo} — portfolio repo is permanently excluded from the feed")
+            continue
         print(f"fetching {repo}...")
         all_items.extend(fetch_repo_activity(repo, max_items))
 

@@ -1,6 +1,5 @@
 {
-  "_comment": "Repos the Recent Work feed pulls from. Add a repo name here once you've picked one you're comfortable with a recruiter opening directly — the section on the site stays hidden until this list has at least one repo with real activity.",
-  "_note": "Natally-1995/Natally-1995.github.io is permanently excluded in fetch_activity.py even if added here -- portfolio-maintenance commits aren't 'recent work'.",
+  "_comment": "Repos the activity feed pulls from. Add a repo name here when you're ready to include it — nothing else needs to change. Keep this to repos you're comfortable with a recruiter opening directly. The portfolio repo itself is permanently excluded by fetch_activity.py regardless of what's listed here, so the feed only ever shows engineering work, never portfolio maintenance.",
   "repos": [],
   "max_items": 8
 }
