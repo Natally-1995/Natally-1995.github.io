@@ -277,7 +277,7 @@ code,.mono{font-family:var(--mono)}
         <div class="eyebrow" style="margin-bottom:14px">Platform Engineer · Chicago</div>
         <h1>Platform engineering for production AWS and Kubernetes.</h1>
         <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
-        <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that flags risky infrastructure changes before they merge — with a human required to approve every production write.</p>
+        <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that flags risky infrastructure changes using read-only AWS context to surface IAM and network risk directly in infrastructure PRs.</p>
         <div class="cta">
           <a class="btn btn-p" href="#work">View my work</a>
           <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
@@ -467,15 +467,16 @@ code,.mono{font-family:var(--mono)}
         <div class="pr a"><span class="op">analyse diff / comment on pull request</span><span class="vd">ALLOW</span></div>
         <div class="pr a"><span class="op">correlate monitoring signals with changes</span><span class="vd">ALLOW</span></div>
         <div class="pr a"><span class="op">draft runbooks and incident summaries</span><span class="vd">ALLOW</span></div>
-        <div class="pr d"><span class="op">terraform apply</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">assume Terraform deployment role</span><span class="vd">DENY</span></div>
+        <div class="pr d"><span class="op">apply infrastructure</span><span class="vd">DENY</span></div>
         <div class="pr d"><span class="op">merge pull request</span><span class="vd">DENY</span></div>
         <div class="pr d"><span class="op">write to production</span><span class="vd">DENY</span></div>
         <div class="pr d"><span class="op">read or rotate secrets</span><span class="vd">DENY</span></div>
         <div class="pr d"><span class="op">modify IAM policy</span><span class="vd">DENY</span></div>
       </div>
       <div class="con-f">
-        <span class="lk">🔒 Deny-all on terraform apply — dev, staging, and prod</span>
-        <span class="hu">No exceptions by environment</span>
+        <span class="lk">🔒 The review identity never holds the Terraform deployment role.</span>
+        <span class="hu">Review and deployment use separate identities.</span>
       </div>
     </div>
     <p class="catch rv">The <a href="#work" style="color:var(--blue)">case study above</a> covers a real finding in detail — a security-group rule widened from a /16 to a /8. CIDR blocks in a diff look like every other line of config, and neither range trips a hard-coded rule.</p>
