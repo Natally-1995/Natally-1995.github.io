@@ -331,7 +331,7 @@ code,.mono{font-family:var(--mono)}
   <div class="wrap">
     <div class="sh rv">
       <span class="eyebrow">Selected work · Chowly</span>
-      <h2>Four decisions, and what came of them.</h2>
+      <h2>Production platform work across delivery, cloud cost, and infrastructure review.</h2>
       <p>Platform work at Chowly, a Chicago restaurant-technology company that integrates delivery marketplaces with restaurant POS systems. Each case study names the alternative I rejected and why. Open any card for the architecture.</p>
     </div>
 
@@ -359,7 +359,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Result</h4>
           <div class="res"><div>Rollback <b>20–30 → 5–10 min</b></div><div>Downtime <b>zero</b></div><div>Config drift <b>ended</b></div></div>
           <h4>What it taught</h4>
-          <p>Image build time became the new bottleneck, so we split into a scheduled base image and a thin application layer. Moving work around doesn't remove it — you choose which step gets to be slow, and deploy-time is the one that matters.</p>
+          <p>Building the AMI ahead of deployment moved most of the preparation work out of the release path. Production rollout then used the already-built image through an Auto Scaling Group refresh.</p>
         </div>
       </details>
 
@@ -386,7 +386,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Result</h4>
           <div class="res"><div><b>20 services</b> migrated</div><div>CI production credentials <b>removed</b></div><div>Rollback <b>a git revert</b></div></div>
           <h4>What it taught</h4>
-          <p>Someone patched a deployment by hand and Argo reverted it within a minute. Correct behaviour, and it looked like a bug to them. The rollout needed the explanation to ship before the enforcement did.</p>
+          <p>The migration also required a change in operating practice. Once Argo CD managed desired state, manual cluster changes could be reverted automatically, so teams needed to understand that Git was now the source of truth.</p>
         </div>
       </details>
 
@@ -411,7 +411,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Result</h4>
           <div class="res"><div>Spend <b>−18%</b></div><div><b>~$60–80K</b> annualised</div><div>Incidents caused <b>none</b></div><div>All changes <b>via Terraform</b></div></div>
           <h4>What it taught</h4>
-          <p>Some of the saving decayed as new resources appeared without the same scrutiny. Cost control isn't a project, it's a habit with a dashboard — running it as a one-off was my mistake.</p>
+          <p>Some savings began to erode as new resources and storage accumulated. I added ongoing cost monitoring so right-sizing and cleanup became recurring operational work.</p>
         </div>
       </details>
 
@@ -432,7 +432,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Result</h4>
           <div class="res"><div>Production access <b>none</b></div><div>This finding <b>surfaced, not auto-blocked</b></div></div>
           <h4>What it taught</h4>
-          <p>An agent that can apply is an agent that can cause an incident nobody chose. The value is a consistent second read on the lines people skim, not autonomy.</p>
+          <p>The AI reviewer is useful as an additional review layer, but it does not need deployment permissions to do that job. Review and deployment therefore use separate identities.</p>
         </div>
       </details>
     </div>
@@ -442,7 +442,7 @@ code,.mono{font-family:var(--mono)}
 <section class="sec" id="philosophy">
   <div class="wrap">
     <div class="sh rv"><span class="eyebrow">How I think about platform engineering</span></div>
-    <p class="thesis rv">The agent can <em>read</em> every environment. It can <em>apply</em> to none of them.</p>
+    <p class="thesis rv">The review workflow uses read-only AWS context. Its identity does not have access to the Terraform deployment role.</p>
     <div class="pil rv">
       <div class="pc"><div class="k">DELIVERY</div><h3>Repeatable and reversible</h3><p>Git is the deployment path. Merging ships; reverting rolls back. No deployment reaches production by hand.</p></div>
       <div class="pc"><div class="k">SECURITY</div><h3>Constrain blast radius</h3><p>Per-service identities instead of shared credentials. Changes reviewed before they merge, not after they break.</p></div>
