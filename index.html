@@ -357,7 +357,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Why not the alternatives</h4>
           <p>Configuration management fixes repeatability but not drift — the host still accumulates state between runs. Containers were the other option, and other services did move to EKS, but these eight didn't need the elasticity.</p>
           <h4>Result</h4>
-          <div class="res"><div>Rollback <b>20–30 → 5–10 min</b></div><div>Downtime <b>zero</b></div><div>Config drift <b>ended</b></div></div>
+          <div class="res"><div>Downtime <b>no reported downtime</b></div><div>EC2 configuration drift <b>reduced</b></div></div>
           <h4>What it taught</h4>
           <p>Building the AMI ahead of deployment moved most of the preparation work out of the release path. Production rollout then used the already-built image through an Auto Scaling Group refresh.</p>
         </div>
@@ -409,7 +409,7 @@ code,.mono{font-family:var(--mono)}
           <h4>Why not just buy reserved capacity</h4>
           <p>Commitment discounts reward you for spending. A three-year commitment on an oversized workload locks in the wrong shape — you get a discount on waste. Right-size first, then commit.</p>
           <h4>Result</h4>
-          <div class="res"><div>Spend <b>−18%</b></div><div><b>~$60–80K</b> annualised</div><div>Incidents caused <b>none</b></div><div>All changes <b>via Terraform</b></div></div>
+          <div class="res"><div>Spend <b>−18%</b></div><div><b>~$60–80K</b> annualised</div><div>Cost changes <b>one resize reverted</b></div><div>All changes <b>via Terraform</b></div></div>
           <h4>What it taught</h4>
           <p>Some savings began to erode as new resources and storage accumulated. I added ongoing cost monitoring so right-sizing and cleanup became recurring operational work.</p>
         </div>
@@ -444,7 +444,7 @@ code,.mono{font-family:var(--mono)}
     <div class="sh rv"><span class="eyebrow">How I think about platform engineering</span></div>
     <p class="thesis rv">The review workflow uses read-only AWS context. Its identity does not have access to the Terraform deployment role.</p>
     <div class="pil rv">
-      <div class="pc"><div class="k">DELIVERY</div><h3>Repeatable and reversible</h3><p>Git is the deployment path. Merging ships; reverting rolls back. No deployment reaches production by hand.</p></div>
+      <div class="pc"><div class="k">DELIVERY</div><h3>Repeatable and reversible</h3><p>Git is the deployment path. Merging ships; reverting rolls back. Argo CD became the normal production deployment path, with production deployment credentials removed from CI.</p></div>
       <div class="pc"><div class="k">SECURITY</div><h3>Constrain blast radius</h3><p>Per-service identities instead of shared credentials. Changes reviewed before they merge, not after they break.</p></div>
       <div class="pc"><div class="k">COST</div><h3>Continuously remove waste</h3><p>Right-size from utilisation data, delete what nobody uses, and monitor so it doesn't drift back up.</p></div>
       <div class="pc"><div class="k">OBSERVABILITY</div><h3>Make failures understandable</h3><p>Alert on symptoms, not causes. On-call should start in one place and narrow from there.</p></div>
@@ -456,9 +456,8 @@ code,.mono{font-family:var(--mono)}
   <div class="wrap">
     <div class="sh rv">
       <span class="eyebrow">AI &amp; platform</span>
-      <h2>AI with a deliberately small blast radius.</h2>
-      <p>Deciding what an agent is allowed to touch is the interesting part — not whether it can write Terraform.</p>
-    </div>
+      <h2>AI review, scoped narrowly.</h2>
+          </div>
     <div class="con rv">
       <div class="con-h"><span class="t">Agent permissions</span><span class="s">enforced by IAM, not by prompt</span></div>
       <div class="perm">
@@ -485,7 +484,7 @@ code,.mono{font-family:var(--mono)}
 
 <section class="sec" id="experience">
   <div class="wrap">
-    <div class="sh rv"><span class="eyebrow">Experience</span><h2>Five years, two platforms.</h2></div>
+    <div class="sh rv"><span class="eyebrow">Experience</span><h2>Chowly and Grubhub, 2021 to present.</h2></div>
     <div class="tl rv">
       <div class="ti now">
         <div class="yr">NOW</div>
@@ -544,14 +543,14 @@ code,.mono{font-family:var(--mono)}
 
 <section class="sec" id="about">
   <div class="wrap">
-    <div class="sh rv"><span class="eyebrow">About this site</span><h2>No framework. No unnecessary pipeline.</h2></div>
+    <div class="sh rv"><span class="eyebrow">About this site</span><h2>How this site is built.</h2></div>
     <div class="two rv">
       <div class="box">
         <p>One HTML file. No framework, no build step, no dependencies. Hosted on GitHub Pages, served straight from <code style="color:var(--cyan)">main</code>, live about a minute after a push.</p>
         <p style="margin-top:14px">Everything renders with scripting disabled — the motion is enhancement, not structure.</p>
       </div>
       <div class="box">
-        <p>A pipeline built to demonstrate pipelines is the same over-engineering I spend my day removing. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
+        <p>This is a static site built with HTML, CSS, and JavaScript. The interesting infrastructure decisions are in the case studies above, made against production systems where they mattered.</p>
         <p style="margin-top:14px"><a href="https://github.com/Natally-1995/Natally-1995.github.io" target="_blank" rel="noopener" style="color:var(--blue)">Read the source →</a></p>
       </div>
     </div>
