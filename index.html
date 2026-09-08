@@ -277,7 +277,7 @@ code,.mono{font-family:var(--mono)}
         <div class="eyebrow" style="margin-bottom:14px">Platform Engineer · Chicago</div>
         <h1>Platform engineering for production AWS and Kubernetes.</h1>
         <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
-        <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that flags risky infrastructure changes using read-only AWS context to surface IAM and network risk directly in infrastructure PRs.</p>
+        <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that surfaces IAM and network risk using read-only AWS context, with no apply or merge access.</p>
         <div class="cta">
           <a class="btn btn-p" href="#work">View my work</a>
           <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
@@ -344,7 +344,7 @@ code,.mono{font-family:var(--mono)}
         </summary>
         <div class="body">
           <h4>Problem</h4>
-          <p>Eight services deployed by hand over SSH. The thirty minutes was human work — connecting to each host, restarting services in sequence, validating one at a time. Hosts drifted apart over months, so the same service in staging and production genuinely weren't the same, and every incident investigation ended at an undocumented change somebody made long ago.</p>
+          <p>Eight services deployed by hand over SSH — connecting to each host, restarting services in sequence, validating one at a time. Hosts drifted apart over months, so the same service in staging and production genuinely weren't the same, and every incident investigation ended at an undocumented change somebody made long ago.</p>
           <h4>Architecture</h4>
           <div class="dg">
             <span class="b">merge to main</span><span class="ar">→</span>
@@ -382,7 +382,7 @@ code,.mono{font-family:var(--mono)}
           </div>
           <p style="font-size:12.5px;color:var(--tx3);margin-top:8px">Representative structure — one Helm values file per environment, not the literal repo layout.</p>
           <h4>Why pull, not push</h4>
-          <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the single source of desired state and the cluster reconciles to match it. The benefit I'd argue first, though: CI no longer needs production credentials at all.</p>
+          <p>With push, git records intent and the cluster holds truth — the two drift. With pull, git is the single source of desired state and the cluster reconciles to match it. The benefit I'd argue first, though: CI no longer needs production credentials at all. Rollback follows the same path in reverse: revert the desired state in Git, and Argo CD reconciles the cluster to it, with Kubernetes performing the actual rollout.</p>
           <h4>Result</h4>
           <div class="res"><div><b>20 services</b> migrated</div><div>CI production credentials <b>removed</b></div><div>Rollback <b>a git revert</b></div></div>
           <h4>What it taught</h4>
