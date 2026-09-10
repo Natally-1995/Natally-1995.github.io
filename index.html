@@ -57,7 +57,8 @@ code,.mono{font-family:var(--mono)}
   border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.07);padding:6px 12px;border-radius:100px;margin-bottom:20px}
 .status b{width:6px;height:6px;border-radius:50%;background:var(--ok);display:block;animation:beat 2.6s infinite}
 @keyframes beat{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{opacity:.55;box-shadow:0 0 0 5px rgba(52,211,153,0)}}
-.hero h1{font-size:clamp(33px,4.8vw,52px);font-weight:800;line-height:1.08;letter-spacing:-.035em;max-width:15ch}
+.hero-name{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:10px}
+.hero h1{font-size:clamp(24px,3.2vw,34px);font-weight:600;line-height:1.16;letter-spacing:-.02em;max-width:20ch;color:var(--tx2)}
 .hero .stk{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--tx3);margin-top:20px}
 .hero p.lede{color:var(--tx2);font-size:16.5px;max-width:52ch;margin-top:18px}
 .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
@@ -274,7 +275,8 @@ code,.mono{font-family:var(--mono)}
     <div class="hgrid">
       <div>
         <span class="status"><b></b>Open to platform engineering roles</span>
-        <div class="eyebrow" style="margin-bottom:14px">Platform Engineer · Chicago</div>
+        <div class="eyebrow" style="margin-bottom:10px">Platform Engineer · Chicago</div>
+        <div class="hero-name">Natalia Tarita</div>
         <h1>Platform engineering for production AWS and Kubernetes.</h1>
         <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
         <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that surfaces IAM and network risk using read-only AWS context, with no apply or merge access.</p>
@@ -292,13 +294,15 @@ code,.mono{font-family:var(--mono)}
           <div class="conn"></div>
           <div class="stp"><span class="dot"></span><span class="lbl">CI · tests, scan, plan</span></div>
           <div class="conn"></div>
-          <div class="stp gate"><span class="dot"></span><span class="lbl">Human approves</span></div>
+          <div class="stp gate"><span class="dot"></span><span class="lbl">Review &amp; approve PR</span></div>
           <div class="conn"></div>
-          <div class="stp"><span class="dot"></span><span class="lbl">Git</span></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Merge</span></div>
+          <div class="conn"></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Git · desired state</span></div>
           <div class="conn"></div>
           <div class="stp"><span class="dot"></span><span class="lbl">Argo CD reconciles</span></div>
           <div class="conn"></div>
-          <div class="stp"><span class="dot"></span><span class="lbl">Production</span></div>
+          <div class="stp"><span class="dot"></span><span class="lbl">Kubernetes</span></div>
         </div>
       </div>
     </div>
