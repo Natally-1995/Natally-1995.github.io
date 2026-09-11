@@ -279,7 +279,7 @@ code,.mono{font-family:var(--mono)}
         <div class="hero-name">Natalia Tarita</div>
         <h1>Platform engineering for production AWS and Kubernetes.</h1>
         <p class="stk">AWS &nbsp;·&nbsp; KUBERNETES &nbsp;·&nbsp; TERRAFORM &nbsp;·&nbsp; GITOPS</p>
-        <p class="lede">Took a 20-service platform off manually-pushed deployments and onto GitOps, removed production deployment credentials from CI, and built the AI review layer that surfaces IAM and network risk using read-only AWS context, with no apply or merge access.</p>
+        <p class="lede">I build AWS and Kubernetes platforms, and use Claude Code and Agent Skills to make infrastructure review, troubleshooting, and operational work faster and more repeatable. Took a 20-service platform off manually pushed deployments and onto GitOps, removing production deployment credentials from CI.</p>
         <div class="cta">
           <a class="btn btn-p" href="#work">View my work</a>
           <a class="btn" href="Natalia-Tarita-Resume.pdf" download>Résumé ↓</a>
@@ -330,6 +330,39 @@ code,.mono{font-family:var(--mono)}
     </div>
   </div>
 </header>
+
+<section class="sec" id="ai-skills">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="eyebrow">How I use AI</span>
+      <h2>Three Agent Skills, three different jobs.</h2>
+      <p>Three repeatable workflows I turned into Claude Code Agent Skills, each solving a different problem: change review, incident investigation, and knowledge capture.</p>
+    </div>
+    <div class="pil rv">
+      <div class="pc">
+        <div class="k">INFRASTRUCTURE REVIEW</div>
+        <h3>Terraform &amp; IAM reviewer</h3>
+        <p><b>Input:</b> Infrastructure pull request<br>
+        <b>Process:</b> Terraform validation and security scanning first, followed by contextual analysis of IAM, networking, and AWS changes<br>
+        <b>Output:</b> Findings directly on the PR; review only, with no apply or merge access</p>
+      </div>
+      <div class="pc">
+        <div class="k">KUBERNETES TROUBLESHOOTING</div>
+        <h3>Workload investigation</h3>
+        <p><b>Input:</b> Namespace and workload<br>
+        <b>Process:</b> Pod status, events, logs, deployment configuration, probes, resource limits, rollout history, and available monitoring context, checked in a repeatable sequence<br>
+        <b>Output:</b> Evidence-based investigation summary with likely causes and recommended next checks</p>
+      </div>
+      <div class="pc">
+        <div class="k">OPERATIONAL DOCUMENTATION</div>
+        <h3>Runbook drafting</h3>
+        <p><b>Input:</b> Repository context, configuration, PR changes, and investigation notes<br>
+        <b>Process:</b> Organizes the available context into symptoms, diagnostic steps, remediation, and verification<br>
+        <b>Output:</b> Reviewed runbook draft; missing information is identified rather than assumed</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="sec" id="work">
   <div class="wrap">
